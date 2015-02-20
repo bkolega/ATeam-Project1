@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent" android:layout_height="fill_parent"
+    android:id="@+id/layoutContainer" android:orientation="horizontal">
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.15">
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.7">
+
+        <!-- This is the part that's 70% of the total width. I'm inserting a LinearLayout and buttons.-->   
+            <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+            
+            <TextView
+		        android:id="@+id/login_register_title"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:gravity="center"
+		        android:text="@string/register"
+		        android:textSize="40sp" 
+	        	/>
+		    
+            
+		    <EditText
+		        android:id="@+id/input_register_email"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:ems="10"
+		        android:hint="@string/email"
+		        android:inputType="textEmailAddress" 
+		   		/>
+		
+		    <EditText
+		        android:id="@+id/input_register_password"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:ems="10"
+		        android:hint="@string/password"
+		        android:inputType="textPassword"
+		        />
+		
+		    <EditText
+		        android:id="@+id/input_register_reenterpw"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:ems="10"
+		        android:hint="@string/reenter"
+		        android:inputType="textPassword" 
+		        />
+		
+		    <EditText
+		        android:id="@+id/input_register_name"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:ems="10"
+		        android:hint="@string/name"
+		        android:inputType="textPersonName" 
+		        />
+		
+		    <EditText
+		        android:id="@+id/input_register_birthdate"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:ems="10"
+		        android:hint="@string/birthdate"
+		        android:inputType="date" 
+		        />
+		
+		
+		    <EditText
+		        android:id="@+id/input_register_phone"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:ems="10"
+		        android:hint="@string/phone"
+		        android:inputType="phone" 
+		        />
+		
+		    <EditText
+		        android:id="@+id/input_register_supervisor"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:ems="10"
+		        android:hint="@string/supervisor_email"
+		        android:inputType="textEmailAddress" />
+		
+		    <Button
+		        android:id="@+id/button_register_submit"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:text="@string/submit" />
+		
+		    
+		    </LinearLayout>
+
+	</RelativeLayout>
+	
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.15">
+    </RelativeLayout>
+</LinearLayout>
