@@ -25,6 +25,8 @@ import java.awt.Panel;
 import java.awt.Canvas;
 import java.awt.CardLayout;
 import javax.swing.JList;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class Customer extends JFrame {
@@ -32,7 +34,6 @@ public class Customer extends JFrame {
 	//private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField passwordField;
-	private JTextField txtResults;
 
 	/**
 	 * Launch the application.
@@ -58,25 +59,49 @@ public class Customer extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 734, 452);
-	//	contentPane = new JPanel();
-	//	contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		//setContentPane(contentPane); not sure what this does.
-	//	contentPane.setLayout(null);
 		
 		JPanel CustomerHomePage = new JPanel();
 		getContentPane().add(CustomerHomePage, "name_39837333787986");
 		CustomerHomePage.setLayout(null);
 		
-		JPanel SearchResults = new JPanel();
-		getContentPane().add(SearchResults, "name_39839104720486");
-		SearchResults.setLayout(null);
+		JPanel SearchResultsPage = new JPanel();
+		getContentPane().add(SearchResultsPage, "name_39839104720486");
+		SearchResultsPage.setLayout(null);
 		
-		txtResults = new JTextField();
-		txtResults.setText("These are your search results:");
-		txtResults.setBounds(12, 13, 225, 22);
-		SearchResults.add(txtResults);
-		txtResults.setColumns(10);
+		JPanel PastOrdersPage = new JPanel();
+		getContentPane().add(PastOrdersPage, "name_39842606014142");
+		PastOrdersPage.setLayout(null);
 		
+		JPanel ModifyExistingOrdersPage = new JPanel();
+		getContentPane().add(ModifyExistingOrdersPage, "name_13517395309252");
+		ModifyExistingOrdersPage.setLayout(null);
+		
+		JButton btnExit_1 = new JButton("Exit");
+		btnExit_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				setVisible(false);
+				dispose();
+				TabbedPane Login = new TabbedPane();
+				Login.setVisible(true);
+			}
+		});
+		btnExit_1.setBounds(607, 369, 97, 25);
+		SearchResultsPage.add(btnExit_1);
+		
+		JLabel lblTheseAreYour_1 = DefaultComponentFactory.getInstance().createLabel("These are your search results: ");
+		lblTheseAreYour_1.setBounds(12, 13, 189, 16);
+		SearchResultsPage.add(lblTheseAreYour_1);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				SearchResultsPage.setVisible(false);
+				CustomerHomePage.setVisible(true);
+			}
+		});
+		btnBack.setBounds(12, 369, 97, 25);
+		SearchResultsPage.add(btnBack);
 		
 		JLabel lblEnterAPick = DefaultComponentFactory.getInstance().createLabel("Enter a pick up date");
 		lblEnterAPick.setBounds(12, 13, 121, 36);
@@ -97,10 +122,24 @@ public class Customer extends JFrame {
 		CustomerHomePage.add(comboBoxVehicleType);
 		
 		JButton btnViewPastOrders = new JButton("View past orders");
+		btnViewPastOrders.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				CustomerHomePage.setVisible(false);
+				PastOrdersPage.setVisible(true);
+			}
+		});
 		btnViewPastOrders.setBounds(12, 271, 245, 27);
 		CustomerHomePage.add(btnViewPastOrders);
 		
 		JButton btnModifyExistingReservation = new JButton("Modify existing reservation");
+		btnModifyExistingReservation.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CustomerHomePage.setVisible(false);
+				ModifyExistingOrdersPage.setVisible(true);
+			}
+		});
 		btnModifyExistingReservation.setBounds(12, 311, 245, 27);
 		CustomerHomePage.add(btnModifyExistingReservation);
 		
@@ -122,11 +161,20 @@ public class Customer extends JFrame {
 		CustomerHomePage.add(passwordField);
 		
 		JButton btnNewButton = new JButton("Register");
-		btnNewButton.setBounds(520, 77, 97, 25);
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				dispose();
+				TabbedPane Login = new TabbedPane();
+				Login.setVisible(true);
+			}
+		});
+		btnNewButton.setBounds(520, 111, 97, 25);
 		CustomerHomePage.add(btnNewButton);
 		
 		JLabel lblNewUser = DefaultComponentFactory.getInstance().createLabel("New user?");
-		lblNewUser.setBounds(440, 81, 68, 16);
+		lblNewUser.setBounds(440, 115, 68, 16);
 		CustomerHomePage.add(lblNewUser);
 		
 		JButton btnExit = new JButton("Exit");
@@ -148,21 +196,72 @@ public class Customer extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 			
 				CustomerHomePage.setVisible(false);
-				SearchResults.setVisible(true);
+				SearchResultsPage.setVisible(true);
 				
 			}
 		});
 		btnSubmit.setBounds(305, 208, 97, 25);
 		CustomerHomePage.add(btnSubmit);
 		
+		JButton btnNewButton_1 = new JButton("Log in");
+		btnNewButton_1.setBounds(520, 78, 97, 25);
+		CustomerHomePage.add(btnNewButton_1);
+		
+		JButton btnExit_2 = new JButton("Exit");
+		btnExit_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				dispose();
+				TabbedPane Login = new TabbedPane();
+				Login.setVisible(true);
+			}
+		});
+		btnExit_2.setBounds(607, 369, 97, 25);
+		PastOrdersPage.add(btnExit_2);
+		
+		JLabel lblTheseAreYour = DefaultComponentFactory.getInstance().createLabel("These are your past orders: ");
+		lblTheseAreYour.setBounds(12, 13, 178, 16);
+		PastOrdersPage.add(lblTheseAreYour);
+		
+		JButton btnBack_1 = new JButton("Back");
+		btnBack_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PastOrdersPage.setVisible(false);
+				CustomerHomePage.setVisible(true);
+			}
+		});
+		btnBack_1.setBounds(12, 369, 97, 25);
+		PastOrdersPage.add(btnBack_1);
 		
 		
 		
-		JPanel panel_2 = new JPanel();
-		getContentPane().add(panel_2, "name_39842606014142");
-		panel_2.setLayout(null);
+		JButton btnExit_3 = new JButton("Exit");
+		btnExit_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				dispose();
+				TabbedPane Login = new TabbedPane();
+				Login.setVisible(true);
+			}
+		});
+		btnExit_3.setBounds(607, 369, 97, 25);
+		ModifyExistingOrdersPage.add(btnExit_3);
 		
+		JLabel lblYouCanModify = DefaultComponentFactory.getInstance().createLabel("You can modify existing orders here:");
+		lblYouCanModify.setBounds(12, 13, 230, 16);
+		ModifyExistingOrdersPage.add(lblYouCanModify);
 		
-		
+		JButton btnBack_2 = new JButton("Back");
+		btnBack_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ModifyExistingOrdersPage.setVisible(false);
+				CustomerHomePage.setVisible(true);
+			}
+		});
+		btnBack_2.setBounds(12, 369, 97, 25);
+		ModifyExistingOrdersPage.add(btnBack_2);
+
 	}
 }
