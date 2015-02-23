@@ -34,20 +34,56 @@
 		        />
             
             <Button
-		        android:id="@+id/button_main_viewsales"
+		        android:id="@+id/button_main_viewinventory"
 		        android:layout_width="fill_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="23dp"
-		        android:text="@string/view_sales" 
+		        android:text="@string/view_inventory" 
 		        android:onClick="submitButtons"
 		        />
             
             <Button
-		        android:id="@+id/button_"
+		        android:id="@+id/button_main_viewuse"
 		        android:layout_width="fill_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="23dp"
-		        android:text="@string/hello" 
+		        android:text="@string/view_use" 
+		        android:onClick="submitButtons"
+		        />
+            
+            <Button
+		        android:id="@+id/button_main_printdetails"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="23dp"
+		        android:text="@string/print_details" 
+		        android:onClick="submitButtons"
+		        />
+            
+            <Button
+		        android:id="@+id/button_main_printcontract"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="23dp"
+		        android:text="@string/print_contract" 
+		        android:onClick="submitButtons"
+		        />
+            
+            <Button
+		        android:id="@+id/button_main_checkoutcar"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="23dp"
+		        android:text="@string/checkout_car" 
+		        android:onClick="submitButtons"
+		        />
+            
+            <Button
+		        android:id="@+id/button_main_logout"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="23dp"
+		        android:text="@string/logout" 
 		        android:onClick="submitButtons"
 		        />
             
