@@ -65,10 +65,10 @@ public final class R {
         public static final int login=0x7f050003;
         public static final int logout=0x7f050004;
         public static final int name=0x7f050009;
+        public static final int password=0x7f050008;
         public static final int phone=0x7f05000b;
         public static final int print_contract=0x7f050011;
         public static final int print_details=0x7f050010;
-        public static final int reenter=0x7f050008;
         public static final int register=0x7f050005;
         public static final int submit=0x7f05000d;
         public static final int supervisor_email=0x7f05000c;

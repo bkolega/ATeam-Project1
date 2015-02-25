@@ -43,6 +43,17 @@
 		        android:inputType="textEmailAddress" >
 		        <requestFocus />
 		    </EditText>
+		    
+		    <EditText
+		        android:id="@+id/input_login_email"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="23dp"
+		        android:gravity="center"
+		        android:ems="10"
+		        android:hint="@string/password"
+      			android:inputType="textPassword"  >
+      		</EditText>
 		
 
 		    <Button
