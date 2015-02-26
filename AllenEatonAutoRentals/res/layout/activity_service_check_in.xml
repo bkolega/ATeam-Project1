@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.aTeam.alleneatonautorentals.ServiceCheckIn" >
+
+    <TextView
+        android:id="@+id/checkInTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Car Check In"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="50sp" />
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/dateEditText"
+        android:layout_alignBottom="@+id/dateEditText"
+        android:layout_alignLeft="@+id/placeTextView"
+        android:text="Check In Date" />
+
+    <EditText
+        android:id="@+id/plateEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/dateEditText"
+        android:layout_below="@+id/checkInTitle"
+        android:layout_marginTop="109dp"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/placeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/plateEditText"
+        android:layout_alignBottom="@+id/plateEditText"
+        android:layout_alignLeft="@+id/checkInTitle"
+        android:text="Car Plate" />
+
+    <EditText
+        android:id="@+id/dateEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/checkInTitle"
+        android:layout_below="@+id/plateEditText"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:inputType="date" />
+
+    <Button
+        android:id="@+id/confirmButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dateEditText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="68dp"
+        android:text="Check In" />
+
+    <Button
+        android:id="@+id/cancelCheckInButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/confirmButton"
+        android:layout_below="@+id/confirmButton"
+        android:onClick="checkInCancel"
+        android:text="Cancel" />
+
+</RelativeLayout>

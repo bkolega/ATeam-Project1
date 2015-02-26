@@ -53,11 +53,27 @@ public class MainActivity extends FragmentActivity {
 	public void submitButtons(View v) {
 		final int id = v.getId();
 		switch (id) {
+		case R.id.button_back:
 		case R.id.button_login_submit:
 			setContentView(R.layout.fragment_main);
 			break;
 		case R.id.button_main_logout:
-			setContentView(R.layout.fragment_login);
+			setContentView(R.layout.activity_main);
+			break;
+		case R.id.button_main_viewinventory:
+			setContentView(R.layout.view_inventory);
+			break;
+		case R.id.button_main_viewuse:
+			setContentView(R.layout.cars_in_use);
+			break;
+		case R.id.button_main_printdetails:
+			setContentView(R.layout.print_details);
+			break;
+		case R.id.button_main_printcontract:
+			setContentView(R.layout.print_contract);
+			break;
+		case R.id.button_main_checkoutcar:
+			setContentView(R.layout.checkout_a_car);
 			break;
 		}
 		
