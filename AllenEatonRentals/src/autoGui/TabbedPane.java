@@ -36,13 +36,26 @@ public class TabbedPane extends JFrame {
        //jp2.setLayout(new BoxLayout(jp2, BoxLayout.Y_AXIS));
        
        JLabel username = new JLabel();
+       username.setBounds(33, 8, 60, 16);
        username.setText("Email:      ");
        JLabel password = new JLabel();
+       password.setBounds(241, 8, 60, 16);
        password.setText("Password:");
     
        JTextField un = new JTextField(12);
+       un.setBounds(98, 5, 138, 22);
        JTextField pw = new JTextField(12);
+       pw.setBounds(306, 5, 138, 22);
        JButton test = new JButton("\nSubmit");
+       test.addMouseListener(new MouseAdapter() {
+       	@Override
+       	public void mouseClicked(MouseEvent arg0) {
+       		setVisible(false);
+       		Customer home = new Customer();
+       		home.setVisible(true);       	}
+       });
+       test.setBounds(202, 32, 99, 25);
+       jp1.setLayout(null);
        jp1.add(username);
        jp1.add(un);
        jp1.add(password);
@@ -85,7 +98,7 @@ public class TabbedPane extends JFrame {
     //will do when the test button is pressed.
     class ButtonHandler implements ActionListener{
            public void actionPerformed(ActionEvent e){
-                   JOptionPane.showMessageDialog(null, "I've been pressed", "What happened?", JOptionPane. INFORMATION_MESSAGE);
+                   //JOptionPane.showMessageDialog(null, "I've been pressed", "What happened?", JOptionPane. INFORMATION_MESSAGE);
            }
     }
 
@@ -93,5 +106,4 @@ public class TabbedPane extends JFrame {
      public static void main (String []args){
         TabbedPane tab = new TabbedPane();
     }
-
 }

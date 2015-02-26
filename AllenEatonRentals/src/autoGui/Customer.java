@@ -1,32 +1,23 @@
 package autoGui;
-import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JTabbedPane;
-import javax.swing.JLabel;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
-import javax.swing.JTable;
-import javax.swing.JEditorPane;
-import javax.swing.table.DefaultTableModel;
-import com.toedter.calendar.JCalendar;
-import javax.swing.JTree;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.Panel;
-import java.awt.Canvas;
-import java.awt.CardLayout;
-import javax.swing.JList;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+import com.toedter.calendar.JCalendar;
 
 
 public class Customer extends JFrame {
