@@ -38,7 +38,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="23dp"
 		        android:text="@string/back" 
-		        android:onClick="submitButtons"
+		        android:onClick="clickButtons"
 		        />
 		    	
     	</LinearLayout>

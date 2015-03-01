@@ -40,19 +40,21 @@
 		        android:gravity="center"
 		        android:ems="10"
 		        android:hint="@string/email"
-		        android:inputType="textEmailAddress" >
+		        android:inputType="textEmailAddress" 
+		        android:imeOptions="actionNext"  >
 		        <requestFocus />
 		    </EditText>
 		    
 		    <EditText
-		        android:id="@+id/input_login_email"
+		        android:id="@+id/input_password_email"
 		        android:layout_width="fill_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="23dp"
 		        android:gravity="center"
 		        android:ems="10"
 		        android:hint="@string/password"
-      			android:inputType="textPassword"  >
+      			android:inputType="textPassword"
+      			android:imeOptions="actionDone"  >
       		</EditText>
 		
 
@@ -62,7 +64,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="23dp"
 		        android:text="@string/submit" 
-		        android:onClick="submitButtons"
+		        android:onClick="clickButtons"
 		        />
 		    	
     	</LinearLayout>

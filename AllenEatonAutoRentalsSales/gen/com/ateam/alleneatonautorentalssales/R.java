@@ -24,24 +24,25 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080011;
-        public static final int button_back=0x7f080005;
-        public static final int button_login_submit=0x7f080003;
-        public static final int button_main_checkoutcar=0x7f08000c;
-        public static final int button_main_logout=0x7f08000d;
-        public static final int button_main_printcontract=0x7f08000b;
-        public static final int button_main_printdetails=0x7f08000a;
-        public static final int button_main_viewinventory=0x7f080008;
-        public static final int button_main_viewuse=0x7f080009;
-        public static final int caruse_title=0x7f080004;
-        public static final int checkoutcar_title=0x7f080006;
+        public static final int action_settings=0x7f080012;
+        public static final int button_back=0x7f080006;
+        public static final int button_login_submit=0x7f080004;
+        public static final int button_main_checkoutcar=0x7f08000d;
+        public static final int button_main_logout=0x7f08000e;
+        public static final int button_main_printcontract=0x7f08000c;
+        public static final int button_main_printdetails=0x7f08000b;
+        public static final int button_main_viewinventory=0x7f080009;
+        public static final int button_main_viewuse=0x7f08000a;
+        public static final int caruse_title=0x7f080005;
+        public static final int checkoutcar_title=0x7f080007;
         public static final int input_login_email=0x7f080002;
+        public static final int input_password_email=0x7f080003;
         public static final int layoutContainer=0x7f080000;
         public static final int login_login_title=0x7f080001;
-        public static final int printcontract_title=0x7f08000e;
-        public static final int printdetails_title=0x7f08000f;
-        public static final int sales_main_title=0x7f080007;
-        public static final int viewinv_title=0x7f080010;
+        public static final int printcontract_title=0x7f08000f;
+        public static final int printdetails_title=0x7f080010;
+        public static final int sales_main_title=0x7f080008;
+        public static final int viewinv_title=0x7f080011;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
