@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
-public class FrontPage extends Activity {
+public class Sales extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -29,7 +29,7 @@ public class FrontPage extends Activity {
 			setContentView(R.layout.fragment_main);
 			break;
 		case R.id.button_main_logout:
-			Intent ii = new Intent(FrontPage.this, MainActivity.class);
+			Intent ii = new Intent(Sales.this, MainActivity.class);
 			startActivity(ii);		
 			finish();	
 			break;

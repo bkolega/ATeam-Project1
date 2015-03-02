@@ -109,7 +109,7 @@ public class MainActivity extends Activity {
 					Log.d("Successfully Login!", json.toString());
 					
 					// Move onto next activity
-					Intent ii = new Intent(MainActivity.this, FrontPage.class);
+					Intent ii = new Intent(MainActivity.this, Sales.class);
 					
 					startActivity(ii);
 					
