@@ -1,43 +1,51 @@
 package com.ateam.alleneatonautorentalssales;
 
 import java.util.Locale;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject; 
 
 import android.app.ActionBar;
-import android.app.ActionBar.Tab;
-import android.app.FragmentTransaction;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
+import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.NavUtils;
-import android.support.v4.view.ViewPager;
-import android.view.Gravity;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.Toast;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends Activity {
 
-
+	private EditText textUser, textPass;
+	private ProgressDialog progressDialog;
+	JSONParser jsonParser = new JSONParser();
+	private static final String LOGIN_URL =
+			"http://people.eecs.ku.edu/~kwu96/ATeamScripts/login.php";
+	private static final String TAG_SUCCESS = "success";
+	private static final String TAG_MESSAGE = "message";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
 	}
 
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -45,40 +53,89 @@ public class MainActivity extends FragmentActivity {
 		return true;
 	}
 
-	/**
-	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-	 * one of the sections/tabs/pages.
-	 */
-
-	public void submitButtons(View v) {
+	// What all the buttons do
+	public void clickButtons(View v) {
 		final int id = v.getId();
 		switch (id) {
-		case R.id.button_back:
 		case R.id.button_login_submit:
-			setContentView(R.layout.fragment_main);
+			//setContentView(R.layout.fragment_main);
+			
+			// Get Text from login text boxes
+			textUser = (EditText)findViewById(R.id.input_login_email);
+			textPass = (EditText)findViewById(R.id.input_password_email);
+
+			new AttemptLogin().execute();
 			break;
-		case R.id.button_main_logout:
-			setContentView(R.layout.activity_main);
-			break;
-		case R.id.button_main_viewinventory:
-			setContentView(R.layout.view_inventory);
-			break;
-		case R.id.button_main_viewuse:
-			setContentView(R.layout.cars_in_use);
-			break;
-		case R.id.button_main_printdetails:
-			setContentView(R.layout.print_details);
-			break;
-		case R.id.button_main_printcontract:
-			setContentView(R.layout.print_contract);
-			break;
-		case R.id.button_main_checkoutcar:
-			setContentView(R.layout.checkout_a_car);
-			break;
+		}
+	}
+	
+	class AttemptLogin extends AsyncTask <String, String, String> {
+
+		boolean failure = false;
+		
+		@Override
+		protected void onPreExecute() {
+			// Initiate
+			super.onPreExecute();
+			progressDialog = new ProgressDialog(MainActivity.this);
+			progressDialog.setMessage("Attempting to login...");
+			progressDialog.setIndeterminate(false);
+			progressDialog.setCancelable(true);
+			progressDialog.show();
+		}
+		
+		@Override
+		protected String doInBackground(String... args) {
+			int success;
+			
+			String username = textUser.getText().toString();
+			String password = textPass.getText().toString();
+			
+			try {
+				List <NameValuePair> params = new ArrayList <NameValuePair>();
+				
+				// Make the JSON to send to PHP server
+				params.add(new BasicNameValuePair("username", username));
+				params.add(new BasicNameValuePair("password", password));
+				
+				Log.d("request!", "starting");
+				
+				// Getting the JSON back from PHP server
+				JSONObject json = jsonParser.makeHttpRequest (LOGIN_URL, "POST", params);
+				Log.d("Login Attempt", json.toString());
+				
+				success = json.getInt(TAG_SUCCESS);
+				if (success == 1) {
+					Log.d("Successfully Login!", json.toString());
+					
+					// Move onto next activity
+					Intent ii = new Intent(MainActivity.this, FrontPage.class);
+					
+					startActivity(ii);
+					
+					finish();					
+					return json.getString(TAG_MESSAGE);
+				}
+				else {
+					return json.getString(TAG_MESSAGE);
+				}
+			}
+			catch (JSONException e) {
+				e.printStackTrace();
+			}
+			
+			return null;
+		}
+		
+		// Cleaning up after done
+		protected void onPostExecute (String message) {
+			progressDialog.dismiss();
+			if (message != null) {
+				Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
+			}
 		}
 		
 	}
-
 
 }
 
