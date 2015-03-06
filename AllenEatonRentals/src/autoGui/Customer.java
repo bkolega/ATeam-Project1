@@ -1,5 +1,6 @@
 package autoGui;
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,7 +8,18 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
+
+
+
+
+
+
+
+
+
+
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -15,9 +27,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
+
+import aerentals.database.DatabaseProvider;
+import aerentals.database.DatabaseRowSet;
+import aerentals.database.SqlDatabaseProvider;
 
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 import com.toedter.calendar.JCalendar;
+
+import javax.swing.JList;
 
 
 public class Customer extends JFrame {
@@ -25,6 +44,7 @@ public class Customer extends JFrame {
 	//private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField passwordField;
+	private static DatabaseProvider dbProvider;
 
 	/**
 	 * Launch the application.
@@ -35,8 +55,22 @@ public class Customer extends JFrame {
 				try {
 					Customer frame = new Customer();
 					frame.setVisible(true);
+//					dbProvider = new SqlDatabaseProvider("jdbc:mysql://mysql.eecs.ku.edu/", "csoden42", "#1Jayhawk");
+					dbProvider = new SqlDatabaseProvider("jdbc:mysql://localhost/car_rentals", "test", "test1234");
+					Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+					    public void run() {
+					    	dbProvider.close();
+					    }
+					}));
+//					DatabaseRowSet rowSet = dbProvider.getRows("car");
+//					
+//					while (rowSet.next()) {
+//						System.out.println("\n*** Row ***");
+//						System.out.println("model = " + rowSet.getField("model"));
+//					}
 				} catch (Exception e) {
 					e.printStackTrace();
+					dbProvider.close();
 				}
 			}
 		});
@@ -93,7 +127,7 @@ public class Customer extends JFrame {
 		});
 		btnBack.setBounds(12, 369, 97, 25);
 		SearchResultsPage.add(btnBack);
-		
+				
 		JLabel lblEnterAPick = DefaultComponentFactory.getInstance().createLabel("Enter a pick up date");
 		lblEnterAPick.setBounds(12, 13, 121, 36);
 		CustomerHomePage.add(lblEnterAPick);
@@ -112,10 +146,21 @@ public class Customer extends JFrame {
 		comboBoxVehicleType.setBounds(155, 207, 102, 27);
 		CustomerHomePage.add(comboBoxVehicleType);
 		
+		DefaultListModel<String> listModel = new DefaultListModel<String>();
+		
 		JButton btnViewPastOrders = new JButton("View past orders");
+		btnViewPastOrders.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnViewPastOrders.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				listModel.clear();
+				DatabaseRowSet rowSet = dbProvider.getRows("car");
+				while (rowSet.next()) {
+					listModel.addElement((String)rowSet.getField("model"));
+				}
 				CustomerHomePage.setVisible(false);
 				PastOrdersPage.setVisible(true);
 			}
@@ -224,6 +269,11 @@ public class Customer extends JFrame {
 		});
 		btnBack_1.setBounds(12, 369, 97, 25);
 		PastOrdersPage.add(btnBack_1);
+		
+		JList<String> list_1 = new JList<String>();
+		list_1.setBounds(22, 41, 255, 254);
+		list_1.setModel(listModel);
+		PastOrdersPage.add(list_1);
 		
 		
 		
