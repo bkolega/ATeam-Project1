@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutContainer"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    tools:context=".ServiceMenu" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <Button
+            android:id="@+id/carUseButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/view_use" />
+
+        <Button
+            android:id="@+id/logOutButton"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:onClick="clickButtons"
+            android:text="@string/logout" />
+
+        <Button
+            android:id="@+id/addNoteButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/printDetailsButton"
+            android:text="@string/add_note" />
+
+        <Button
+            android:id="@+id/printDetailsButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/carUseButton"
+            android:text="@string/print_details" />
+
+        <Button
+            android:id="@+id/checkInButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/carUseButton"
+            android:layout_alignParentLeft="true"
+            android:text="@string/checkin_car" />
+
+        <TextView
+            android:id="@+id/first_name_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/checkInButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="52dp"
+            android:gravity="center"
+		    android:text="@string/welcome"
+		    android:textSize="40sp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

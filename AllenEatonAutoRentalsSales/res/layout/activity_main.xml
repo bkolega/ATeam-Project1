@@ -16,58 +16,90 @@
         android:layout_width="0dip"
         android:layout_height="fill_parent"
         android:layout_weight="0.7">
-        
-          <LinearLayout
+
+          <TextView
+              android:id="@+id/login_login_title"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentLeft="true"
+              android:layout_alignParentTop="true"
+              android:layout_marginTop="17dp"
+              android:gravity="center"
+              android:text="@string/login"
+              android:textSize="40sp" />
+
+        <RadioGroup
+            android:id="@+id/radioEmployeeGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/login_login_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="22dp" >
+
+            <RadioButton
+                android:id="@+id/radio_sales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/radiosales" />
+
+            <RadioButton
+                android:id="@+id/radio_service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/radioservice" />
+        </RadioGroup>
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="vertical">
-		        
-		    <TextView
-		        android:id="@+id/login_login_title"
-		        android:layout_width="fill_parent"
-		        android:layout_height="wrap_content"
-		        android:gravity="center"
-		        android:text="@string/login"
-		        android:textSize="40sp"
-		        />
-		
-		    <EditText
-		        android:id="@+id/input_login_email"
-		        android:layout_width="fill_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="23dp"
-		        android:gravity="center"
-		        android:ems="10"
-		        android:hint="@string/email"
-		        android:inputType="textEmailAddress" 
-		        android:imeOptions="actionNext"  >
-		        <requestFocus />
-		    </EditText>
-		    
-		    <EditText
-		        android:id="@+id/input_password_email"
-		        android:layout_width="fill_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="23dp"
-		        android:gravity="center"
-		        android:ems="10"
-		        android:hint="@string/password"
-      			android:inputType="textPassword"
-      			android:imeOptions="actionDone"  >
-      		</EditText>
-		
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/radioEmployeeGroup"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical" >
 
-		    <Button
-		        android:id="@+id/button_login_submit"
-		        android:layout_width="fill_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="23dp"
-		        android:text="@string/submit" 
-		        android:onClick="clickButtons"
-		        />
-		    	
-    	</LinearLayout>
+            <EditText
+                android:id="@+id/input_login_email"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="@string/email"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/input_password_email"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="@string/password"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_login_submit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button_register"
+            android:layout_alignParentLeft="true"
+            android:onClick="clickButtons"
+            android:paddingBottom="10dp"
+            android:text="@string/submit" />
+
+        <Button
+            android:id="@+id/button_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:onClick="clickButtons"
+            android:text="@string/register" />
     
     </RelativeLayout>
     

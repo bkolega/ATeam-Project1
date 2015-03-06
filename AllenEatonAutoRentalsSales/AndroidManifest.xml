@@ -31,7 +31,15 @@
             </intent-filter>
         </activity>
         <activity
-              android:name="com.ateam.alleneatonautorentalssales.Sales"
+              android:name="com.ateam.alleneatonautorentalssales.FrontPage"
+              android:label="@string/app_name" >         
+        </activity>
+        <activity
+              android:name="com.ateam.alleneatonautorentalssales.ServiceMenu"
+              android:label="@string/app_name" >         
+        </activity>
+        <activity
+              android:name="com.ateam.alleneatonautorentalssales.Register"
               android:label="@string/app_name" >         
         </activity>
     </application>

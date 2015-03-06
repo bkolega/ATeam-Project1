@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"
+    android:id="@+id/layoutContainer" 
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:id="@+id/employee_email_edit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/last_name_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/first_name_view"
+            android:paddingLeft="10dp"
+            android:paddingTop="20dp"
+            android:text="@string/last_name" />
+
+        <TextView
+            android:id="@+id/first_name_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="36dp"
+            android:paddingLeft="10dp"
+            android:text="@string/first_name" />
+
+        <EditText
+            android:id="@+id/first_name_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/last_name_view"
+            android:layout_alignParentRight="true"
+            android:ems="10" />
+
+        <EditText
+            android:id="@+id/last_name_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/last_name_view"
+            android:layout_alignParentRight="true"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/birthdate_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/first_name_view"
+            android:layout_below="@+id/last_name_view"
+            android:layout_marginTop="19dp"
+            android:text="@string/birthdate" />
+
+        <EditText
+            android:id="@+id/birthdate_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/birthdate_view"
+            android:layout_alignParentRight="true"
+            android:ems="10"
+            android:inputType="date" />
+
+        <TextView
+            android:id="@+id/supervisor_email_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/birthdate_view"
+            android:layout_alignRight="@+id/last_name_view"
+            android:layout_below="@+id/birthdate_view"
+            android:layout_marginTop="14dp"
+            android:text="@string/supervisor_email" />
+
+        <TextView
+            android:id="@+id/employee_email_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/birthdate_view"
+            android:layout_below="@+id/supervisor_email_edit"
+            android:layout_marginTop="10dp"
+            android:text="@string/email" />
+
+        <EditText
+            android:id="@+id/employeeemail_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/employee_email_view"
+            android:layout_alignLeft="@+id/supervisor_email_edit"
+            android:ems="10"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/supervisor_email_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/supervisor_email_view"
+            android:layout_alignBottom="@+id/supervisor_email_view"
+            android:layout_alignParentRight="true"
+            android:ems="10"
+            android:inputType="textEmailAddress" />
+
+        <TextView
+            android:id="@+id/employee_password_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/supervisor_email_view"
+            android:layout_below="@+id/employee_email_view"
+            android:paddingTop="15dp"
+            android:text="@string/password" />
+
+        <EditText
+            android:id="@+id/employee_password_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/employee_password_view"
+            android:layout_alignLeft="@+id/employeeemail_view"
+            android:layout_alignParentRight="true"
+            android:ems="10"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/button_register_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/employee_password_edit"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="74dp"
+            android:text="@string/register" />
+
+        <Button
+            android:id="@+id/button_register_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_register_confirm"
+            android:layout_centerHorizontal="true"
+            android:onClick="clickButtons"
+            android:text="@string/cancel" />
+
+    </RelativeLayout>
+
+</LinearLayout>

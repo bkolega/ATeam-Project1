@@ -1,6 +1,5 @@
 package com.ateam.alleneatonautorentalssales;
 
-import java.util.Locale;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,19 +14,19 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Bundle;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
 	private EditText textUser, textPass;
+	private RadioGroup radioGroupId;
+	private RadioButton radioEmployeeButton;
 	private ProgressDialog progressDialog;
 	JSONParser jsonParser = new JSONParser();
 	private static final String LOGIN_URL =
@@ -63,8 +62,21 @@ public class MainActivity extends Activity {
 			// Get Text from login text boxes
 			textUser = (EditText)findViewById(R.id.input_login_email);
 			textPass = (EditText)findViewById(R.id.input_password_email);
+			
+			//get the radio button option 
+			radioGroupId = (RadioGroup) findViewById(R.id.radioEmployeeGroup);
+			int selectedOption = radioGroupId.getCheckedRadioButtonId();
+			radioEmployeeButton = (RadioButton) findViewById(selectedOption);
 
 			new AttemptLogin().execute();
+			break;
+			
+		case R.id.button_register: 
+			Intent  ii = new Intent(MainActivity.this, Register.class);	
+			startActivity(ii);
+			finish();	
+			break;
+		default:
 			break;
 		}
 	}
@@ -90,6 +102,7 @@ public class MainActivity extends Activity {
 			
 			String username = textUser.getText().toString();
 			String password = textPass.getText().toString();
+			String radioEmployee = radioEmployeeButton.getText().toString();
 			
 			try {
 				List <NameValuePair> params = new ArrayList <NameValuePair>();
@@ -109,7 +122,13 @@ public class MainActivity extends Activity {
 					Log.d("Successfully Login!", json.toString());
 					
 					// Move onto next activity
-					Intent ii = new Intent(MainActivity.this, Sales.class);
+					Intent  ii; 
+					if(radioEmployee.equals("radio_sales")) {
+						ii = new Intent(MainActivity.this, FrontPage.class);
+					}
+					else {
+						ii = new Intent(MainActivity.this, ServiceMenu.class);
+					}
 					
 					startActivity(ii);
 					

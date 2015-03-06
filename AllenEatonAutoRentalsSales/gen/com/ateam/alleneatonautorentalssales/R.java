@@ -24,25 +24,49 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080012;
-        public static final int button_back=0x7f080006;
-        public static final int button_login_submit=0x7f080004;
-        public static final int button_main_checkoutcar=0x7f08000d;
-        public static final int button_main_logout=0x7f08000e;
-        public static final int button_main_printcontract=0x7f08000c;
-        public static final int button_main_printdetails=0x7f08000b;
-        public static final int button_main_viewinventory=0x7f080009;
-        public static final int button_main_viewuse=0x7f08000a;
-        public static final int caruse_title=0x7f080005;
-        public static final int checkoutcar_title=0x7f080007;
-        public static final int input_login_email=0x7f080002;
-        public static final int input_password_email=0x7f080003;
+        public static final int action_settings=0x7f08002a;
+        public static final int addNoteButton=0x7f080026;
+        public static final int birthdate_edit=0x7f08001b;
+        public static final int birthdate_view=0x7f08001a;
+        public static final int button_back=0x7f08000a;
+        public static final int button_login_submit=0x7f080007;
+        public static final int button_main_checkoutcar=0x7f080011;
+        public static final int button_main_logout=0x7f080012;
+        public static final int button_main_printcontract=0x7f080010;
+        public static final int button_main_printdetails=0x7f08000f;
+        public static final int button_main_viewinventory=0x7f08000d;
+        public static final int button_main_viewuse=0x7f08000e;
+        public static final int button_register=0x7f080008;
+        public static final int button_register_cancel=0x7f080023;
+        public static final int button_register_confirm=0x7f080022;
+        public static final int carUseButton=0x7f080024;
+        public static final int caruse_title=0x7f080009;
+        public static final int checkInButton=0x7f080028;
+        public static final int checkoutcar_title=0x7f08000b;
+        public static final int employee_email_edit=0x7f080015;
+        public static final int employee_email_view=0x7f08001d;
+        public static final int employee_password_edit=0x7f080021;
+        public static final int employee_password_view=0x7f080020;
+        public static final int employeeemail_view=0x7f08001f;
+        public static final int first_name_edit=0x7f080018;
+        public static final int first_name_view=0x7f080017;
+        public static final int input_login_email=0x7f080005;
+        public static final int input_password_email=0x7f080006;
+        public static final int last_name_edit=0x7f080019;
+        public static final int last_name_view=0x7f080016;
         public static final int layoutContainer=0x7f080000;
+        public static final int logOutButton=0x7f080025;
         public static final int login_login_title=0x7f080001;
-        public static final int printcontract_title=0x7f08000f;
-        public static final int printdetails_title=0x7f080010;
-        public static final int sales_main_title=0x7f080008;
-        public static final int viewinv_title=0x7f080011;
+        public static final int printDetailsButton=0x7f080027;
+        public static final int printcontract_title=0x7f080013;
+        public static final int printdetails_title=0x7f080014;
+        public static final int radioEmployeeGroup=0x7f080002;
+        public static final int radio_sales=0x7f080003;
+        public static final int radio_service=0x7f080004;
+        public static final int sales_main_title=0x7f08000c;
+        public static final int supervisor_email_edit=0x7f08001e;
+        public static final int supervisor_email_view=0x7f08001c;
+        public static final int viewinv_title=0x7f080029;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -51,31 +75,39 @@ public final class R {
         public static final int fragment_main=0x7f030003;
         public static final int print_contract=0x7f030004;
         public static final int print_details=0x7f030005;
-        public static final int view_inventory=0x7f030006;
+        public static final int register=0x7f030006;
+        public static final int service_menu=0x7f030007;
+        public static final int view_inventory=0x7f030008;
     }
     public static final class menu {
         public static final int main=0x7f070000;
     }
     public static final class string {
-        public static final int action_settings=0x7f050001;
-        public static final int app_name=0x7f050000;
-        public static final int back=0x7f050007;
-        public static final int birthdate=0x7f05000a;
-        public static final int checkout_car=0x7f050012;
-        public static final int email=0x7f050006;
-        public static final int login=0x7f050003;
-        public static final int logout=0x7f050004;
-        public static final int name=0x7f050009;
-        public static final int password=0x7f050008;
-        public static final int phone=0x7f05000b;
-        public static final int print_contract=0x7f050011;
-        public static final int print_details=0x7f050010;
-        public static final int register=0x7f050005;
-        public static final int submit=0x7f05000d;
-        public static final int supervisor_email=0x7f05000c;
-        public static final int view_inventory=0x7f05000e;
-        public static final int view_use=0x7f05000f;
-        public static final int welcome=0x7f050002;
+        public static final int action_settings=0x7f050003;
+        public static final int add_note=0x7f050018;
+        public static final int app_name=0x7f050002;
+        public static final int back=0x7f05000a;
+        public static final int birthdate=0x7f05000e;
+        public static final int cancel=0x7f050008;
+        public static final int checkin_car=0x7f050017;
+        public static final int checkout_car=0x7f050016;
+        public static final int email=0x7f050009;
+        public static final int first_name=0x7f05000c;
+        public static final int last_name=0x7f05000d;
+        public static final int login=0x7f050005;
+        public static final int logout=0x7f050006;
+        public static final int password=0x7f05000b;
+        public static final int phone=0x7f05000f;
+        public static final int print_contract=0x7f050015;
+        public static final int print_details=0x7f050014;
+        public static final int radiosales=0x7f050000;
+        public static final int radioservice=0x7f050001;
+        public static final int register=0x7f050007;
+        public static final int submit=0x7f050011;
+        public static final int supervisor_email=0x7f050010;
+        public static final int view_inventory=0x7f050012;
+        public static final int view_use=0x7f050013;
+        public static final int welcome=0x7f050004;
     }
     public static final class style {
         /** 
