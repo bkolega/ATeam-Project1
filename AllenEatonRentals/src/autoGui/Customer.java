@@ -296,7 +296,7 @@ public class Customer extends JFrame {
 				if(comboBoxVehicleType.getSelectedItem().equals("Economy"))
 				{
 					try {
-						BufferedImage image = ImageIO.read(new File("AllenEatonRentals/Images/derpamine.jpg")); // test
+						BufferedImage image = ImageIO.read(new File("AllenEatonRentals/lib/derpamine.jpg")); // test
 						JLabel picLabel = new JLabel(new ImageIcon(image));
 						picLabel.setBounds(10, 25, 300, 400);
 						SearchResultsPage.add(picLabel);
