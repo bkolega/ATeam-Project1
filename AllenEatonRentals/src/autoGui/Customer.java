@@ -304,7 +304,7 @@ public class Customer extends JFrame {
 				{
 				//	try {
 						
-						JLabel picLabel = new JLabel(new ImageIcon (Toolkit.getDefaultToolkit().getImage("images/derpamine.jpg")));
+						JLabel picLabel = new JLabel(new ImageIcon (Toolkit.getDefaultToolkit().getImage("AllenEatonRentals/images/derpamine.jpg")));
 						picLabel.setBounds(10, 25, 300, 400);
 						SearchResultsPage.add(picLabel);
 						picLabel.setVisible(true);
