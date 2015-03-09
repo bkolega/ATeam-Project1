@@ -2,10 +2,14 @@ package autoGui;
 import java.awt.CardLayout;
 import java.awt.EventQueue;
 import java.awt.TextField;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+
+
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -21,6 +25,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,7 +41,9 @@ import javax.swing.JCheckBox;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JScrollBar;
+
 import java.awt.Scrollbar;
+
 import javax.swing.JSeparator;
 
 
@@ -295,16 +302,16 @@ public class Customer extends JFrame {
 				SearchResultsPage.setVisible(true);
 				if(comboBoxVehicleType.getSelectedItem().equals("Economy"))
 				{
-					try {
-						BufferedImage image = ImageIO.read(new File("AllenEatonRentals/lib/derpamine.jpg")); // test
-						JLabel picLabel = new JLabel(new ImageIcon(image));
+				//	try {
+						
+						JLabel picLabel = new JLabel(new ImageIcon (Toolkit.getDefaultToolkit().getImage("images/derpamine.jpg")));
 						picLabel.setBounds(10, 25, 300, 400);
 						SearchResultsPage.add(picLabel);
 						picLabel.setVisible(true);
 						
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+				//	} catch (IOException e) {
+				//		e.printStackTrace();
+				//	}
 				}
 			}
 		});
