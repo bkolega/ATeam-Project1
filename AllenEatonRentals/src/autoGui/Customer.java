@@ -11,7 +11,12 @@ import java.awt.event.MouseEvent;
 
 
 
+
+
+
+
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -30,6 +35,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
+
+import aerentals.database.DatabaseRowSet;
+import aerentals.database.SqlDatabaseProvider;
+import aerentals.database.SqlDatabaseRowSet;
 
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 import com.toedter.calendar.JCalendar;
@@ -50,6 +59,8 @@ import javax.swing.JSeparator;
 public class Customer extends JFrame {
 	private JTextField textField;
 	private JPasswordField passwordField;
+	private SqlDatabaseProvider databaseProvider;
+	private DefaultListModel<String> listModel = new DefaultListModel();
 
 	/**
 	 * Launch the application.
@@ -75,6 +86,8 @@ public class Customer extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1087, 654);
 		getContentPane().setLayout(new CardLayout(0, 0));
+
+		databaseProvider = new SqlDatabaseProvider("jdbc:mysql://localhost/car_rentals", "test", "test1234");
 		
 		////////////////////////////////////////////////////////////////////////////////
 		/////////////////////////////   PANELS   ///////////////////////////////////////
@@ -241,6 +254,12 @@ public class Customer extends JFrame {
 		btnViewPastOrders.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				listModel.clear();
+				DatabaseRowSet rowSet = databaseProvider.getRows("`ALLEN_EATON_AUTO.RESERVATION`");
+				while (rowSet.next()) {
+					System.out.println(rowSet.getField("reservation_start_date").toString());
+					listModel.addElement(rowSet.getField("reservation_start_date").toString());
+				}
 				CustomerHomePage.setVisible(false);
 				PastOrdersPage.setVisible(true);
 			}
@@ -490,6 +509,11 @@ public class Customer extends JFrame {
 		});
 		btnBack_1.setBounds(12, 571, 97, 25);
 		PastOrdersPage.add(btnBack_1);
+		
+		JList list = new JList();
+		list.setBounds(22, 50, 460, 431);
+		list.setModel(listModel);
+		PastOrdersPage.add(list);
 		
 		
 		

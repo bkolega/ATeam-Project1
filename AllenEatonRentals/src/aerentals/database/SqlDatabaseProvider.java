@@ -23,6 +23,10 @@ public class SqlDatabaseProvider implements DatabaseProvider {
 			e.printStackTrace();
 		}
 	}
+	
+	public Connection getConnection() {
+		return conn;
+	}
 
 	// XXX: Don't let a user directly enter a String that will be given to this method.
 	//      There is an SQL injection risk if this happens. Unfortunately, it looks like
