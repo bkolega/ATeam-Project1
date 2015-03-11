@@ -1,0 +1,135 @@
+<?php
+	include ("db_access.php");
+	
+	$response["success"] = 1;
+	$response["message"] = "";
+/*
+	if (empty($_POST['username'])) {
+	   $response["success"] = 0;
+	   $response["message"] += "Email is required\n";
+	}
+	else {
+	   $userQuery = "SELECT user_email
+	     		 FROM `ALLEN_EATON_AUTO.USER`
+			 WHERE user_email='".$_POST['username']."'";
+
+	   $userResult = mysqli_query($c, $userQuery);
+	   $userArray = mysqli_fetch_array($userResult);
+
+	   if (!empty($userArray)) {
+	      $response["success"] = 0;
+	      $response["message"] += "Email is in use\n"
+	   }
+	}
+	
+	if (empty($_POST['password'])) {
+	   $response["success"] = 0;
+	   $response["message"] += "Password is required\n"
+	}
+	else if (empty($_POST['repassword'])) {
+	   $response["success"] = 0;
+	   $response["message"] += "Re-entering password is required\n"
+	}
+	else if ($_POST['repassword'] != $_POST['password']) {
+	   $response["success"] = 0;
+	   $response["message"] += "The entered passwords need to match\n"
+	}
+	else {
+	     $options = [ 'cost' => 12 ];
+	     $password = password_hash($_POST['password'], PASSWORD_BCRYPT, $options);
+	}
+
+	if (empty($_POST['firstname'])) {
+	   $response["success"] = 0;
+	   $response["message"] += "First name is required\n"
+	}
+
+	if (empty($_POST['lastname'])) {
+	   $response["success"] = 0;
+	   $response["message"] += "Last name is required\n"
+	}
+
+	if (empty($_POST['birthdate'])) {
+	   $response["success"] = 0;
+	   $response["message"] += "Birth date is required\n"
+	}
+
+	if (empty($_POST['street'])) {
+	   $response["success"] = 0;
+	   $response["message"] += "Street address is required\n"
+	}
+
+	if (empty($_POST['city'])) {
+	   $response["success"] = 0;
+	   $response["message"] += "City is required\n"
+	}
+
+	if (empty($_POST['state'])) {
+	   $response["success"] = 0;
+	   $response["message"] += "State is required\n"
+	}
+
+	if (empty($_POST['zip'])) {
+	   $response["success"] = 0;
+	   $response["message"] += "Zip code is required\n"
+	}
+
+	if (empty($_POST['role'])) {
+	   $response["success"] = 0;
+	   $response["message"] += "Employee role is required\n"
+	}
+
+	if ($response["success"] == 0) {
+	   die(json_encode($response));
+	}  /*
+	else {
+	   $registerQuery = "BEGIN;
+			     INSERT INTO `csoden42`.`ALLEN_EATON_AUTO.USER`
+			     	    (`user_email`,
+				     `user_password`,
+				     `user_first_name`,
+				     `user_middle_name`,
+				     `user_last_name`,
+				     `user_birthday`,
+				     `user_telephone`,
+				     `user_address_street`,
+				     `user_address_street_2`,
+				     `user_address_city`,
+				     `user_address_state`,
+				     `user_address_zip` )
+			      VALUES (
+			      	     '".$_POST['username']."',
+				     '".$password."',
+				     '".$_POST['firstname']."',
+				     '".$_POST['middlename']."',
+				     '".$_POST['lastname']."',
+				     '".$_POST['birthdate']."',
+				     '".$_POST['phone']."',
+				     '".$_POST['street']."',
+				     '".$_POST['street2']."',
+				     '".$_POST['city']."',
+				     '".$_POST['state']."',
+				     '".$_POST['zip']."' );
+			      INSERT INTO `csoden42`.`ALLEN_EATON_AUTO.EMPLOYEE`
+			      	    (`user_email`,
+				     `supervisor_email`,
+				     `employee_role` )
+			      VALUES (
+			      	     '".$_POST['username']."',
+				     '".$_POST['supemail']."',
+				     '".$_POST['role']."' );
+			      COMMIT;";
+	     if (mysqli_query($c, $registerQuery)) {
+	     	$response["success"] = 1;
+		$response["message"]= "Register Successful!";
+	     }
+	     else {
+	     	$response["success"] = 0;
+		$response["message"]= "Error in registering.";
+	     }
+	     
+	     die(json_encode($response));
+	} */
+*/
+	mysqli_close($c);
+?>
