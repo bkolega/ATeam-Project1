@@ -6,22 +6,28 @@
     android:orientation="horizontal">
 
     <RelativeLayout
-        android:id="@+id/employee_email_edit"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.15">
+    </RelativeLayout>
+    
+     <RelativeLayout
+         android:layout_width="346dp"
+         android:layout_height="444dp"
+         android:layout_gravity="center_vertical" >
 
         <TextView
             android:id="@+id/last_name_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/first_name_view"
+            android:layout_below="@+id/textServiceMenu"
             android:paddingLeft="10dp"
             android:paddingTop="20dp"
             android:text="@string/last_name" />
 
         <TextView
-            android:id="@+id/first_name_view"
+            android:id="@+id/textServiceMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -53,7 +59,7 @@
             android:id="@+id/birthdate_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/first_name_view"
+            android:layout_alignRight="@+id/textServiceMenu"
             android:layout_below="@+id/last_name_view"
             android:layout_marginTop="19dp"
             android:text="@string/birthdate" />
@@ -142,6 +148,12 @@
             android:onClick="clickButtons"
             android:text="@string/cancel" />
 
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.15">
     </RelativeLayout>
 
 </LinearLayout>

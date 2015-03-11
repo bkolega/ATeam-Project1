@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" xmlns:tools="http://schemas.android.com/tools" tools:context=".SalesOptionsUser">
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.15" >
+
+    </RelativeLayout>
+    
+     <RelativeLayout
+         android:layout_width="222dp"
+         android:layout_height="fill_parent" >
+
+         <LinearLayout
+             android:id="@+id/linearLayout1"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:layout_centerInParent="true"
+             android:orientation="vertical" >
+
+
+             <TextView
+                 android:id="@+id/userIDTextSales"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:gravity="center"
+                 android:text="@string/user_id"
+                 android:textSize="40sp" />
+
+             <Button
+                 android:id="@+id/userInformationsButtonSales"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="23dp"
+                 android:onClick="clickButtons"
+                 android:text="@string/view_user_info" />
+
+             <Button
+                 android:id="@+id/printContractButtonSales"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="23dp"
+                 android:onClick="clickButtons"
+                 android:text="@string/print_contract" />
+
+             <Button
+                 android:id="@+id/backUserButtonSales"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="23dp"
+                 android:onClick="clickButtons"
+                 android:text="@string/back" />
+
+         </LinearLayout>
+     </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.15" >
+
+    </RelativeLayout>
+    
+
+</LinearLayout>
+

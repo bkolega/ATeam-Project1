@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"
+    android:id="@+id/layoutContainer"
+    android:orientation="horizontal">
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.15" >
+
+    </RelativeLayout>
+    
+     <RelativeLayout
+         android:layout_width="222dp"
+         android:layout_height="fill_parent" >
+        
+         <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+              <TextView
+                  android:id="@+id/carIDTextSales"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:gravity="center"
+                  android:text="@string/car_id"
+                  android:textSize="40sp" />
+
+              <Button
+                  android:id="@+id/checkoutButtonSales"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="23dp"
+                  android:onClick="clickButtons"
+                  android:text="@string/checkout_car" />
+
+              <Button
+                  android:id="@+id/viewCarButtonSales"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="23dp"
+                  android:onClick="clickButtons"
+                  android:text="@string/view_car_details" />
+
+              <Button
+                  android:id="@+id/carUseButtonSales"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="23dp"
+                  android:onClick="clickButtons"
+                  android:text="@string/check_car_use" />
+
+              <Button
+                  android:id="@+id/backButtonSales"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="23dp"
+                  android:onClick="clickButtons"
+                  android:text="@string/back" />
+            
+            
+    		</LinearLayout>
+    
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.15" >
+
+    </RelativeLayout>
+    
+
+</LinearLayout>

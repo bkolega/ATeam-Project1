@@ -124,17 +124,15 @@ public class MainActivity extends Activity {
 					Log.d("Successfully Login!", json.toString());
 					
 					// Move onto next activity
-					Intent  ii; 
-					if(radioEmployee.equals("Sales")) {
-						ii = new Intent(MainActivity.this, SalesMenu.class);
-					}
-					else {
-						ii = new Intent(MainActivity.this, ServiceMenu.class);
-					}
+					Intent  ii = new Intent(MainActivity.this, MainMenu.class);
+					Bundle b = new Bundle();
+					b.putString("employeeType", radioEmployee); //Your id
+					ii.putExtras(b);
 					
-					startActivity(ii);
+					startActivity(ii);					
+					finish();	
 					
-					finish();					
+	
 					return json.getString(TAG_MESSAGE);
 				}
 				else {

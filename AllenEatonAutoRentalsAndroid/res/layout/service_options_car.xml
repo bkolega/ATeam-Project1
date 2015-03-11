@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:id="@+id/layoutContainer"
+    tools:context=".ServiceOptionsCar" >
+
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.15" >
+
+    </RelativeLayout>
+
+   <RelativeLayout
+       android:layout_width="217dp"
+       android:layout_height="459dp"
+       android:layout_gravity="center_vertical" >
+
+       <LinearLayout
+           android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical" >
+
+           <TextView
+               android:id="@+id/serviceTextCarID"
+               android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:gravity="center"
+               android:text="@string/car_id"
+               android:textSize="40sp" />
+
+           <Button
+               android:id="@+id/checkInButtonService"
+               android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="23dp"
+               android:onClick="clickButtons"
+               android:text="@string/checkin_car" />
+
+           <Button
+               android:id="@+id/viewNotesButtonService"
+               android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="23dp"
+               android:onClick="clickButtons"
+               android:text="@string/view_notes" />
+
+           <Button
+               android:id="@+id/addNotesButtonService"
+               android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="23dp"
+               android:onClick="clickButtons"
+               android:text="@string/add_note" />
+
+           <Button
+               android:id="@+id/backButtonService"
+               android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="23dp"
+               android:onClick="clickButtons"
+               android:text="@string/back" />
+         
+       </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.15">
+    </RelativeLayout>
+
+</LinearLayout>

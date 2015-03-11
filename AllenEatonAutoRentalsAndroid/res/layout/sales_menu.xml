@@ -1,100 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent" 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutContainer"
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:id="@+id/layoutContainer" 
-    android:orientation="horizontal">
-  	
-	<RelativeLayout
-        android:layout_width="0dip"
-        android:layout_height="fill_parent"
-        android:layout_weight="0.15">
-    </RelativeLayout>
-    
-     <RelativeLayout
-        android:layout_width="0dip"
-        android:layout_height="fill_parent"
-        android:layout_weight="0.7">
-        
-          <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="vertical">
-		       
-              
-            <TextView
-		        android:id="@+id/sales_main_title"
-		        android:layout_width="fill_parent"
-		        android:layout_height="wrap_content"
-		        android:gravity="center"
-		        android:text="@string/welcome"
-		        android:textSize="40sp"
-		        />
-            
-            <Button
-		        android:id="@+id/button_main_viewinventory"
-		        android:layout_width="fill_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="23dp"
-		        android:text="@string/view_inventory" 
-		        android:onClick="clickButtons"
-		        />
-            
-            <Button
-		        android:id="@+id/button_main_viewuse"
-		        android:layout_width="fill_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="23dp"
-		        android:text="@string/view_use" 
-		        android:onClick="clickButtons"
-		        />
-            
-            <Button
-		        android:id="@+id/button_main_printdetails"
-		        android:layout_width="fill_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="23dp"
-		        android:text="@string/print_details" 
-		        android:onClick="clickButtons"
-		        />
-            
-            <Button
-		        android:id="@+id/button_main_printcontract"
-		        android:layout_width="fill_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="23dp"
-		        android:text="@string/print_contract" 
-		        android:onClick="clickButtons"
-		        />
-            
-            <Button
-		        android:id="@+id/button_main_checkoutcar"
-		        android:layout_width="fill_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="23dp"
-		        android:text="@string/checkout_car" 
-		        android:onClick="clickButtons"
-		        />
-            
-            <Button
-		        android:id="@+id/button_main_logout"
-		        android:layout_width="fill_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="23dp"
-		        android:text="@string/logout" 
-		        android:onClick="clickButtons"
-		        />
-            
-    		</LinearLayout>
-    
-    </RelativeLayout>
-    
+    android:orientation="horizontal"
+    tools:context=".MainMenu" >
+
     <RelativeLayout
         android:layout_width="0dip"
         android:layout_height="fill_parent"
-        android:layout_weight="0.15">
+        android:layout_weight="0.15" >
     </RelativeLayout>
-    
-</LinearLayout>             
+
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.7" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textSalesMenu"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/welcome"
+                android:textSize="40sp" />
+
+            <Button
+                android:id="@+id/serachCarButtonSalesMenu"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:onClick="clickButtons"
+                android:text="@string/search_car" />
+
+            <Button
+                android:id="@+id/viewCarsButtonSalesMenu"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:onClick="clickButtons"
+                android:text="@string/view_inventory" />
+
+            <Button
+                android:id="@+id/searchUserButtonSalesMenu"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:onClick="clickButtons"
+                android:text="@string/search_user" />
+
+            <Button
+                android:id="@+id/viewUserButtonSalesMenu"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:onClick="clickButtons"
+                android:text="@string/view_users" />
+
+            <Button
+                android:id="@+id/logoutButtonSalesMenu"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:onClick="clickButtons"
+                android:text="@string/logout" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.15" >
+    </RelativeLayout>
+
+</LinearLayout>
