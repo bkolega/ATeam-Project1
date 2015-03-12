@@ -8,6 +8,11 @@
 	if (empty($_POST['username'])) {
 	   $response["success"] = 0;
 	   $response["message"] .= "Email is required\n";
+	}
+	// Check if email is valid
+	else if (!filter_var(empty($_POST['username']), FILTER_VALIDATE_EMAIL)) {
+	   $response["success"] = 0;
+	   $response["message"] .= "Email is not valid\n";
 	} 
 	// Check if user already exists
 	else {
@@ -57,7 +62,11 @@
 	if (empty($_POST['birthdate'])) {
 	   $response["success"] = 0;
 	   $response["message"] .= "Birth date is required\n";
-	}
+	} 
+	else if (!preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $_POST['birthdate'])) {
+	   $response["success"] = 0;
+	   $response["message"] .= "Birth date needs to be in 'YYYY-MM-DD' format\n";
+	} 
 	
 	// Check if street address field is empty
 	if (empty($_POST['street'])) {
@@ -149,7 +158,7 @@
 	   // Commit transaction
 	   if (mysqli_query($c, "COMMIT")) {
 	     	$response["success"] = 1;
-		$response["message"] = "Register Successful!";
+		$response["message"] = "Register Successful! Please log in.";
 	   }
 	   else {
 	     	$response["success"] = 0;

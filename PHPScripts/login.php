@@ -21,7 +21,7 @@
   $loginResult = mysqli_query($c, $loginQuery);
   $loginArray = mysqli_fetch_array($loginResult);
 
-  if (!empty($loginArray) && $loginPassword == $loginArray['user_password'] /*password_verify($loginPassword, $loginArray['user_password'])*/) {
+  if (!empty($loginArray) && /*$loginPassword == $loginArray['user_password']*/ password_verify($loginPassword, $loginArray['user_password'])) {
      $response["success"] = 1;
      $response["message"] = "Login Successful!";
      die(json_encode($response));
