@@ -13,141 +13,185 @@
     
      <RelativeLayout
          android:layout_width="346dp"
-         android:layout_height="444dp"
+         android:layout_height="700dp"
          android:layout_gravity="center_vertical" >
 
-        <TextView
-            android:id="@+id/last_name_view"
-            android:layout_width="wrap_content"
+      <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/textServiceMenu"
-            android:paddingLeft="10dp"
-            android:paddingTop="20dp"
-            android:text="@string/last_name" />
-
-        <TextView
-            android:id="@+id/textServiceMenu"
-            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:gravity="center_horizontal" 
+            android:layout_gravity="center_horizontal" >
+        
+        <EditText
+            android:id="@+id/employee_email_edit"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="36dp"
-            android:paddingLeft="10dp"
-            android:text="@string/first_name" />
-
+            android:ems="10"
+            android:inputType="textEmailAddress" 
+            android:imeOptions="actionNext"
+            android:hint="@string/email" >
+            <requestFocus />     
+			</EditText>
+	
+        <EditText
+            android:id="@+id/employee_password_edit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword" 
+            android:imeOptions="actionNext"
+            android:hint="@string/password"  >
+            </EditText>
+            
+        <EditText
+            android:id="@+id/employee_repassword_edit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword" 
+            android:imeOptions="actionNext"
+            android:hint="@string/repassword"  >
+            </EditText>
+			
         <EditText
             android:id="@+id/first_name_edit"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/last_name_view"
-            android:layout_alignParentRight="true"
-            android:ems="10" />
-
+            android:ems="10" 
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:hint="@string/first_name" >
+            </EditText>
+            
+        <EditText
+            android:id="@+id/middle_name_edit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10" 
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:hint="@string/middle_name" >
+        	</EditText>
+          
         <EditText
             android:id="@+id/last_name_edit"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/last_name_view"
-            android:layout_alignParentRight="true"
-            android:ems="10" >
-
-            <requestFocus />
-        </EditText>
-
-        <TextView
-            android:id="@+id/birthdate_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/textServiceMenu"
-            android:layout_below="@+id/last_name_view"
-            android:layout_marginTop="19dp"
-            android:text="@string/birthdate" />
+            android:ems="10" 
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:hint="@string/last_name" >
+        	</EditText>
 
         <EditText
             android:id="@+id/birthdate_edit"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/birthdate_view"
-            android:layout_alignParentRight="true"
             android:ems="10"
-            android:inputType="date" />
-
-        <TextView
-            android:id="@+id/supervisor_email_view"
-            android:layout_width="wrap_content"
+            android:inputType="date"
+            android:imeOptions="actionNext"
+            android:hint="@string/birthdate" >
+            </EditText>
+            
+        <EditText
+            android:id="@+id/address_edit"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/birthdate_view"
-            android:layout_alignRight="@+id/last_name_view"
-            android:layout_below="@+id/birthdate_view"
-            android:layout_marginTop="14dp"
-            android:text="@string/supervisor_email" />
-
-        <TextView
-            android:id="@+id/employee_email_view"
-            android:layout_width="wrap_content"
+            android:ems="10" 
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:hint="@string/address" >
+        	</EditText>
+        	
+        <EditText
+            android:id="@+id/address2_edit"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/birthdate_view"
-            android:layout_below="@+id/supervisor_email_edit"
-            android:layout_marginTop="10dp"
-            android:text="@string/email" />
+            android:ems="10" 
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:hint="@string/address2" >
+        	</EditText>
+        	
+        <EditText
+            android:id="@+id/city_edit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10" 
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:hint="@string/city" >
+        	</EditText>
+        	
+        <EditText
+            android:id="@+id/state_edit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10" 
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:hint="@string/state" >
+        	</EditText>
+        
+        <EditText
+            android:id="@+id/zip_edit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            android:imeOptions="actionNext"
+            android:hint="@string/zip" >
+            </EditText>
+        
+        <EditText
+            android:id="@+id/phone_edit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="phone"
+            android:imeOptions="actionNext"
+            android:hint="@string/phone" >
+            </EditText>
 
         <EditText
-            android:id="@+id/employeeemail_view"
-            android:layout_width="wrap_content"
+            android:id="@+id/employee_role_edit"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/employee_email_view"
-            android:layout_alignLeft="@+id/supervisor_email_edit"
-            android:ems="10"
-            android:inputType="textEmailAddress" />
+            android:ems="10" 
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:hint="@string/role" >
+            </EditText>
 
         <EditText
             android:id="@+id/supervisor_email_edit"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/supervisor_email_view"
-            android:layout_alignBottom="@+id/supervisor_email_view"
-            android:layout_alignParentRight="true"
             android:ems="10"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:imeOptions="actionDone"
+            android:hint="@string/supervisor_email" >
+            </EditText>
 
-        <TextView
-            android:id="@+id/employee_password_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/supervisor_email_view"
-            android:layout_below="@+id/employee_email_view"
-            android:paddingTop="15dp"
-            android:text="@string/password" />
 
-        <EditText
-            android:id="@+id/employee_password_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/employee_password_view"
-            android:layout_alignLeft="@+id/employeeemail_view"
-            android:layout_alignParentRight="true"
-            android:ems="10"
-            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/button_register_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/employee_password_edit"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="74dp"
+            android:onClick="clickButtons"
             android:text="@string/register" />
 
         <Button
             android:id="@+id/button_register_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/button_register_confirm"
-            android:layout_centerHorizontal="true"
             android:onClick="clickButtons"
             android:text="@string/cancel" />
-
+        
+        </LinearLayout>
     </RelativeLayout>
     
     <RelativeLayout
