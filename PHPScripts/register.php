@@ -10,7 +10,7 @@
 	   $response["message"] .= "Email is required\n";
 	}
 	// Check if email is valid
-	else if (!filter_var(empty($_POST['username']), FILTER_VALIDATE_EMAIL)) {
+	else if (filter_var(empty($_POST['username']), FILTER_VALIDATE_EMAIL)) {
 	   $response["success"] = 0;
 	   $response["message"] .= "Email is not valid\n";
 	} 
