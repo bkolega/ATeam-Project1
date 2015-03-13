@@ -19,6 +19,23 @@ import java.awt.event.MouseEvent;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -39,6 +56,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -71,6 +91,22 @@ import net.sourceforge.jcalendarbutton.JTimeButton;
 
 import org.sourceforge.jcalendarbutton.JTimePopup;
 
+import sun.util.calendar.BaseCalendar;
+import sun.util.calendar.BaseCalendar.Date;
+import net.sourceforge.jcalendarbutton.JCalendarPopup;
+
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
+import java.text.DateFormat;
+
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.JDatePanelImpl;
+
+import javax.swing.JFormattedTextField.AbstractFormatter;
+
+import org.jdatepicker.util.JDatePickerUtil;
 
 public class Customer extends JFrame {
 	private JTextField textField;
@@ -78,7 +114,7 @@ public class Customer extends JFrame {
 	private SqlDatabaseProvider databaseProvider;
 	private DefaultListModel<String> listModel = new DefaultListModel();
 	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField txtDate;
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private String userEmail;
@@ -243,7 +279,7 @@ public class Customer extends JFrame {
 				//Login.setVisible(true);
 			}
 		});
-		btnExit_4.setBounds(960, 525, 97, 25);
+		btnExit_4.setBounds(909, 525, 97, 25);
 		LoginWithSearchResults.add(btnExit_4);
 		
 		passwordField = new JPasswordField();
@@ -266,7 +302,7 @@ public class Customer extends JFrame {
 				//Login.setVisible(true);
 			}
 		});
-		btnExit_1.setBounds(960, 525, 97, 25);
+		btnExit_1.setBounds(909, 525, 97, 25);
 		SearchResultsPage.add(btnExit_1);
 		
 		JLabel lblTheseAreYour_1 = DefaultComponentFactory.getInstance().createLabel("These are your search results: ");
@@ -278,6 +314,7 @@ public class Customer extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				SearchResultsPage.setVisible(false);
 				CustomerHomePage.setVisible(true);
+				//make array of image labels that is removed here
 			}
 		});
 		btnBack.setBounds(12, 525, 97, 25);
@@ -367,26 +404,75 @@ public class Customer extends JFrame {
 		CustomerHomePage.add(comboBox);
 		
 		btnReserveAsGuest = new JButton("Reserve as guest");
+		JLabel picLabel = new JLabel();
 		btnReserveAsGuest.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				CustomerHomePage.setVisible(false);
 				SearchResultsPage.setVisible(true);
+
 				if(comboBoxVehicleType.getSelectedItem().equals("Economy"))
 				{
-				//	try {
-						
-						JLabel picLabel = new JLabel();
-						ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/derpamine.jpg")));
+						picLabel.setIcon(null);
+						ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/economyCar.jpg")));
 						picLabel.setIcon(testImg);
 						picLabel.setBounds(10, 25, 300, 400);
 						SearchResultsPage.add(picLabel);
 						picLabel.setVisible(true);
-						
-				//	} catch (IOException e) {
-											
-				//		e.printStackTrace();
-				//	}
+				}
+				if(comboBoxVehicleType.getSelectedItem().equals("Compact"))
+				{
+						picLabel.setIcon(null);
+						ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/compactCar.jpg")));
+						picLabel.setIcon(testImg);
+						picLabel.setBounds(10, 25, 300, 400);
+						SearchResultsPage.add(picLabel);
+						picLabel.setVisible(true);
+				}
+				if(comboBoxVehicleType.getSelectedItem().equals("Standard"))
+				{
+						picLabel.setIcon(null);
+						ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/standardCar.jpg")));
+						picLabel.setIcon(testImg);
+						picLabel.setBounds(10, 25, 300, 400);
+						SearchResultsPage.add(picLabel);
+						picLabel.setVisible(true);
+				}
+				if(comboBoxVehicleType.getSelectedItem().equals("Small SUV"))
+				{
+						picLabel.setIcon(null);
+						ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/smallSUV.jpg")));
+						picLabel.setIcon(testImg);
+						picLabel.setBounds(10, 25, 300, 400);
+						SearchResultsPage.add(picLabel);
+						picLabel.setVisible(true);
+				}
+				if(comboBoxVehicleType.getSelectedItem().equals("Minivan"))
+				{
+						picLabel.setIcon(null);
+						ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/minivan.jpg")));
+						picLabel.setIcon(testImg);
+						picLabel.setBounds(10, 25, 300, 400);
+						SearchResultsPage.add(picLabel);
+						picLabel.setVisible(true);
+				}
+				if(comboBoxVehicleType.getSelectedItem().equals("Standard SUV"))
+				{
+						picLabel.setIcon(null);
+						ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/standardSUV.jpg")));
+						picLabel.setIcon(testImg);
+						picLabel.setBounds(10, 25, 300, 400);
+						SearchResultsPage.add(picLabel);
+						picLabel.setVisible(true);
+				}
+				if(comboBoxVehicleType.getSelectedItem().equals("Premium"))
+				{
+						picLabel.setIcon(null);
+						ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/premiumCar.jpg")));
+						picLabel.setIcon(testImg);
+						picLabel.setBounds(10, 25, 300, 400);
+						SearchResultsPage.add(picLabel);
+						picLabel.setVisible(true);
 				}
 			}
 		});
@@ -428,12 +514,37 @@ public class Customer extends JFrame {
 		CustomerHomePage.add(textField_1);
 		textField_1.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(236, 129, 234, 22);
-		CustomerHomePage.add(textField_2);
-		textField_2.setColumns(10);
+		txtDate = new JTextField();
+		txtDate.setBounds(236, 129, 234, 22);
+		CustomerHomePage.add(txtDate);
+		txtDate.setColumns(10);
 		
+		
+		
+		
+		//DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);
 		JCalendarButton calendarButton_1 = new JCalendarButton();
+		calendarButton_1.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				//System.out.println(evt.getNewValue());
+				
+				//if (!(newVal.equals(oldVal)) && evt.getOldValue()!=null){
+					
+					//String dateTime =  parse(evt.getNewValue());
+					//String dateTimeString = "";
+					//if (dateTime != null) {
+					//		dateTimeString = dateTimeFormat.format(dateTime);
+					//		txtDate.setText(dateTimeString);
+					//	}
+				//	System.out.println(evt.getNewValue());
+				//	System.out.println("asdf");
+
+				     			        
+				}
+			}
+		//}
+	);
+		
 		calendarButton_1.setBounds(514, 121, 32, 30);
 		CustomerHomePage.add(calendarButton_1);
 		
@@ -557,7 +668,7 @@ public class Customer extends JFrame {
 				dispose();
 			}
 		});
-		btnExit_5.setBounds(960, 525, 97, 25);
+		btnExit_5.setBounds(909, 525, 97, 25);
 		AdditionalOptionsPage.add(btnExit_5);
 		
 		
@@ -576,7 +687,7 @@ public class Customer extends JFrame {
 				//Login.setVisible(true);
 			}
 		});
-		btnExit_3.setBounds(960, 525, 97, 25);
+		btnExit_3.setBounds(909, 525, 97, 25);
 		ModifyExistingOrdersPage.add(btnExit_3);
 		
 		JLabel lblYouCanModify = DefaultComponentFactory.getInstance().createLabel("You can modify existing orders here:");
@@ -615,7 +726,7 @@ public class Customer extends JFrame {
 				//Login.setVisible(true);
 			}
 		});
-		btnExit_2.setBounds(960, 525, 97, 25);
+		btnExit_2.setBounds(909, 525, 97, 25);
 		PastOrdersPage.add(btnExit_2);
 		
 		JLabel lblTheseAreYour = DefaultComponentFactory.getInstance().createLabel("These are your past orders: ");
