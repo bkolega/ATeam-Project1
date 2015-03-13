@@ -54,6 +54,11 @@ import javax.swing.JScrollBar;
 import java.awt.Scrollbar;
 
 import javax.swing.JSeparator;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import net.sourceforge.jcalendarbutton.JCalendarButton;
+import net.sourceforge.jcalendarbutton.JTimeButton;
+import org.sourceforge.jcalendarbutton.JTimePopup;
 
 
 public class Customer extends JFrame {
@@ -61,6 +66,10 @@ public class Customer extends JFrame {
 	private JPasswordField passwordField;
 	private SqlDatabaseProvider databaseProvider;
 	private DefaultListModel<String> listModel = new DefaultListModel();
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
 
 	/**
 	 * Launch the application.
@@ -84,10 +93,11 @@ public class Customer extends JFrame {
 	public Customer() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1087, 654);
+		setBounds(100, 100, 1036, 608);
 		getContentPane().setLayout(new CardLayout(0, 0));
 
-		databaseProvider = new SqlDatabaseProvider("jdbc:mysql://localhost/car_rentals", "test", "test1234");
+		databaseProvider = new SqlDatabaseProvider("jdbc:mysql://localhost/csoden42", "test", "test1234");
+		
 		
 		////////////////////////////////////////////////////////////////////////////////
 		/////////////////////////////   PANELS   ///////////////////////////////////////
@@ -173,7 +183,7 @@ public class Customer extends JFrame {
 				CustomerHomePage.setVisible(true);
 			}
 		});
-		btnBack_3.setBounds(12, 571, 97, 25);
+		btnBack_3.setBounds(12, 525, 97, 25);
 		LoginWithSearchResults.add(btnBack_3);
 		
 		JButton btnExit_4 = new JButton("Exit");
@@ -186,7 +196,7 @@ public class Customer extends JFrame {
 				//Login.setVisible(true);
 			}
 		});
-		btnExit_4.setBounds(960, 571, 97, 25);
+		btnExit_4.setBounds(960, 525, 97, 25);
 		LoginWithSearchResults.add(btnExit_4);
 		
 		passwordField = new JPasswordField();
@@ -209,7 +219,7 @@ public class Customer extends JFrame {
 				//Login.setVisible(true);
 			}
 		});
-		btnExit_1.setBounds(960, 571, 97, 25);
+		btnExit_1.setBounds(960, 525, 97, 25);
 		SearchResultsPage.add(btnExit_1);
 		
 		JLabel lblTheseAreYour_1 = DefaultComponentFactory.getInstance().createLabel("These are your search results: ");
@@ -223,7 +233,7 @@ public class Customer extends JFrame {
 				CustomerHomePage.setVisible(true);
 			}
 		});
-		btnBack.setBounds(12, 571, 97, 25);
+		btnBack.setBounds(12, 525, 97, 25);
 		SearchResultsPage.add(btnBack);
 		
 		////////////////////////////////////////////////////////////////////////////////
@@ -232,22 +242,18 @@ public class Customer extends JFrame {
 		
 		JLabel lblEnterAPick = DefaultComponentFactory.getInstance().createLabel("Enter a pick up date:");
 		lblEnterAPick.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblEnterAPick.setBounds(12, 13, 179, 36);
+		lblEnterAPick.setBounds(77, 13, 179, 36);
 		CustomerHomePage.add(lblEnterAPick);
 		lblEnterAPick.setVisible(true);
 		
-		JCalendar calendar = new JCalendar();
-		calendar.setBounds(203, 13, 461, 255);
-		CustomerHomePage.add(calendar);
-		
 		JLabel lblChooseVehicleType = DefaultComponentFactory.getInstance().createLabel("Choose vehicle class:");
 		lblChooseVehicleType.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblChooseVehicleType.setBounds(12, 302, 144, 16);
+		lblChooseVehicleType.setBounds(77, 301, 144, 16);
 		CustomerHomePage.add(lblChooseVehicleType);
 		
 		JComboBox comboBoxVehicleType = new JComboBox();
 		comboBoxVehicleType.setModel(new DefaultComboBoxModel(new String[] {"Any class", "Economy", "Compact", "Standard", "Premium", "Small SUV", "Standard SUV", "Minivan"}));
-		comboBoxVehicleType.setBounds(200, 298, 121, 27);
+		comboBoxVehicleType.setBounds(233, 297, 121, 27);
 		CustomerHomePage.add(comboBoxVehicleType);
 		
 		JButton btnViewPastOrders = new JButton("View past orders");
@@ -264,7 +270,7 @@ public class Customer extends JFrame {
 				PastOrdersPage.setVisible(true);
 			}
 		});
-		btnViewPastOrders.setBounds(12, 517, 245, 27);
+		btnViewPastOrders.setBounds(407, 487, 245, 27);
 		CustomerHomePage.add(btnViewPastOrders);
 		
 		JButton btnModifyExistingReservation = new JButton("Modify existing reservation");
@@ -275,7 +281,7 @@ public class Customer extends JFrame {
 				ModifyExistingOrdersPage.setVisible(true);
 			}
 		});
-		btnModifyExistingReservation.setBounds(12, 557, 245, 27);
+		btnModifyExistingReservation.setBounds(109, 487, 245, 27);
 		CustomerHomePage.add(btnModifyExistingReservation);
 		
 		JButton btnExit = new JButton("Exit");
@@ -288,7 +294,7 @@ public class Customer extends JFrame {
 				//Login.setVisible(true);
 			}
 		});
-		btnExit.setBounds(960, 558, 97, 25);
+		btnExit.setBounds(890, 525, 97, 25);
 		CustomerHomePage.add(btnExit);
 		
 		JButton btnSubmit = new JButton("Reserve as member");
@@ -300,17 +306,17 @@ public class Customer extends JFrame {
 				lblInvalid.setVisible(false);
 			}
 		});
-		btnSubmit.setBounds(203, 430, 208, 36);
+		btnSubmit.setBounds(109, 389, 245, 36);
 		CustomerHomePage.add(btnSubmit);
 		
 		JLabel lblChooseRentalLocation = new JLabel("Choose rental location:");
 		lblChooseRentalLocation.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblChooseRentalLocation.setBounds(12, 340, 144, 16);
+		lblChooseRentalLocation.setBounds(77, 340, 144, 16);
 		CustomerHomePage.add(lblChooseRentalLocation);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Atchison, KS", "Belton, MO", "Emporia, KS", "Hiawatha, KS", "Kansas City, Mo", "Lawrence, KS", "Leavenworth, KS", "Manhattan, KS", "Platte City, Mo", "St Joseph, MO", "Topeka, KS", "Warrensburg, MO"}));
-		comboBox.setBounds(200, 338, 121, 24);
+		comboBox.setBounds(233, 337, 121, 24);
 		CustomerHomePage.add(comboBox);
 		
 		JButton btnReserveAsGuest = new JButton("Reserve as guest");
@@ -323,40 +329,94 @@ public class Customer extends JFrame {
 				{
 				//	try {
 						
-						JLabel picLabel = new JLabel(new ImageIcon (Toolkit.getDefaultToolkit().getImage("AllenEatonRentals/images/derpamine.jpg")));
+						JLabel picLabel = new JLabel();
+						ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/derpamine.jpg")));
+						picLabel.setIcon(testImg);
 						picLabel.setBounds(10, 25, 300, 400);
 						SearchResultsPage.add(picLabel);
 						picLabel.setVisible(true);
 						
 				//	} catch (IOException e) {
+											
 				//		e.printStackTrace();
 				//	}
 				}
 			}
 		});
-		btnReserveAsGuest.setBounds(461, 430, 203, 36);
+		btnReserveAsGuest.setBounds(407, 389, 245, 36);
 		CustomerHomePage.add(btnReserveAsGuest);
 		
 		JLabel lblSelectAnAge = new JLabel("Select an age range:");
 		lblSelectAnAge.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblSelectAnAge.setBounds(355, 298, 144, 27);
+		lblSelectAnAge.setBounds(407, 296, 144, 27);
 		CustomerHomePage.add(lblSelectAnAge);
 		
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"25+", "23-24", "20-22", "18-19", ""}));
-		comboBox_1.setBounds(543, 304, 121, 21);
+		comboBox_1.setBounds(563, 300, 121, 21);
 		CustomerHomePage.add(comboBox_1);
 		
 		JCheckBox chckbxReturnCarTo = new JCheckBox("Return car to same location");
 		chckbxReturnCarTo.setSelected(true);
 		chckbxReturnCarTo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		chckbxReturnCarTo.setBounds(355, 336, 208, 25);
+		chckbxReturnCarTo.setBounds(407, 336, 208, 25);
 		CustomerHomePage.add(chckbxReturnCarTo);
 		
 		JLabel lblCart_2 = new JLabel("Cart:");
 		lblCart_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCart_2.setBounds(794, 24, 56, 16);
+		lblCart_2.setBounds(730, 23, 56, 16);
 		CustomerHomePage.add(lblCart_2);
+		
+		JCalendarButton calendarButton = new JCalendarButton();
+		calendarButton.setBounds(514, 13, 32, 30);
+		CustomerHomePage.add(calendarButton);
+		
+		JLabel lblEnterAReturn = new JLabel("Enter a return date:");
+		lblEnterAReturn.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblEnterAReturn.setBounds(77, 131, 131, 16);
+		CustomerHomePage.add(lblEnterAReturn);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(236, 21, 234, 22);
+		CustomerHomePage.add(textField_1);
+		textField_1.setColumns(10);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(236, 129, 234, 22);
+		CustomerHomePage.add(textField_2);
+		textField_2.setColumns(10);
+		
+		JCalendarButton calendarButton_1 = new JCalendarButton();
+		calendarButton_1.setBounds(514, 121, 32, 30);
+		CustomerHomePage.add(calendarButton_1);
+		
+		JTimeButton timeButton = new JTimeButton();
+		timeButton.setBounds(514, 164, 32, 30);
+		CustomerHomePage.add(timeButton);
+		
+		JTimeButton timeButton_1 = new JTimeButton();
+		timeButton_1.setBounds(514, 54, 32, 30);
+		CustomerHomePage.add(timeButton_1);
+		
+		JLabel lblEnterATime = new JLabel("Enter a pick up time:");
+		lblEnterATime.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblEnterATime.setBounds(77, 62, 144, 16);
+		CustomerHomePage.add(lblEnterATime);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(236, 62, 234, 22);
+		CustomerHomePage.add(textField_3);
+		textField_3.setColumns(10);
+		
+		JLabel lblEnterAReturn_1 = new JLabel("Enter a return time:");
+		lblEnterAReturn_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblEnterAReturn_1.setBounds(77, 172, 144, 16);
+		CustomerHomePage.add(lblEnterAReturn_1);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(236, 172, 234, 22);
+		CustomerHomePage.add(textField_4);
 		
 		////////////////////////////////////////////////////////////////////////////////
 		//////////////////////  Additional Options Page   //////////////////////////////
@@ -407,7 +467,7 @@ public class Customer extends JFrame {
 				SearchResultsPage.setVisible(true);
 			}
 		});
-		btnBack_4.setBounds(12, 571, 97, 25);
+		btnBack_4.setBounds(12, 525, 97, 25);
 		AdditionalOptionsPage.add(btnBack_4);
 		
 		JComboBox comboBox_2 = new JComboBox();
@@ -434,7 +494,7 @@ public class Customer extends JFrame {
 				dispose();
 			}
 		});
-		btnExit_5.setBounds(960, 571, 97, 25);
+		btnExit_5.setBounds(960, 525, 97, 25);
 		AdditionalOptionsPage.add(btnExit_5);
 		
 		
@@ -453,7 +513,7 @@ public class Customer extends JFrame {
 				//Login.setVisible(true);
 			}
 		});
-		btnExit_3.setBounds(960, 571, 97, 25);
+		btnExit_3.setBounds(960, 525, 97, 25);
 		ModifyExistingOrdersPage.add(btnExit_3);
 		
 		JLabel lblYouCanModify = DefaultComponentFactory.getInstance().createLabel("You can modify existing orders here:");
@@ -468,7 +528,7 @@ public class Customer extends JFrame {
 				CustomerHomePage.setVisible(true);
 			}
 		});
-		btnBack_2.setBounds(12, 571, 97, 25);
+		btnBack_2.setBounds(12, 525, 97, 25);
 		ModifyExistingOrdersPage.add(btnBack_2);
 		
 		JLabel lblCart_1 = new JLabel("Cart:");
@@ -492,7 +552,7 @@ public class Customer extends JFrame {
 				//Login.setVisible(true);
 			}
 		});
-		btnExit_2.setBounds(960, 571, 97, 25);
+		btnExit_2.setBounds(960, 525, 97, 25);
 		PastOrdersPage.add(btnExit_2);
 		
 		JLabel lblTheseAreYour = DefaultComponentFactory.getInstance().createLabel("These are your past orders: ");
@@ -507,7 +567,7 @@ public class Customer extends JFrame {
 				CustomerHomePage.setVisible(true);
 			}
 		});
-		btnBack_1.setBounds(12, 571, 97, 25);
+		btnBack_1.setBounds(12, 525, 97, 25);
 		PastOrdersPage.add(btnBack_1);
 		
 		JList list = new JList();
@@ -519,5 +579,22 @@ public class Customer extends JFrame {
 		
 		
 
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
 	}
 }
