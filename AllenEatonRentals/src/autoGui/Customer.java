@@ -15,6 +15,10 @@ import java.awt.event.MouseEvent;
 
 
 
+
+
+
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -31,6 +35,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -55,9 +63,12 @@ import java.awt.Scrollbar;
 
 import javax.swing.JSeparator;
 import javax.swing.JPopupMenu;
+
 import java.awt.Component;
+
 import net.sourceforge.jcalendarbutton.JCalendarButton;
 import net.sourceforge.jcalendarbutton.JTimeButton;
+
 import org.sourceforge.jcalendarbutton.JTimePopup;
 
 
@@ -70,6 +81,45 @@ public class Customer extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+	private String userEmail;
+	private JLabel lblInvalid;
+	private JPanel LoginWithSearchResults;
+	private JPanel CustomerHomePage;
+	private JButton btnSubmit;
+	private JButton btnReserveAsGuest;
+	private JButton btnLogout;
+	private boolean loggedIn = false;
+	
+	public void login(String userEmail, String pass) {
+		Connection conn = databaseProvider.getConnection();
+		try {
+			PreparedStatement stmt = conn.prepareStatement("SELECT user_password FROM `ALLEN_EATON_AUTO.USER` WHERE user_email=? LIMIT 1");
+			stmt.setString(1, userEmail);
+			stmt.executeQuery();
+			ResultSet results = stmt.getResultSet();
+			results.next();
+			
+			if (results.getString(1).equals(pass)) {
+				// Successful log in
+				this.userEmail = userEmail;
+				loggedIn = true;
+				lblInvalid.setVisible(false);
+				LoginWithSearchResults.setVisible(false);
+				CustomerHomePage.setVisible(true);
+				btnLogout.setVisible(true);
+				btnReserveAsGuest.setVisible(false);
+				btnSubmit.setVisible(false);
+			} else {
+				// Invalid log in
+				lblInvalid.setVisible(true);
+				loggedIn = false;
+				userEmail = null;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Launch the application.
@@ -103,7 +153,12 @@ public class Customer extends JFrame {
 		/////////////////////////////   PANELS   ///////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////
 		
-		JPanel CustomerHomePage = new JPanel();
+		CustomerHomePage = new JPanel();
+		CustomerHomePage.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 		CustomerHomePage.setForeground(Color.BLACK);
 		getContentPane().add(CustomerHomePage, "name_52494973958178");
 		CustomerHomePage.setLayout(null);
@@ -112,7 +167,7 @@ public class Customer extends JFrame {
 		getContentPane().add(SearchResultsPage, "name_52494991163566");
 		SearchResultsPage.setLayout(null);
 		
-		JPanel LoginWithSearchResults = new JPanel();
+		LoginWithSearchResults = new JPanel();
 		getContentPane().add(LoginWithSearchResults, "name_52495009040667");
 		LoginWithSearchResults.setLayout(null);
 		
@@ -151,7 +206,7 @@ public class Customer extends JFrame {
 		lblPassword.setBounds(357, 261, 100, 42);
 		LoginWithSearchResults.add(lblPassword);
 		
-		JLabel lblInvalid = new JLabel("Invalid Login/Password Combination");
+		lblInvalid = new JLabel("Invalid Login/Password Combination");
 		lblInvalid.setForeground(Color.RED);
 		lblInvalid.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblInvalid.setBounds(357, 316, 270, 25);
@@ -161,15 +216,7 @@ public class Customer extends JFrame {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(textField.getText().equals("Jason"))
-				{
-					LoginWithSearchResults.setVisible(false);
-					SearchResultsPage.setVisible(true);
-				}
-				else
-				{
-					lblInvalid.setVisible(true);
-				}
+				login(textField.getText(), passwordField.getText());
 			}
 		});
 		btnNewButton.setBounds(357, 354, 258, 42);
@@ -297,7 +344,7 @@ public class Customer extends JFrame {
 		btnExit.setBounds(890, 525, 97, 25);
 		CustomerHomePage.add(btnExit);
 		
-		JButton btnSubmit = new JButton("Reserve as member");
+		btnSubmit = new JButton("Reserve as member");
 		btnSubmit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -319,7 +366,7 @@ public class Customer extends JFrame {
 		comboBox.setBounds(233, 337, 121, 24);
 		CustomerHomePage.add(comboBox);
 		
-		JButton btnReserveAsGuest = new JButton("Reserve as guest");
+		btnReserveAsGuest = new JButton("Reserve as guest");
 		btnReserveAsGuest.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -417,6 +464,22 @@ public class Customer extends JFrame {
 		textField_4.setColumns(10);
 		textField_4.setBounds(236, 172, 234, 22);
 		CustomerHomePage.add(textField_4);
+		
+		btnLogout = new JButton("Logout");
+		btnLogout.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				userEmail = null;
+				loggedIn = false;
+				btnLogout.setVisible(false);
+				btnSubmit.setVisible(true);
+				passwordField.setText("");
+				btnReserveAsGuest.setVisible(true);
+			}
+		});
+		btnLogout.setBounds(318, 437, 117, 29);
+		btnLogout.setVisible(false);
+		CustomerHomePage.add(btnLogout);
 		
 		////////////////////////////////////////////////////////////////////////////////
 		//////////////////////  Additional Options Page   //////////////////////////////
