@@ -17,19 +17,12 @@
         android:layout_height="fill_parent"
         android:layout_weight="0.7" >
 
-        <LinearLayout
+       	<LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:orientation="vertical" >
 
-            <Button
-                android:id="@+id/backButtonViewUsers"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="23dp"
-                android:onClick="clickButtons"
-                android:text="@string/back" />
             
             <TextView
                 android:id="@+id/viewUsersText"
@@ -38,6 +31,8 @@
                 android:gravity="center"
                 android:text="@string/view_users"
                 android:textSize="40sp" />
+            
+
 
            <ListView 
                android:id="@android:id/list"

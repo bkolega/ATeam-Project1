@@ -51,7 +51,7 @@
               android:label="@string/app_name" >         
         </activity>
         <activity
-              android:name="com.ateam.alleneatonautorentals.ViewCarsInventory"
+              android:name="com.ateam.alleneatonautorentals.ViewCars"
               android:label="@string/app_name" >         
         </activity>
         <activity

@@ -23,15 +23,19 @@ public class SalesOptionsCar extends Activity {
 		final int id = v.getId();
 		Intent ii;
 		switch (id) {
-			case R.id.backButtonSales:
-				ii = new Intent(SalesOptionsCar.this, MainMenu.class);
-				startActivity(ii);		
-				finish();	
-				break;
+
 			default:
 				break;
 		}
 
+	}
+	
+	@Override
+	public void onBackPressed() {
+		Intent ii;
+		ii = new Intent(SalesOptionsCar.this, MainMenu.class);
+		startActivity(ii);		
+		finish();			
 	}
 
 }

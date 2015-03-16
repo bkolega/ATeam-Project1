@@ -48,13 +48,6 @@
                  android:onClick="clickButtons"
                  android:text="@string/print_contract" />
 
-             <Button
-                 android:id="@+id/backUserButtonSales"
-                 android:layout_width="fill_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_marginTop="23dp"
-                 android:onClick="clickButtons"
-                 android:text="@string/back" />
 
          </LinearLayout>
      </RelativeLayout>

@@ -6,11 +6,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 
-public class ServiceOptionsCar extends Activity {
+public class ViewCars extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.service_options_car);
+		setContentView(R.layout.view_inventory);
 	}
 	
 	@Override
@@ -19,21 +19,10 @@ public class ServiceOptionsCar extends Activity {
 		return true;
 	}
 	
-	public void clickButtons(View v) {
-		final int id = v.getId();
-		Intent ii;
-		switch (id) {
-
-			default:
-				break;
-		}
-
-	}
-	
 	@Override
 	public void onBackPressed() {
 		Intent ii;
-		ii = new Intent(ServiceOptionsCar.this, MainMenu.class);
+		ii = new Intent(ViewCars.this, MainMenu.class);
 		startActivity(ii);		
 		finish();			
 	}

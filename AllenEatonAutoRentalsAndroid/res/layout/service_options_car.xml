@@ -58,14 +58,7 @@
                android:onClick="clickButtons"
                android:text="@string/add_note" />
 
-           <Button
-               android:id="@+id/backButtonService"
-               android:layout_width="fill_parent"
-               android:layout_height="wrap_content"
-               android:layout_marginTop="23dp"
-               android:onClick="clickButtons"
-               android:text="@string/back" />
-         
+
        </LinearLayout>
 
     </RelativeLayout>

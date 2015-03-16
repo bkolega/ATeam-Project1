@@ -119,19 +119,19 @@ ActionBar.TabListener {
 			    newFragment.show(getSupportFragmentManager(), "carid");	
 			    break;
 				
-			case R.id.serachCarButtonSalesMenu:
+			case R.id.searchCarButtonSalesMenu:
 				newFragment = new CarIDDialog("Sales");
 			    newFragment.show(getSupportFragmentManager(), "carid");
 			    break;
 			
 			case R.id.viewCarsButtonService: 
-				ii = new Intent(MainMenu.this, ViewCarsInventory.class);
+				ii = new Intent(MainMenu.this, ViewCars.class);
 				startActivity(ii);		
 				finish();	
 				break;
 				
 			case R.id.viewCarsButtonSalesMenu:
-				ii = new Intent(MainMenu.this, ViewCarsInventory.class);
+				ii = new Intent(MainMenu.this, ViewCars.class);
 				startActivity(ii);		
 				finish();	
 				break;

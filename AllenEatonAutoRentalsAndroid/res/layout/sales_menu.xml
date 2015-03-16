@@ -33,7 +33,7 @@
                 android:textSize="40sp" />
 
             <Button
-                android:id="@+id/serachCarButtonSalesMenu"
+                android:id="@+id/searchCarButtonSalesMenu"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="23dp"

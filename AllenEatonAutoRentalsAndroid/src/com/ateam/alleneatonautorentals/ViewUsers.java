@@ -63,21 +63,6 @@ public class ViewUsers extends ListActivity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
-	public void clickButtons(View v) {
-		final int id = v.getId();
-		Intent ii;
-		switch (id) {
-			case R.id.backButtonViewUsers:
-				ii = new Intent(ViewUsers.this, MainMenu.class);
-				startActivity(ii);		
-				finish();	
-				break;
-			default:
-				break;
-		}
-
-	}
 
 	class LoadAllUsers extends AsyncTask<String, String, String> {
 		
@@ -176,7 +161,20 @@ public class ViewUsers extends ListActivity {
 			});
 		}
 		
+		public void backButton() {
+			
+		}
+		
 	}
+	
+	@Override
+	public void onBackPressed() {
+		Intent ii;
+		ii = new Intent(ViewUsers.this, MainMenu.class);
+		startActivity(ii);		
+		finish();			
+	}
+	
 }
 
 
