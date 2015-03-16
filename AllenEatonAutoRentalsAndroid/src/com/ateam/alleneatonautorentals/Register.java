@@ -9,7 +9,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.ateam.alleneatonautorentals.R;
-import com.ateam.alleneatonautorentals.MainActivity.AttemptLogin;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -29,7 +28,7 @@ public class Register extends Activity {
 					 textZip, textRole, textSupEmail;
 	private ProgressDialog progressDialog;
 	JSONParser jsonParser = new JSONParser();
-	private static final String LOGIN_URL =
+	private static final String REGISTER_URL =
 			"http://people.eecs.ku.edu/~kwu96/ATeamScripts/register.php";
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_MESSAGE = "message";
@@ -143,7 +142,7 @@ public class Register extends Activity {
 				Log.d("request!", "starting");
 				
 				// Getting the JSON back from PHP server
-				JSONObject json = jsonParser.makeHttpRequest (LOGIN_URL, "POST", params);
+				JSONObject json = jsonParser.makeHttpRequest (REGISTER_URL, "POST", params);
 				Log.d("Login Attempt", json.toString());
 				
 				success = json.getInt(TAG_SUCCESS);

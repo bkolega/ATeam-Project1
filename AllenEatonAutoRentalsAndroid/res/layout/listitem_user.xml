@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+	<TextView 
+	    android:id="@+id/user_name_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="end"
+        android:textSize="30sp" />
+
+	<TextView 
+	    android:id="@+id/user_email_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/user_cardnum_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/user_license_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/user_licensestate_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/user_phone_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/user_address_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/user_address2_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/user_city_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/user_state_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/user_zip_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+</LinearLayout>
