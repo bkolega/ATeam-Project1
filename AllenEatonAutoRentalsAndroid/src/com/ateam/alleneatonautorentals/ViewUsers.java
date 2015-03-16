@@ -29,7 +29,7 @@ public class ViewUsers extends ListActivity {
 	ArrayList<HashMap<String, String>> usersList;
 	
 	private static final String USERS_URL =
-			"http://people.eecs.ku.edu/~kwu96/ATeamScripts/listCustomers.php";
+			"http://people.eecs.ku.edu/~kwu96/ATeamScripts/list_customers.php";
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_USERS = "users";
 	private static final String TAG_EMAIL = "email";
