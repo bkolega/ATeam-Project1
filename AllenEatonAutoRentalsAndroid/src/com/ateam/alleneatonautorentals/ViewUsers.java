@@ -16,9 +16,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.View;
 import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
@@ -54,8 +52,7 @@ public class ViewUsers extends ListActivity {
 		usersList = new ArrayList<HashMap<String, String>>();
 	
 		new LoadAllUsers().execute();
-		
-		ListView lv = getListView();	
+
 	}
 	
 	@Override
@@ -160,10 +157,7 @@ public class ViewUsers extends ListActivity {
 				}
 			});
 		}
-		
-		public void backButton() {
-			
-		}
+
 		
 	}
 	

@@ -21,7 +21,7 @@ public class SalesOptionsUser extends Activity {
 	
 	public void clickButtons(View v) {
 		final int id = v.getId();
-		Intent ii;
+
 		switch (id) {
 
 			default:

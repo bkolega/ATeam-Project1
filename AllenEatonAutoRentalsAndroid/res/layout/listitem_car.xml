@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?><LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+	<TextView 
+	    android:id="@+id/car_make_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="end"
+        android:textSize="30sp" />
+	
+	<TextView 
+	    android:id="@+id/car_location_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+
+	<TextView 
+	    android:id="@+id/car_id_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/car_model_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/car_type_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/car_year_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/car_license_state_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/car_license_plate_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/car_miles_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/car_oil_date_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/car_oil_mile_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/car_tire_date_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/car_tire_mile_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/car_filter_date_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/car_filter_mile_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+
+	
+</LinearLayout>
