@@ -43,11 +43,11 @@
 	<string name="search_car">Search Car</string>
 	<string name="search_user">Search User</string>
 	<string name="view_users">View Users</string>
-	<string name="car_id">Car ID</string>
+	<string name="car_id">Search Cars</string>
 	<string name="search">Search</string>
 	<string name="view_car_details">View Details About Car</string>
 	<string name="check_car_use">Check Car in Use</string>
 	<string name="view_notes">View Notes</string>
-	<string name="user_id">User ID</string>
+	<string name="user_id">Search Users</string>
 	<string name="view_user_info">View User Information</string>
 </resources>

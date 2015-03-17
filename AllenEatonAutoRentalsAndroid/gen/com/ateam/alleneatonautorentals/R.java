@@ -24,8 +24,8 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080050;
-        public static final int addNotesButtonService=0x7f08004d;
+        public static final int action_settings=0x7f080051;
+        public static final int addNotesButtonService=0x7f08004e;
         public static final int address2_edit=0x7f08002c;
         public static final int address_edit=0x7f08002b;
         public static final int birthdate_edit=0x7f08002a;
@@ -35,11 +35,10 @@ public final class R {
         public static final int button_register_confirm=0x7f080033;
         public static final int carIDTextSales=0x7f08003b;
         public static final int carUseButtonSales=0x7f08003e;
+        public static final int car__search_id_text=0x7f080043;
         public static final int car_filter_date_list=0x7f080016;
         public static final int car_filter_mile_list=0x7f080017;
-        public static final int car_id_get=0x7f080044;
         public static final int car_id_list=0x7f08000b;
-        public static final int car_id_text=0x7f080043;
         public static final int car_license_plate_list=0x7f080010;
         public static final int car_license_state_list=0x7f08000f;
         public static final int car_location_list=0x7f08000a;
@@ -52,7 +51,7 @@ public final class R {
         public static final int car_tire_mile_list=0x7f080015;
         public static final int car_type_list=0x7f08000d;
         public static final int car_year_list=0x7f08000e;
-        public static final int checkInButtonService=0x7f08004b;
+        public static final int checkInButtonService=0x7f08004c;
         public static final int checkoutButtonSales=0x7f08003c;
         public static final int city_edit=0x7f08002d;
         public static final int employee_email_edit=0x7f080024;
@@ -65,7 +64,7 @@ public final class R {
         public static final int last_name_edit=0x7f080029;
         public static final int layoutContainer=0x7f080000;
         public static final int linearLayout1=0x7f08003f;
-        public static final int logOutButtonService=0x7f080049;
+        public static final int logOutButtonService=0x7f08004a;
         public static final int login_login_title=0x7f080001;
         public static final int logoutButtonSalesMenu=0x7f08003a;
         public static final int middle_name_edit=0x7f080028;
@@ -76,14 +75,15 @@ public final class R {
         public static final int radio_sales=0x7f080003;
         public static final int radio_service=0x7f080004;
         public static final int searchCarButtonSalesMenu=0x7f080036;
-        public static final int searchCarButtonService=0x7f080047;
+        public static final int searchCarButtonService=0x7f080048;
         public static final int searchUserButtonSalesMenu=0x7f080038;
-        public static final int search_user_edit=0x7f080045;
-        public static final int serviceTextCarID=0x7f08004a;
+        public static final int search_car_edit=0x7f080044;
+        public static final int search_user_edit=0x7f080046;
+        public static final int serviceTextCarID=0x7f08004b;
         public static final int state_edit=0x7f08002e;
         public static final int supervisor_email_edit=0x7f080032;
         public static final int textSalesMenu=0x7f080035;
-        public static final int textServiceMenu=0x7f080046;
+        public static final int textServiceMenu=0x7f080047;
         public static final int userIDTextSales=0x7f080040;
         public static final int userInformationsButtonSales=0x7f080041;
         public static final int user_address2_list=0x7f08001f;
@@ -95,15 +95,16 @@ public final class R {
         public static final int user_licensestate_list=0x7f08001c;
         public static final int user_name_list=0x7f080018;
         public static final int user_phone_list=0x7f08001d;
+        public static final int user_search_id_text=0x7f080045;
         public static final int user_state_list=0x7f080021;
         public static final int user_zip_list=0x7f080022;
         public static final int viewCarButtonSales=0x7f08003d;
         public static final int viewCarsButtonSalesMenu=0x7f080037;
-        public static final int viewCarsButtonService=0x7f080048;
-        public static final int viewNotesButtonService=0x7f08004c;
+        public static final int viewCarsButtonService=0x7f080049;
+        public static final int viewNotesButtonService=0x7f08004d;
         public static final int viewUserButtonSalesMenu=0x7f080039;
-        public static final int viewUsersText=0x7f08004f;
-        public static final int viewinv_title=0x7f08004e;
+        public static final int viewUsersText=0x7f080050;
+        public static final int viewinv_title=0x7f08004f;
         public static final int zip_edit=0x7f08002f;
     }
     public static final class layout {

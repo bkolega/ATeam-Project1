@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/car_id_text"
+        android:id="@+id/car__search_id_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -13,14 +13,16 @@
         android:textSize="30sp" />
 
     <EditText
-        android:id="@+id/car_id_get"
+        android:id="@+id/search_car_edit"
         android:layout_width="match_parent"
-        android:singleLine="true"
         android:layout_height="wrap_content"
+        android:singleLine="true"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginTop="4dp"
-        android:hint="@string/search" />
+        android:hint="@string/search" >
+        <requestFocus />
+    </EditText>
    
 </LinearLayout>
