@@ -55,7 +55,6 @@ public final class R {
         public static final int checkInButtonService=0x7f08004b;
         public static final int checkoutButtonSales=0x7f08003c;
         public static final int city_edit=0x7f08002d;
-        public static final int editText1=0x7f080045;
         public static final int employee_email_edit=0x7f080024;
         public static final int employee_password_edit=0x7f080025;
         public static final int employee_repassword_edit=0x7f080026;
@@ -79,6 +78,7 @@ public final class R {
         public static final int searchCarButtonSalesMenu=0x7f080036;
         public static final int searchCarButtonService=0x7f080047;
         public static final int searchUserButtonSalesMenu=0x7f080038;
+        public static final int search_user_edit=0x7f080045;
         public static final int serviceTextCarID=0x7f08004a;
         public static final int state_edit=0x7f08002e;
         public static final int supervisor_email_edit=0x7f080032;

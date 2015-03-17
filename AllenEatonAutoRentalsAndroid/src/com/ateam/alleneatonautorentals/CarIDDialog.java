@@ -31,13 +31,13 @@ public class CarIDDialog extends DialogFragment {
 	               public void onClick(DialogInterface dialog, int id) {
 	                   if(employeeType == "Sales"){
 	                	   	Activity temp = getActivity();
-	                	   	Intent ii = new Intent(temp, SalesOptionsCar.class); 
+	                	   	Intent ii = new Intent(temp, SalesSearchCar.class); 
 	       					startActivity(ii);		
 	       					temp.finish();		                	   
 	                   }
 	                   else if(employeeType == "Service"){
 	                	   	Activity temp = getActivity();
-	                	   	Intent ii = new Intent(temp, ServiceOptionsCar.class); 
+	                	   	Intent ii = new Intent(temp, ServiceSearchCar.class); 
 	       					startActivity(ii);		
 	       					temp.finish();	
 	                   }

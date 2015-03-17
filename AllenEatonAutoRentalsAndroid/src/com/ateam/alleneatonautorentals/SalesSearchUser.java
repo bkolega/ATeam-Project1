@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,18 +17,20 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-public class ViewUsers extends ListActivity {
+public class SalesSearchUser extends ListActivity {
+	String keyword = "";
 	private ProgressDialog progressDialog;
 	JSONParser jsonParser = new JSONParser();
 	
 	ArrayList<HashMap<String, String>> usersList;
 	
 	private static final String USERS_URL =
-			"http://people.eecs.ku.edu/~kwu96/ATeamScripts/list_customers.php";
+			"http://people.eecs.ku.edu/~kwu96/ATeamScripts/search_customers.php";
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_USERS = "users";
 	private static final String TAG_EMAIL = "email";
@@ -40,7 +43,7 @@ public class ViewUsers extends ListActivity {
 	private static final String TAG_ADDRESS2 = "address2";
 	private static final String TAG_CITY = "city";
 	private static final String TAG_STATE = "state";
-	private static final String TAG_ZIP = "zip";
+	private static final String TAG_ZIP = "zip";	
 	
 	JSONArray users = null;
 	
@@ -49,10 +52,13 @@ public class ViewUsers extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.view_users);
 		
+		Intent getIntent = getIntent();
+		keyword = getIntent.getStringExtra("key");
+		Log.d("Key Searched: ", keyword);
 		usersList = new ArrayList<HashMap<String, String>>();
-	
-		new LoadAllUsers().execute();
-
+		
+		new LoadFoundUsers().execute();		
+		
 	}
 	
 	@Override
@@ -60,13 +66,13 @@ public class ViewUsers extends ListActivity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
-	class LoadAllUsers extends AsyncTask<String, String, String> {
+	
+	class LoadFoundUsers extends AsyncTask<String, String, String> {
 		
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			progressDialog = new ProgressDialog(ViewUsers.this);
+			progressDialog = new ProgressDialog(SalesSearchUser.this);
 			progressDialog.setMessage("Loading users...");
 			progressDialog.setIndeterminate(false);
 			progressDialog.setCancelable(false);
@@ -77,7 +83,9 @@ public class ViewUsers extends ListActivity {
 		protected String doInBackground(String... args) {
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			
-			JSONObject json = jsonParser.makeHttpRequest(USERS_URL, "GET", params);
+			params.add(new BasicNameValuePair("keyword", keyword));
+			
+			JSONObject json = jsonParser.makeHttpRequest(USERS_URL, "POST", params);
 			
 			Log.d("All Users: ", json.toString());
 			
@@ -123,8 +131,7 @@ public class ViewUsers extends ListActivity {
 					}
 				}
 				else {
-					// Not successful if the database is down
-					Intent  ii = new Intent(ViewUsers.this, MainMenu.class);
+					Intent  ii = new Intent(SalesSearchUser.this, MainMenu.class);
 					Bundle b = new Bundle();
 					b.putString("employeeType", "Sales"); 
 					ii.putExtras(b);
@@ -132,7 +139,7 @@ public class ViewUsers extends ListActivity {
 					startActivity(ii);					
 					finish();
 					
-					return "Error in Database";
+					return "Error in Database";					
 				}
 			}
 			catch (JSONException e) {
@@ -146,14 +153,14 @@ public class ViewUsers extends ListActivity {
 			progressDialog.dismiss();
 			
 			if (message != null) {
-				Toast.makeText(ViewUsers.this, message, Toast.LENGTH_LONG).show();
+				Toast.makeText(SalesSearchUser.this, message, Toast.LENGTH_LONG).show();
 			}
 			else {
 				// Puts all the strings into the list
 				runOnUiThread(new Runnable() {
 					public void run() {
 						ListAdapter adapter = new SimpleAdapter 
-								(ViewUsers.this, usersList,
+								(SalesSearchUser.this, usersList,
 								 R.layout.listitem_user, new String[] 
 										 {TAG_NAME, TAG_EMAIL, TAG_CARD, TAG_LICENSE, 
 										  TAG_LICENSE_STATE, TAG_PHONE, TAG_ADDRESS,
@@ -174,17 +181,26 @@ public class ViewUsers extends ListActivity {
 		
 	}
 	
+	public void clickButtons(View v) {
+		final int id = v.getId();
+
+		switch (id) {
+
+			default:
+				break;
+		}
+
+	}
+	
 	@Override
 	public void onBackPressed() {
-		Intent  ii = new Intent(ViewUsers.this, MainMenu.class);
+		Intent  ii = new Intent(SalesSearchUser.this, MainMenu.class);
 		Bundle b = new Bundle();
 		b.putString("employeeType", "Sales"); 
 		ii.putExtras(b);
 		
 		startActivity(ii);					
-		finish();		
+		finish();	
 	}
-	
+
 }
-
-

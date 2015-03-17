@@ -59,15 +59,15 @@
               android:label="@string/app_name" >         
         </activity>
         <activity
-              android:name="com.ateam.alleneatonautorentals.SalesOptionsCar"
+              android:name="com.ateam.alleneatonautorentals.SalesSearchCar"
               android:label="@string/app_name" >         
         </activity>
         <activity
-              android:name="com.ateam.alleneatonautorentals.ServiceOptionsCar"
+              android:name="com.ateam.alleneatonautorentals.ServiceSearchCar"
               android:label="@string/app_name" >         
         </activity>
         <activity
-              android:name="com.ateam.alleneatonautorentals.SalesOptionsUser"
+              android:name="com.ateam.alleneatonautorentals.SalesSearchUser"
               android:label="@string/app_name" >         
         </activity>
         <activity

@@ -46,12 +46,17 @@ public class ViewCars extends ListActivity {
 	private static final String TAG_FILTER_MILE = "air_filters_mile";
 	private static final String TAG_LOCATION = "location";
 	
+	String employeeType;
+	
 	JSONArray cars = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.view_inventory);
+
+		Intent getIntent = getIntent();
+		employeeType = getIntent.getStringExtra("employeeType");
 		
 		carsList = new ArrayList<HashMap<String, String>>();
 	
@@ -137,8 +142,15 @@ public class ViewCars extends ListActivity {
 					
 				}
 				else {
-					// Not successful if the database is down
-					Toast.makeText(ViewCars.this, "Error in database", Toast.LENGTH_LONG).show();
+					Intent  ii = new Intent(ViewCars.this, MainMenu.class);
+					Bundle b = new Bundle();
+					b.putString("employeeType", employeeType); 
+					ii.putExtras(b);
+					
+					startActivity(ii);					
+					finish();
+					
+					return "Error in Database";
 				} 
 			}
 			catch (JSONException e) {
@@ -148,42 +160,50 @@ public class ViewCars extends ListActivity {
 			return null;
 		}
 		
-		protected void onPostExecute(String file_url) {
+		protected void onPostExecute(String message) {
 			progressDialog.dismiss();
 			
-			// Puts all the strings into the list
-			runOnUiThread(new Runnable() {
-				public void run() {
-					ListAdapter adapter = new SimpleAdapter 
-							(ViewCars.this, carsList,
-							 R.layout.listitem_car, new String[] 
-									 {TAG_ID, TAG_TYPE, TAG_MAKE, TAG_MODEL, 
-									  TAG_YEAR, TAG_LICENSE_PLATE, TAG_LICENSE_STATE,
-									  TAG_MILES, TAG_OIL_DATE, TAG_OIL_MILE, TAG_TIRE_DATE,
-									  TAG_TIRE_MILE, TAG_FILTER_DATE, TAG_FILTER_MILE,
-									  TAG_LOCATION },
-									  new int[] {R.id.car_id_list, R.id.car_type_list,
-												 R.id.car_make_list, R.id.car_model_list,
-												 R.id.car_year_list, R.id.car_license_plate_list,
-												 R.id.car_license_state_list, R.id.car_miles_list,
-												 R.id.car_oil_date_list, R.id.car_oil_mile_list,
-												 R.id.car_tire_date_list, R.id.car_tire_mile_list,
-												 R.id.car_filter_date_list, R.id.car_filter_mile_list,
-												 R.id.car_location_list
-							});
-					setListAdapter(adapter);
-				}
-			});
+			if (message != null) {
+				Toast.makeText(ViewCars.this, message, Toast.LENGTH_LONG).show();
+			}
+			else {
+				// Puts all the strings into the list
+				runOnUiThread(new Runnable() {
+					public void run() {
+						ListAdapter adapter = new SimpleAdapter 
+								(ViewCars.this, carsList,
+								 R.layout.listitem_car, new String[] 
+										 {TAG_ID, TAG_TYPE, TAG_MAKE, TAG_MODEL, 
+										  TAG_YEAR, TAG_LICENSE_PLATE, TAG_LICENSE_STATE,
+										  TAG_MILES, TAG_OIL_DATE, TAG_OIL_MILE, TAG_TIRE_DATE,
+										  TAG_TIRE_MILE, TAG_FILTER_DATE, TAG_FILTER_MILE,
+										  TAG_LOCATION },
+										  new int[] {R.id.car_id_list, R.id.car_type_list,
+													 R.id.car_make_list, R.id.car_model_list,
+													 R.id.car_year_list, R.id.car_license_plate_list,
+													 R.id.car_license_state_list, R.id.car_miles_list,
+													 R.id.car_oil_date_list, R.id.car_oil_mile_list,
+													 R.id.car_tire_date_list, R.id.car_tire_mile_list,
+													 R.id.car_filter_date_list, R.id.car_filter_mile_list,
+													 R.id.car_location_list
+								});
+						setListAdapter(adapter);
+					}
+				});
+			}
 		}
 		
 	}
 	
 	@Override
 	public void onBackPressed() {
-		Intent ii;
-		ii = new Intent(ViewCars.this, MainMenu.class);
-		startActivity(ii);		
-		finish();			
+		Intent  ii = new Intent(ViewCars.this, MainMenu.class);
+		Bundle b = new Bundle();
+		b.putString("employeeType", employeeType); 
+		ii.putExtras(b);
+		
+		startActivity(ii);					
+		finish();				
 	}
 	
 }

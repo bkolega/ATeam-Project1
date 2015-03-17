@@ -27,8 +27,8 @@
 	<string name="role">*Role in Company</string>
 	<string name="supervisor_email">Supervisor Email</string>
 	<string name="submit">Submit</string>
-	<string name="view_inventory">View Cars in Inventory</string>
-	<string name="view_use">View Cars in Use</string>
+	<string name="view_inventory">View Cars</string>
+	<string name="view_use">View Cars</string>
 	<string name="print_details">Print Details About Car</string>
 	<string name="print_contract">Print Contract</string>
 	<string name="checkout_car">Checkout a Car</string>

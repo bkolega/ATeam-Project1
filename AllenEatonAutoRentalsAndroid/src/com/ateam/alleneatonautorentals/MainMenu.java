@@ -42,7 +42,7 @@ ActionBar.TabListener {
         	tabs[1] = "Sales";
         }
  
-        // Initilization
+        // Initialization
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager(), employeeType);
@@ -126,12 +126,14 @@ ActionBar.TabListener {
 			
 			case R.id.viewCarsButtonService: 
 				ii = new Intent(MainMenu.this, ViewCars.class);
+         	   	ii.putExtra("employeeType", "Service");
 				startActivity(ii);		
 				finish();	
 				break;
 				
 			case R.id.viewCarsButtonSalesMenu:
 				ii = new Intent(MainMenu.this, ViewCars.class);
+				ii.putExtra("employeeType", "Sales");
 				startActivity(ii);		
 				finish();	
 				break;
