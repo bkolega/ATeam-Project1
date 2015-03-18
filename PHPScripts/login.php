@@ -10,7 +10,7 @@
    $loginEmail = mysqli_real_escape_string($c, $_POST['username']);
    $loginPassword = mysqli_real_escape_string($c, $_POST['password']);
    
-   $loginQuery = "SELECT E.user_email, user_password, employee_role
+   $loginQuery = "SELECT E.user_email, user_password, employee_role, user_first_name
    	       	 	 FROM `ALLEN_EATON_AUTO.USER` U,
 			      (SELECT user_email, employee_role
 			       FROM `ALLEN_EATON_AUTO.EMPLOYEE`
@@ -24,6 +24,8 @@
   if (!empty($loginArray) && /*$loginPassword == $loginArray['user_password']*/ password_verify($loginPassword, $loginArray['user_password'])) {
      $response["success"] = 1;
      $response["message"] = "Login Successful!";
+     $response["role"] = $loginArray['employee_role'];
+     $response["name"] = $loginArray['user_first_name'];
      die(json_encode($response));
   }
   else {

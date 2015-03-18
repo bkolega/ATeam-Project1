@@ -35,6 +35,8 @@ public class MainActivity extends Activity {
 			"http://people.eecs.ku.edu/~kwu96/ATeamScripts/login.php";
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_MESSAGE = "message";
+	private static final String TAG_ROLE = "role";
+	private static final String TAG_NAME = "name";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +124,12 @@ public class MainActivity extends Activity {
 				success = json.getInt(TAG_SUCCESS);
 				if (success == 1) {
 					Log.d("Successfully Login!", json.toString());
+					
+					String role = json.getString(TAG_ROLE);
+					String name = json.getString(TAG_NAME);
+					
+					SessionManager session = new SessionManager(getApplicationContext());
+					session.createLoginSession(username, role, name);
 					
 					// Move onto next activity
 					Intent  ii = new Intent(MainActivity.this, MainMenu.class);

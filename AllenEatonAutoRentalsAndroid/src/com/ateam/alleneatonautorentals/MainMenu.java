@@ -101,17 +101,14 @@ ActionBar.TabListener {
 		final int id = v.getId();
 		Intent ii;
 		DialogFragment newFragment;
+		SessionManager session = new SessionManager(getApplicationContext());
 		switch (id) {
-			case R.id.logOutButtonService:
-				ii = new Intent(MainMenu.this, MainActivity.class);
-				startActivity(ii);		
-				finish();	
+			case R.id.logOutButtonService:				
+				session.logoutUser();
 				break;
 				
 			case R.id.logoutButtonSalesMenu:
-				ii = new Intent(MainMenu.this, MainActivity.class);
-				startActivity(ii);		
-				finish();	
+				session.logoutUser();
 				break;
 				
 			case R.id.searchCarButtonService:

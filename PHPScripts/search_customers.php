@@ -29,7 +29,6 @@
 	if (!searchCustomerResult) {
 	   $response["success"] = 0;
 	   $response["users"] = array();
-	   $response["message"] = "Something wrong with database";
 	   die(json_encode($response));
 	}	
 
@@ -37,21 +36,21 @@
 	   $response["users"] = array();
 
 	   while ($row = mysqli_fetch_array($searchCustomerResult)) {
-	   $user = array();
+	   	$user = array();
 	
-	   $user["email"] = $row["user_email"];
-	   $user["card_number"] = $row["customer_card_number"];
-	   $user["license"] = $row["customer_driver_license"];
-	   $user["license_state"] = $row["customer_driver_license_state"];
-	   $user["name"] = $row["user_first_name"] . " " . $row["user_last_name"];
-	   $user["phone"] = $row["user_telephone"];
-	   $user["address"] = $row["user_address_street"];
-	   $user["address2"] = $row["user_address_street_2"];
-	   $user["city"] = $row["user_address_city"];
-	   $user["state"] = $row["user_address_state"];
-	   $user["zip"] = $row["user_address_zip"];
+		$user["email"] = $row["user_email"];
+		$user["card_number"] = $row["customer_card_number"];
+		$user["license"] = $row["customer_driver_license"];
+		$user["license_state"] = $row["customer_driver_license_state"];
+		$user["name"] = $row["user_first_name"] . " " . $row["user_last_name"];
+		$user["phone"] = $row["user_telephone"];
+		$user["address"] = $row["user_address_street"];
+		$user["address2"] = $row["user_address_street_2"];
+		$user["city"] = $row["user_address_city"];
+		$user["state"] = $row["user_address_state"];
+		$user["zip"] = $row["user_address_zip"];
 
-	   array_push($response["users"], $user);
+		array_push($response["users"], $user);
 	}
 
 	$response["success"] = 1;
