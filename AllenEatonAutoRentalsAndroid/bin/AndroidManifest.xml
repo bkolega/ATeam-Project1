@@ -39,19 +39,7 @@
               android:label="@string/app_name" >         
         </activity>
         <activity
-              android:name="com.ateam.alleneatonautorentals.AddNote"
-              android:label="@string/app_name" >         
-        </activity>
-        <activity
-              android:name="com.ateam.alleneatonautorentals.CheckInCar"
-              android:label="@string/app_name" >         
-        </activity>
-        <activity
-              android:name="com.ateam.alleneatonautorentals.ViewCarsUse"
-              android:label="@string/app_name" >         
-        </activity>
-        <activity
-              android:name="com.ateam.alleneatonautorentals.ViewCars"
+              android:name="com.ateam.alleneatonautorentals.ServiceViewCars"
               android:label="@string/app_name" >         
         </activity>
         <activity
@@ -63,6 +51,10 @@
               android:label="@string/app_name" >         
         </activity>
         <activity
+              android:name="com.ateam.alleneatonautorentals.SalesViewCars"
+              android:label="@string/app_name" >         
+        </activity>
+        <activity
               android:name="com.ateam.alleneatonautorentals.ServiceSearchCar"
               android:label="@string/app_name" >         
         </activity>
@@ -71,9 +63,22 @@
               android:label="@string/app_name" >         
         </activity>
         <activity
-              android:name="com.ateam.alleneatonautorentals.ViewUsers"
+              android:name="com.ateam.alleneatonautorentals.SalesViewUsers"
               android:label="@string/app_name" >         
         </activity>
+        <activity
+              android:name="com.ateam.alleneatonautorentals.SalesUserMenu"
+              android:label="@string/app_name" >         
+        </activity>
+        <activity
+              android:name="com.ateam.alleneatonautorentals.SalesCheckoutCarMenu"
+              android:label="@string/app_name" >         
+        </activity>
+        <activity
+              android:name="com.ateam.alleneatonautorentals.ServiceCarMenu"
+              android:label="@string/app_name" >         
+        </activity>
+        
     </application>
 
 </manifest>

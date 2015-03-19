@@ -1,3 +1,9 @@
+/*
+ * TODO: PHP needs to not include checked out cars
+ * XML: view_inventory
+ * Sales part for searching for cars when checking out for users
+ */
+
 package com.ateam.alleneatonautorentals;
 
 import java.util.ArrayList;
@@ -49,6 +55,10 @@ public class SalesSearchCar extends ListActivity {
 	private static final String TAG_FILTER_MILE = "air_filters_mile";
 	private static final String TAG_LOCATION = "location";
 	
+	private String userEmail;
+	private String name;
+	private String keyUser;
+	
 	JSONArray cars = null;
 	
 	@Override
@@ -57,8 +67,10 @@ public class SalesSearchCar extends ListActivity {
 		setContentView(R.layout.view_inventory);
 		
 		Intent getIntent = getIntent();
-		keyword = getIntent.getStringExtra("key");
-		Log.d("Key Searched: ", keyword);
+		keyword = getIntent.getStringExtra("key");		
+		userEmail = getIntent.getStringExtra("email");
+		keyUser = getIntent.getStringExtra("keyUser");
+		name = getIntent.getStringExtra("name");
 		carsList = new ArrayList<HashMap<String, String>>();
 		
 		new LoadFoundCars().execute();
@@ -142,15 +154,15 @@ public class SalesSearchCar extends ListActivity {
 					}
 				}
 				else {
-					Intent  ii = new Intent(SalesSearchCar.this, MainMenu.class);
-					Bundle b = new Bundle();
-					b.putString("employeeType", "Sales"); 
-					ii.putExtras(b);
+					Intent ii;
+					ii = new Intent(SalesSearchCar.this, SalesCheckoutCarMenu.class);
 					
-					startActivity(ii);					
-					finish();
+					ii.putExtra("email", userEmail);
+					ii.putExtra("key", keyUser);
+					ii.putExtra("name", name);
 					
-					return "Error in Database";					
+					startActivity(ii);		
+					finish();					
 				}
 			}
 			catch (JSONException e) {
@@ -209,13 +221,15 @@ public class SalesSearchCar extends ListActivity {
 	
 	@Override
 	public void onBackPressed() {
-		Intent ii = new Intent(SalesSearchCar.this, MainMenu.class);
-		Bundle b = new Bundle();
-		b.putString("employeeType", "Sales");
-		ii.putExtras(b);
+		Intent ii;
+		ii = new Intent(SalesSearchCar.this, SalesCheckoutCarMenu.class);
+		
+		ii.putExtra("email", userEmail);
+		ii.putExtra("key", keyUser);
+		ii.putExtra("name", name);
 		
 		startActivity(ii);		
-		finish();			
+		finish();	
 	}
 
 }

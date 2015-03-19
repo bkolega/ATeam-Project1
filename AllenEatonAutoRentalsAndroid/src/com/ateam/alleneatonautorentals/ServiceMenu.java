@@ -1,3 +1,8 @@
+/*
+ * XML: service_menu
+ * Inflate service_menu fragment
+ */
+
 package com.ateam.alleneatonautorentals;
 
 //import com.ateam.alleneatonautorentalssales.MainActivity.AttemptLogin;

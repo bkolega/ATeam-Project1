@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent" 
     android:layout_height="fill_parent"
     android:id="@+id/layoutContainer" 
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    tools:context=".MainMenu">
 
     <RelativeLayout
         android:layout_width="0dip"
         android:layout_height="fill_parent"
-        android:layout_gravity="center_vertical"
         android:layout_weight="0.15" >
-
     </RelativeLayout>
     
      <RelativeLayout
-         android:layout_width="217dp"
-         android:layout_height="459dp"
-         android:layout_gravity="center_vertical" >
+         android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.7"  >
          
          <LinearLayout
            android:layout_width="fill_parent"
@@ -29,7 +29,7 @@
             	android:layout_width="fill_parent"
                	android:layout_height="wrap_content"
                	android:gravity="center"
-		    	android:text="@string/welcome"
+		    	android:text="@string/service"
 		    	android:textSize="40sp" />
              
              <Button
@@ -46,7 +46,7 @@
                	android:layout_height="wrap_content"
                	android:layout_marginTop="23dp"
                	android:onClick="clickButtons"
-            	android:text="@string/view_inventory" />
+            	android:text="@string/view_cars" />
 
         	<Button
             	android:id="@+id/logOutButtonService"

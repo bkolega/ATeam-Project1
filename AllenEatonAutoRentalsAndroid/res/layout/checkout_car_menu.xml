@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutContainer"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    tools:context=".MainMenu" >
+
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.15" >
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.7" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical" >
+            
+             <TextView
+                 android:id="@+id/userCheckOutText"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:gravity="center"
+                 android:text="@string/checkout_car"
+                 android:textSize="40sp" />
+            
+            <Button
+                android:id="@+id/searchCarButtonSalesMenu"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:onClick="clickButtons"
+                android:text="@string/search_car" />
+
+            <Button
+                android:id="@+id/viewCarsButtonSalesMenu"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:onClick="clickButtons"
+                android:text="@string/view_cars" />
+            
+            <Button
+                android:id="@+id/viewReservationsButtonSalesMenu"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:onClick="clickButtons"
+                android:text="@string/view_reservations" />   
+            
+         </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.15" >
+    </RelativeLayout>
+
+</LinearLayout>

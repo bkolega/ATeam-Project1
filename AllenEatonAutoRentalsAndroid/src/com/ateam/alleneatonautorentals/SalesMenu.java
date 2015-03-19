@@ -1,3 +1,8 @@
+/*
+ * XML: sales_menu
+ * Inflate the sales_menu fragment
+ */
+
 package com.ateam.alleneatonautorentals;
 
 import com.ateam.alleneatonautorentals.R;

@@ -1,3 +1,8 @@
+/*
+ * XML: view_inventory
+ * Search cars in service menu
+ */
+
 package com.ateam.alleneatonautorentals;
 
 import java.util.ArrayList;
@@ -18,9 +23,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class ServiceSearchCar extends ListActivity {
 	String keyword = "";
@@ -63,6 +72,34 @@ public class ServiceSearchCar extends ListActivity {
 		carsList = new ArrayList<HashMap<String, String>>();
 		
 		new LoadFoundCars().execute();
+		
+		SessionManager session = new SessionManager(getApplicationContext());
+		String role = session.getRole();
+		
+		if (role.equals("Service") || role.equals("Manager")) {
+			ListView lv = getListView();
+			
+			lv.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					String model = ((TextView)view.findViewById(R.id.car_model_list)).getText().toString();
+					String make = ((TextView)view.findViewById(R.id.car_make_list)).getText().toString();
+					String carid = ((TextView)view.findViewById(R.id.car_id_list)).getText().toString();
+					Intent ii = new Intent(getApplicationContext(), ServiceCarMenu.class);
+					
+					ii.putExtra(TAG_MODEL, model);
+					ii.putExtra(TAG_MAKE, make);
+					ii.putExtra(TAG_ID, carid);
+					ii.putExtra("key", keyword);
+					
+					startActivity(ii);
+					finish();
+				}
+				
+			});
+		}
 	}
 	
 	@Override

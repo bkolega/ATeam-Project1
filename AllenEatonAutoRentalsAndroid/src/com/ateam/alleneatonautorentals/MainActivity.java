@@ -1,3 +1,8 @@
+/*
+ * XML: activity_main.xml
+ * Login Screen
+ */
+
 package com.ateam.alleneatonautorentals;
 
 import java.util.ArrayList;

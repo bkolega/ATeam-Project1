@@ -1,3 +1,7 @@
+/*
+ * Manage sessions
+ */
+
 package com.ateam.alleneatonautorentals;
 
 import android.content.Context;

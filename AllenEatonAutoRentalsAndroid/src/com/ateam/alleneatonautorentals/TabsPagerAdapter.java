@@ -1,5 +1,8 @@
-package com.ateam.alleneatonautorentals;
+/*
+ * Allow swipe tabs
+ */
 
+package com.ateam.alleneatonautorentals;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

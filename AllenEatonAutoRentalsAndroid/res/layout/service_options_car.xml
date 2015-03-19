@@ -27,20 +27,23 @@
             android:orientation="vertical" >
 
            <TextView
+               android:id="@+id/serviceTextMake"
+               android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:gravity="center"
+               android:textSize="40sp" />
+           <TextView
+               android:id="@+id/serviceTextModel"
+               android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:gravity="center"
+               android:textSize="20sp" />
+           <TextView
                android:id="@+id/serviceTextCarID"
                android:layout_width="fill_parent"
                android:layout_height="wrap_content"
                android:gravity="center"
-               android:text="@string/car_id"
-               android:textSize="40sp" />
-
-           <Button
-               android:id="@+id/checkInButtonService"
-               android:layout_width="fill_parent"
-               android:layout_height="wrap_content"
-               android:layout_marginTop="23dp"
-               android:onClick="clickButtons"
-               android:text="@string/checkin_car" />
+               android:textSize="20sp" />
 
            <Button
                android:id="@+id/viewNotesButtonService"

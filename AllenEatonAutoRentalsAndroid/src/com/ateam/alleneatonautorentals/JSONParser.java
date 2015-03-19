@@ -1,3 +1,7 @@
+/*
+ * Parse JSON using a PHP link
+ */
+
 package com.ateam.alleneatonautorentals;
 
 import java.util.List;

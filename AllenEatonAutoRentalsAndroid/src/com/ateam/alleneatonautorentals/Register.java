@@ -1,3 +1,8 @@
+/*
+ * XML: register.xml
+ * Register Employees to the system
+ */
+
 package com.ateam.alleneatonautorentals;
 
 import java.util.ArrayList;

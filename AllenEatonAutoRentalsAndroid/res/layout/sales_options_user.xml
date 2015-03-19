@@ -25,21 +25,13 @@
 
 
              <TextView
-                 android:id="@+id/userIDTextSales"
+                 android:id="@+id/userTitleTextSales"
                  android:layout_width="fill_parent"
                  android:layout_height="wrap_content"
                  android:gravity="center"
-                 android:text="@string/user_id"
                  android:textSize="40sp" />
 
-             <Button
-                 android:id="@+id/userInformationsButtonSales"
-                 android:layout_width="fill_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_marginTop="23dp"
-                 android:onClick="clickButtons"
-                 android:text="@string/view_user_info" />
-
+ 
              <Button
                  android:id="@+id/printContractButtonSales"
                  android:layout_width="fill_parent"
@@ -47,6 +39,22 @@
                  android:layout_marginTop="23dp"
                  android:onClick="clickButtons"
                  android:text="@string/print_contract" />
+             
+             <Button
+                 android:id="@+id/CheckinCarButtonSales"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="23dp"
+                 android:onClick="clickButtons"
+                 android:text="@string/checkin_car" />
+             
+             <Button
+                 android:id="@+id/CheckoutCarButtonSales"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="23dp"
+                 android:onClick="clickButtons"
+                 android:text="@string/checkout_car" />
 
 
          </LinearLayout>

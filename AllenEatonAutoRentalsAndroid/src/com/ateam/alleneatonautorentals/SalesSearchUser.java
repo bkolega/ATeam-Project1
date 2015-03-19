@@ -1,3 +1,8 @@
+/*
+ * XML: view_users
+ * Search for users in Sales
+ */
+
 package com.ateam.alleneatonautorentals;
 
 import java.util.ArrayList;
@@ -18,9 +23,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class SalesSearchUser extends ListActivity {
 	String keyword = "";
@@ -57,7 +66,31 @@ public class SalesSearchUser extends ListActivity {
 		Log.d("Key Searched: ", keyword);
 		usersList = new ArrayList<HashMap<String, String>>();
 		
-		new LoadFoundUsers().execute();		
+		new LoadFoundUsers().execute();
+		
+		SessionManager session = new SessionManager(getApplicationContext());
+		String role = session.getRole();
+		
+		if (role.equals("Sales") || role.equals("Manager")) {
+			ListView lv = getListView();
+			
+			lv.setOnItemClickListener(new OnItemClickListener() {
+	
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					String email = ((TextView)view.findViewById(R.id.user_email_list)).getText().toString();
+					String name = ((TextView)view.findViewById(R.id.user_name_list)).getText().toString();
+					Intent ii = new Intent(getApplicationContext(), SalesUserMenu.class);
+					ii.putExtra(TAG_EMAIL, email);
+					ii.putExtra("key", keyword);
+					ii.putExtra(TAG_NAME, name);
+					startActivity(ii);
+					finish();
+				}
+				
+			});
+		}
 		
 	}
 	

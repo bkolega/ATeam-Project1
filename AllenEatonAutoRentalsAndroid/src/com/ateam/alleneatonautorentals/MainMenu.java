@@ -1,3 +1,9 @@
+/*
+ * XML: main_sales_service
+ * fragments: sales_menu, service_menu
+ * Main menu for Sales and Service
+ */
+
 package com.ateam.alleneatonautorentals;
 
 //import android.os.Build;
@@ -112,36 +118,24 @@ ActionBar.TabListener {
 				break;
 				
 			case R.id.searchCarButtonService:
-				newFragment = new CarIDDialog("Service");
+				newFragment = new SearchCarDialog("Service", "", "", "");
 			    newFragment.show(getSupportFragmentManager(), "carid");	
 			    break;
-				
-			case R.id.searchCarButtonSalesMenu:
-				newFragment = new CarIDDialog("Sales");
-			    newFragment.show(getSupportFragmentManager(), "carid");
-			    break;
+
 			
 			case R.id.viewCarsButtonService: 
-				ii = new Intent(MainMenu.this, ViewCars.class);
-         	   	ii.putExtra("employeeType", "Service");
-				startActivity(ii);		
-				finish();	
-				break;
-				
-			case R.id.viewCarsButtonSalesMenu:
-				ii = new Intent(MainMenu.this, ViewCars.class);
-				ii.putExtra("employeeType", "Sales");
+				ii = new Intent(MainMenu.this, ServiceViewCars.class);
 				startActivity(ii);		
 				finish();	
 				break;
 				
 			case R.id.searchUserButtonSalesMenu: 
-				newFragment = new UserIDDialog();
+				newFragment = new SearchUserDialog();
 			    newFragment.show(getSupportFragmentManager(), "userid");
 			    break;
 			    
 			case R.id.viewUserButtonSalesMenu: 
-				ii = new Intent(MainMenu.this, ViewUsers.class);
+				ii = new Intent(MainMenu.this, SalesViewUsers.class);
 				startActivity(ii);		
 				finish();	
 				break;
@@ -149,6 +143,11 @@ ActionBar.TabListener {
 			default:
 				break;
 		}
+
+	}
+	
+	@Override
+	public void onBackPressed() {
 
 	}
 
