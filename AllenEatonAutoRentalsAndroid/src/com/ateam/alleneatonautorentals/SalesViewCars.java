@@ -79,30 +79,6 @@ public class SalesViewCars extends ListActivity {
 		SessionManager session = new SessionManager(getApplicationContext());
 		String role = session.getRole();
 		
-		if (role.equals("Service") || role.equals("Manager")) {
-			ListView lv = getListView();
-			
-			lv.setOnItemClickListener(new OnItemClickListener() {
-
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-					String model = ((TextView)view.findViewById(R.id.car_model_list)).getText().toString();
-					String make = ((TextView)view.findViewById(R.id.car_make_list)).getText().toString();
-					String carid = ((TextView)view.findViewById(R.id.car_id_list)).getText().toString();
-					Intent ii = new Intent(getApplicationContext(), ServiceCarMenu.class);
-					
-					ii.putExtra(TAG_MODEL, model);
-					ii.putExtra(TAG_MAKE, make);
-					ii.putExtra(TAG_ID, carid);
-					ii.putExtra("key", "");
-					
-					startActivity(ii);
-					finish();
-				}
-				
-			});
-		}
 	}
 	
 	@Override
