@@ -97,6 +97,10 @@
 	   $response["success"] = 0;
 	   $response["message"] .= "Employee role is required\n";
 	}
+	else if ($_POST['role'] != "Sales" && $_POST['role'] != "Service" && $_POST['role'] != "Manager") {
+	     $response["success"] = 0;
+	     $response["message"] .= "Sales, Service, or Manager for role only\n";
+	}
 
 	// If there is no error, run INSERT query
 	if ($response["success"] != 0) {

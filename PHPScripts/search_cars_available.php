@@ -1,16 +1,19 @@
 <?php
 	include ("db_access.php");
 
-	$searchCarQuery = "SELECT *
-			   FROM `ALLEN_EATON_AUTO.CAR`
-			   WHERE car_id='".$_POST['keyword']."'
+	$searchCarQuery = "SELECT DISTINCT C.*
+			   FROM `ALLEN_EATON_AUTO.CAR` C, `ALLEN_EATON_AUTO.RESERVATION` R
+			   WHERE (C.car_id='".$_POST['keyword']."'
 			   OR car_type='".$_POST['keyword']."'
 			   OR car_make='".$_POST['keyword']."'
 			   OR car_model='".$_POST['keyword']."'
 			   OR car_year='".$_POST['keyword']."'
 			   OR car_license_state='".$_POST['keyword']."'
 			   OR car_license_plate='".$_POST['keyword']."'
-			   OR car_location='".$_POST['keyword']."'";
+			   OR car_location='".$_POST['keyword']."')
+			   AND (C.car_id NOT IN 
+			   (SELECT RE.car_id FROM `ALLEN_EATON_AUTO.RESERVATION` RE)
+			   OR (C.car_id=R.car_id AND checked_out=0))";
 
 	$searchCarResult = mysqli_query($c, $searchCarQuery);
 

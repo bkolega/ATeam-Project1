@@ -75,7 +75,7 @@ public class SalesViewUsers extends ListActivity {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long id) {
-					String email = ((TextView)view.findViewById(R.id.user_email_list)).getText().toString();
+					String email = (((TextView)view.findViewById(R.id.user_email_list)).getText().toString()).substring(7);
 					String name = ((TextView)view.findViewById(R.id.user_name_list)).getText().toString();
 					Intent ii = new Intent(getApplicationContext(), SalesUserMenu.class);
 					ii.putExtra(TAG_EMAIL, email);

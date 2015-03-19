@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?><LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+	<TextView 
+	    android:id="@+id/carres_make_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="end"
+        android:textSize="30sp" />
+	
+	<TextView 
+	    android:id="@+id/carres_model_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/carres_type_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/carres_id_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/carres_license_plate_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/carres_city_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/carres_state_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/carres_start_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/carres_end_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/carres_per_week_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/carres_GPS_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/carres_child_seat_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/carres_k_tag_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/carres_assistance_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/carres_dinsurance_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+	
+	<TextView 
+	    android:id="@+id/carres_ainsurance_list"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:gravity="start"
+        android:textSize="20sp" />
+    
+</LinearLayout>

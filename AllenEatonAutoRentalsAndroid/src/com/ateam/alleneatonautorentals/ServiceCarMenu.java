@@ -41,7 +41,15 @@ public class ServiceCarMenu extends Activity {
 		Intent ii;
 		switch (id) {
 			case R.id.viewNotesButtonService:
+				ii = new Intent(ServiceCarMenu.this, ServiceViewNotes.class);
 				
+				ii.putExtra("make", carMake);
+				ii.putExtra("model", carModel);
+				ii.putExtra("id", carID);
+				ii.putExtra("key", key);
+				
+				startActivity(ii);
+				finish();
 				break;
 			case R.id.addNotesButtonService:
 				

@@ -1,5 +1,4 @@
 /*
- * TODO: PHP needs to not include checked out cars
  * XML: view_inventory
  * List all cars
  */
@@ -38,7 +37,7 @@ public class SalesViewCars extends ListActivity {
 	ArrayList<HashMap<String, String>> carsList;
 	
 	private static final String CARS_URL =
-			"http://people.eecs.ku.edu/~kwu96/ATeamScripts/list_cars.php";
+			"http://people.eecs.ku.edu/~kwu96/ATeamScripts/list_cars_available.php";
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_CARS = "cars";
 	private static final String TAG_ID = "id";
@@ -72,13 +71,10 @@ public class SalesViewCars extends ListActivity {
 		userEmail = getIntent.getStringExtra("email");
 		key = getIntent.getStringExtra("key");
 		name = getIntent.getStringExtra("name");
+		
 		carsList = new ArrayList<HashMap<String, String>>();
 	
 		new LoadAllCars().execute();
-	
-		SessionManager session = new SessionManager(getApplicationContext());
-		String role = session.getRole();
-		
 	}
 	
 	@Override

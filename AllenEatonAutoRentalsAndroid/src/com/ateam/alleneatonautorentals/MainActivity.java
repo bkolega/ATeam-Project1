@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
 			new AttemptLogin().execute();
 			break;
 			
-		case R.id.button_register: 
+		case R.id.button_register:
 			Intent  ii = new Intent(MainActivity.this, Register.class);	
 			startActivity(ii);
 			finish();	

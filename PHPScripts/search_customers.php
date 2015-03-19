@@ -26,7 +26,7 @@
 				    )";
 	$searchCustomerResult = mysqli_query($c, $searchCustomerQuery);
 
-	if (!searchCustomerResult) {
+	if (!$searchCustomerResult) {
 	   $response["success"] = 0;
 	   $response["users"] = array();
 	   die(json_encode($response));

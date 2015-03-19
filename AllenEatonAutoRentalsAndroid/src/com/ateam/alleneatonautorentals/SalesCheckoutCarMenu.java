@@ -47,7 +47,14 @@ public class SalesCheckoutCarMenu extends FragmentActivity {
 				finish();	
 				break;
 			case R.id.viewReservationsButtonSalesMenu:
+				ii = new Intent(SalesCheckoutCarMenu.this, SalesViewReservations.class);
 				
+				ii.putExtra("email", userEmail);
+				ii.putExtra("key", key);
+				ii.putExtra("name", name);
+				
+				startActivity(ii);
+				finish();
 				break;
 			default:
 				break;

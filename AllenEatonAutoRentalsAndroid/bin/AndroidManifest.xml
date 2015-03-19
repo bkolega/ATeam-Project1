@@ -43,6 +43,10 @@
               android:label="@string/app_name" >         
         </activity>
         <activity
+              android:name="com.ateam.alleneatonautorentals.ServiceViewNotes"
+              android:label="@string/app_name" >         
+        </activity>
+        <activity
               android:name="com.ateam.alleneatonautorentals.CheckOutCar"
               android:label="@string/app_name" >         
         </activity>
@@ -52,6 +56,10 @@
         </activity>
         <activity
               android:name="com.ateam.alleneatonautorentals.SalesViewCars"
+              android:label="@string/app_name" >         
+        </activity>
+        <activity
+              android:name="com.ateam.alleneatonautorentals.SalesViewReservations"
               android:label="@string/app_name" >         
         </activity>
         <activity

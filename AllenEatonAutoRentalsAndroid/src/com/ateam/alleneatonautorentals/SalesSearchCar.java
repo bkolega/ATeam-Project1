@@ -1,5 +1,4 @@
 /*
- * TODO: PHP needs to not include checked out cars
  * XML: view_inventory
  * Sales part for searching for cars when checking out for users
  */
@@ -36,7 +35,7 @@ public class SalesSearchCar extends ListActivity {
 	ArrayList<HashMap<String, String>> carsList;
 	
 	private static final String CARS_URL =
-			"http://people.eecs.ku.edu/~kwu96/ATeamScripts/search_cars.php";
+			"http://people.eecs.ku.edu/~kwu96/ATeamScripts/search_cars_available.php";
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_CARS = "cars";
 	private static final String TAG_ID = "id";
@@ -162,7 +161,9 @@ public class SalesSearchCar extends ListActivity {
 					ii.putExtra("name", name);
 					
 					startActivity(ii);		
-					finish();					
+					finish();	
+					
+					return "Error in Database";
 				}
 			}
 			catch (JSONException e) {
