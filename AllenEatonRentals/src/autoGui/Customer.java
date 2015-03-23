@@ -97,7 +97,7 @@ public class Customer extends JFrame {
 	private JLabel lblInvalid;
 	private JPanel LoginWithSearchResults;
 	private JPanel CustomerHomePage;
-	private JButton btnSubmit;
+	private JButton btnReserveAsMember;
 	private JButton btnReserveAsGuest;
 	private JButton btnLogout;
 	private boolean loggedIn = false;
@@ -113,6 +113,12 @@ public class Customer extends JFrame {
 	private JTextField textField_12;
 	private JTextField textField_13;
 	private JTextField textField_14;
+	private JLabel lblInvalidRange = new JLabel("Please select a valid range of dates");
+	private long dayReserved =0;
+	private long dayReturned =0;
+	private long totalReserved=0;
+	private JLabel lblCartInfo = new JLabel(totalReserved + " days reserved");
+	
 	
 	public void login(String userEmail, String pass) {
 		Connection conn = databaseProvider.getConnection();
@@ -132,7 +138,7 @@ public class Customer extends JFrame {
 				CustomerHomePage.setVisible(true);
 				btnLogout.setVisible(true);
 				btnReserveAsGuest.setVisible(false);
-				btnSubmit.setVisible(false);
+				btnReserveAsMember.setVisible(false);
 			} else {
 				// Invalid log in
 				lblInvalid.setVisible(true);
@@ -215,6 +221,7 @@ public class Customer extends JFrame {
 		//////////////////////////// Register Page //////////////////////////////////
 		/////////////////////////////////////////////////////////////////////////////
 		
+	
 		JPanel RegisterPage = new JPanel();
 		getContentPane().add(RegisterPage, "name_22846752421143");
 		RegisterPage.setLayout(null);
@@ -523,6 +530,7 @@ public class Customer extends JFrame {
 		/////////////////////////  Customer Home Page   ////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////
 		
+		
 		JLabel lblEnterAPick = DefaultComponentFactory.getInstance().createLabel("Enter a pick up date:");
 		lblEnterAPick.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblEnterAPick.setBounds(77, 13, 179, 36);
@@ -573,24 +581,30 @@ public class Customer extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				setVisible(false);
 				dispose();
-				//TabbedPane Login = new TabbedPane();
-				//Login.setVisible(true);
 			}
 		});
 		btnExit.setBounds(890, 525, 97, 25);
 		CustomerHomePage.add(btnExit);
 		
-		btnSubmit = new JButton("Reserve as member");
-		btnSubmit.addMouseListener(new MouseAdapter() {
+		btnReserveAsMember = new JButton("Reserve as member");
+		btnReserveAsMember.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				CustomerHomePage.setVisible(false);
-				LoginWithSearchResults.setVisible(true);	
-				lblInvalid.setVisible(false);
+				if(totalReserved > 0)
+				{
+					CustomerHomePage.setVisible(false);
+					LoginWithSearchResults.setVisible(true);	
+					lblInvalid.setVisible(false);
+					lblInvalidRange.setVisible(false);
+				}
+				else
+				{
+					lblInvalidRange.setVisible(true);
+				}
 			}
 		});
-		btnSubmit.setBounds(109, 389, 245, 36);
-		CustomerHomePage.add(btnSubmit);
+		btnReserveAsMember.setBounds(109, 389, 245, 36);
+		CustomerHomePage.add(btnReserveAsMember);
 		
 		JLabel lblChooseRentalLocation = new JLabel("Choose rental location:");
 		lblChooseRentalLocation.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -607,71 +621,80 @@ public class Customer extends JFrame {
 		btnReserveAsGuest.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				CustomerHomePage.setVisible(false);
-				SearchResultsPage.setVisible(true);
-
-				if(comboBoxVehicleType.getSelectedItem().equals("Economy"))
+				
+				if(totalReserved > 0)
 				{
-						picLabel.setIcon(null);
-						ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/economyCar.jpg")));
-						picLabel.setIcon(testImg);
-						picLabel.setBounds(10, 25, 300, 400);
-						SearchResultsPage.add(picLabel);
-						picLabel.setVisible(true);
+					lblInvalidRange.setVisible(false);
+					CustomerHomePage.setVisible(false);
+					SearchResultsPage.setVisible(true);
+	
+					if(comboBoxVehicleType.getSelectedItem().equals("Economy"))
+					{
+							picLabel.setIcon(null);
+							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/economyCar.jpg")));
+							picLabel.setIcon(testImg);
+							picLabel.setBounds(10, 25, 300, 400);
+							SearchResultsPage.add(picLabel);
+							picLabel.setVisible(true);
+					}
+					if(comboBoxVehicleType.getSelectedItem().equals("Compact"))
+					{
+							picLabel.setIcon(null);
+							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/compactCar.jpg")));
+							picLabel.setIcon(testImg);
+							picLabel.setBounds(10, 25, 300, 400);
+							SearchResultsPage.add(picLabel);
+							picLabel.setVisible(true);
+					}
+					if(comboBoxVehicleType.getSelectedItem().equals("Standard"))
+					{
+							picLabel.setIcon(null);
+							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/standardCar.jpg")));
+							picLabel.setIcon(testImg);
+							picLabel.setBounds(10, 25, 300, 400);
+							SearchResultsPage.add(picLabel);
+							picLabel.setVisible(true);
+					}
+					if(comboBoxVehicleType.getSelectedItem().equals("Small SUV"))
+					{
+							picLabel.setIcon(null);
+							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/smallSUV.jpg")));
+							picLabel.setIcon(testImg);
+							picLabel.setBounds(10, 25, 300, 400);
+							SearchResultsPage.add(picLabel);
+							picLabel.setVisible(true);
+					}
+					if(comboBoxVehicleType.getSelectedItem().equals("Minivan"))
+					{
+							picLabel.setIcon(null);
+							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/minivan.jpg")));
+							picLabel.setIcon(testImg);
+							picLabel.setBounds(10, 25, 300, 400);
+							SearchResultsPage.add(picLabel);
+							picLabel.setVisible(true);
+					}
+					if(comboBoxVehicleType.getSelectedItem().equals("Standard SUV"))
+					{
+							picLabel.setIcon(null);
+							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/standardSUV.jpg")));
+							picLabel.setIcon(testImg);
+							picLabel.setBounds(10, 25, 300, 400);
+							SearchResultsPage.add(picLabel);
+							picLabel.setVisible(true);
+					}
+					if(comboBoxVehicleType.getSelectedItem().equals("Premium"))
+					{
+							picLabel.setIcon(null);
+							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/premiumCar.jpg")));
+							picLabel.setIcon(testImg);
+							picLabel.setBounds(10, 25, 300, 400);
+							SearchResultsPage.add(picLabel);
+							picLabel.setVisible(true);
+					}
 				}
-				if(comboBoxVehicleType.getSelectedItem().equals("Compact"))
+				else
 				{
-						picLabel.setIcon(null);
-						ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/compactCar.jpg")));
-						picLabel.setIcon(testImg);
-						picLabel.setBounds(10, 25, 300, 400);
-						SearchResultsPage.add(picLabel);
-						picLabel.setVisible(true);
-				}
-				if(comboBoxVehicleType.getSelectedItem().equals("Standard"))
-				{
-						picLabel.setIcon(null);
-						ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/standardCar.jpg")));
-						picLabel.setIcon(testImg);
-						picLabel.setBounds(10, 25, 300, 400);
-						SearchResultsPage.add(picLabel);
-						picLabel.setVisible(true);
-				}
-				if(comboBoxVehicleType.getSelectedItem().equals("Small SUV"))
-				{
-						picLabel.setIcon(null);
-						ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/smallSUV.jpg")));
-						picLabel.setIcon(testImg);
-						picLabel.setBounds(10, 25, 300, 400);
-						SearchResultsPage.add(picLabel);
-						picLabel.setVisible(true);
-				}
-				if(comboBoxVehicleType.getSelectedItem().equals("Minivan"))
-				{
-						picLabel.setIcon(null);
-						ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/minivan.jpg")));
-						picLabel.setIcon(testImg);
-						picLabel.setBounds(10, 25, 300, 400);
-						SearchResultsPage.add(picLabel);
-						picLabel.setVisible(true);
-				}
-				if(comboBoxVehicleType.getSelectedItem().equals("Standard SUV"))
-				{
-						picLabel.setIcon(null);
-						ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/standardSUV.jpg")));
-						picLabel.setIcon(testImg);
-						picLabel.setBounds(10, 25, 300, 400);
-						SearchResultsPage.add(picLabel);
-						picLabel.setVisible(true);
-				}
-				if(comboBoxVehicleType.getSelectedItem().equals("Premium"))
-				{
-						picLabel.setIcon(null);
-						ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/premiumCar.jpg")));
-						picLabel.setIcon(testImg);
-						picLabel.setBounds(10, 25, 300, 400);
-						SearchResultsPage.add(picLabel);
-						picLabel.setVisible(true);
+					lblInvalidRange.setVisible(true);
 				}
 			}
 		});
@@ -716,6 +739,9 @@ public class Customer extends JFrame {
 						date = (java.util.Date) evt.getNewValue();
 						calendarButton.setTargetDate(date);
 						
+						dayReserved = (date.getTime()/(1000*60*60*24));
+						lblCartInfo.setText(totalReserved + " days reserved");
+						
 						if(calendarButton.getTargetDate() != null)
 						{
 							String s = DateFormat.getDateInstance(DateFormat.FULL, getLocale()).format(date);
@@ -747,6 +773,10 @@ public class Customer extends JFrame {
 						java.util.Date date = null;
 						date = (java.util.Date) evt.getNewValue();
 						calendarButton_1.setTargetDate(date);
+						
+						dayReturned = (date.getTime()/(1000*60*60*24));
+						totalReserved = (dayReturned - dayReserved);
+						lblCartInfo.setText(totalReserved + " days reserved");
 						
 						if(calendarButton_1.getTargetDate() != null)
 						{
@@ -835,7 +865,7 @@ public class Customer extends JFrame {
 				userEmail = null;
 				loggedIn = false;
 				btnLogout.setVisible(false);
-				btnSubmit.setVisible(true);
+				btnReserveAsMember.setVisible(true);
 				passwordField.setText("");
 				btnReserveAsGuest.setVisible(true);
 			}
@@ -843,6 +873,18 @@ public class Customer extends JFrame {
 		btnLogout.setBounds(318, 437, 117, 29);
 		btnLogout.setVisible(false);
 		CustomerHomePage.add(btnLogout);
+		
+		
+		lblInvalidRange.setForeground(Color.RED);
+		lblInvalidRange.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblInvalidRange.setBounds(212, 232, 299, 27);
+		lblInvalidRange.setVisible(false);
+		CustomerHomePage.add(lblInvalidRange);
+		
+		
+		lblCartInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblCartInfo.setBounds(782, 24, 121, 16);
+		CustomerHomePage.add(lblCartInfo);
 		
 		////////////////////////////////////////////////////////////////////////////////
 		//////////////////////  Additional Options Page   //////////////////////////////
@@ -1002,10 +1044,6 @@ public class Customer extends JFrame {
 		PastOrdersPage.add(list);
 		
 
-		
-		
-		
-		
 
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
