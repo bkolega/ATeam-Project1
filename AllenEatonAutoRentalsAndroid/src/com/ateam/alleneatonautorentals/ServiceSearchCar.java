@@ -247,7 +247,7 @@ public class ServiceSearchCar extends ListActivity {
 	
 	@Override
 	public void onBackPressed() {
-		Intent ii = new Intent(ServiceSearchCar.this, MainMenu.class);
+		Intent ii = new Intent(getApplicationContext(), MainMenu.class);
 		Bundle b = new Bundle();
 		b.putString("employeeType", "Service");
 		ii.putExtras(b);
