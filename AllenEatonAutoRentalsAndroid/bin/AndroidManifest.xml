@@ -86,6 +86,10 @@
               android:name="com.ateam.alleneatonautorentals.ServiceCarMenu"
               android:label="@string/app_name" >         
         </activity>
+        <activity
+              android:name="com.ateam.alleneatonautorentals.ServiceAddNote"
+              android:label="@string/app_name" >         
+        </activity>
         
     </application>
 

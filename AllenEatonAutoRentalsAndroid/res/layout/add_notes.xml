@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" >
+    
+     <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.15" >
+    </RelativeLayout>
+
+     <RelativeLayout
+         android:layout_width="0dip"
+         android:layout_height="fill_parent"
+         android:layout_weight="0.7" >
+
+         <LinearLayout
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:layout_above="@+id/linearLayout1"
+             android:layout_alignParentLeft="true"
+             android:layout_alignParentTop="true"
+             android:orientation="vertical" >
+
+             <TextView
+                 android:id="@+id/textAddNote"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="50dp"
+                 android:gravity="center"
+                 android:text="@string/add_note"
+                 android:textSize="40sp" />
+
+            <!--  <TextView
+                 android:id="@+id/textCarMake"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:gravity="center"
+                 android:textSize="40sp" />
+
+             <TextView
+                 android:id="@+id/textCarModel"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:gravity="center"
+                 android:textSize="20sp" />-->
+
+             <TextView
+                 android:id="@+id/textCarId"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:gravity="center"
+                 android:textSize="20sp" />
+
+         </LinearLayout>
+
+         <LinearLayout
+             android:id="@+id/linearLayout1"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:layout_alignParentLeft="true"
+             android:layout_centerVertical="true"
+             android:orientation="vertical" >
+
+             <EditText
+                 android:id="@+id/editCustomerEmail"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="23dp"
+                 android:ems="10"
+                 android:hint="@string/customer_email"
+                 android:inputType="textEmailAddress" >
+
+                 <requestFocus />
+             </EditText>
+
+             <EditText
+                 android:id="@+id/editTextCarHistory"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center_vertical"
+                 android:layout_marginTop="30dp"
+                 android:ems="10"
+                 android:hint="@string/car_history"
+                 android:inputType="textMultiLine"
+                 android:lines="4" />
+
+             <Button
+                 android:id="@+id/buttonAddNote"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center_horizontal"
+                 android:layout_marginTop="30dp"
+                 android:onClick="clickButtons"
+                 android:text="@string/add" />
+         </LinearLayout>
+
+     </RelativeLayout>
+     
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.15">
+         
+        
+    </RelativeLayout>
+    
+
+</LinearLayout>

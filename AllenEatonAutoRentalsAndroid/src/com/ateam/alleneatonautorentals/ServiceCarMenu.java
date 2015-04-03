@@ -52,7 +52,15 @@ public class ServiceCarMenu extends Activity {
 				finish();
 				break;
 			case R.id.addNotesButtonService:
+				ii = new Intent(ServiceCarMenu.this, ServiceAddNote.class);
 				
+				ii.putExtra("make", carMake);
+				ii.putExtra("model", carModel);
+				ii.putExtra("id", carID);
+				ii.putExtra("key", key);
+				
+				startActivity(ii);
+				finish();				
 				break;
 			default:
 				break;
