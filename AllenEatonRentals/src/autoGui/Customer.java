@@ -75,12 +75,16 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 import java.text.DateFormat;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.JDatePanelImpl;
 
 import javax.swing.JFormattedTextField.AbstractFormatter;
 
 import org.jdatepicker.util.JDatePickerUtil;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.swing.JToolBar;
 
@@ -119,8 +123,50 @@ public class Customer extends JFrame {
 	private long totalReserved=0;
 	private JLabel lblCartInfo = new JLabel(totalReserved + " days reserved");
 	
+	private JPanel RegisterPage = new JPanel();
+
+	JSONObject jsonObject;
+
+	private final static String RES_URL = "http://people.eecs.ku.edu/~kwu96/ATeamScripts/list_reservations.php";
+	private final static String USER_URL = "http://people.eecs.ku.edu/~kwu96/ATeamScripts/list_customers.php";
+	private final static String LOGIN_URL = "http://people.eecs.ku.edu/~kwu96/ATeamScripts/login.php";
 	
 	public void login(String userEmail, String pass) {
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("username", userEmail));
+		params.add(new BasicNameValuePair("password", pass));
+		JsonHandler handler = new JsonHandler(LOGIN_URL, params);
+		System.out.println(handler.getJsonObject().toString());
+		
+		if (handler.getJsonObject().getInt("success") == 1) {
+			loggedIn = true;
+			this.userEmail = userEmail;
+			lblInvalid.setVisible(false);
+			LoginWithSearchResults.setVisible(false);
+			CustomerHomePage.setVisible(true);
+			btnLogout.setVisible(true);
+			btnReserveAsGuest.setVisible(false);
+			btnReserveAsMember.setVisible(false);
+		} else {
+			this.userEmail = null;
+			loggedIn = false;
+			lblInvalid.setVisible(true);
+		}
+//		jsonObject = new JsonReader(USER_URL).getJsonObject();
+//		
+//		JSONArray arr = jsonObject.getJSONArray("users");
+//		
+//		for (int i = 0; i < arr.length(); ++i) {
+//			JSONObject obj = arr.getJSONObject(i);
+//
+////			listModel.addElement(obj.getString("start_date"));
+//			
+//			if (userEmail == obj.getString("email")) {
+//				//if ()
+//			}
+//		}
+		
+		/*
 		Connection conn = databaseProvider.getConnection();
 		try {
 			PreparedStatement stmt = conn.prepareStatement("SELECT user_password FROM `ALLEN_EATON_AUTO.USER` WHERE user_email=? LIMIT 1");
@@ -149,6 +195,7 @@ public class Customer extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
 	}
 
 	/**
@@ -176,7 +223,6 @@ public class Customer extends JFrame {
 		setBounds(100, 100, 1036, 608);
 		getContentPane().setLayout(new CardLayout(0, 0));
 
-		databaseProvider = new SqlDatabaseProvider("jdbc:mysql://localhost/csoden42", "test", "test1234");
 		
 		
 		////////////////////////////////////////////////////////////////////////////////
@@ -221,197 +267,7 @@ public class Customer extends JFrame {
 		//////////////////////////// Register Page //////////////////////////////////
 		/////////////////////////////////////////////////////////////////////////////
 		
-	
-		JPanel RegisterPage = new JPanel();
-		getContentPane().add(RegisterPage, "name_22846752421143");
-		RegisterPage.setLayout(null);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(584, 87, 116, 22);
-		RegisterPage.add(textField_2);
-		textField_2.setColumns(10);
-		
-		JLabel lblEmail = new JLabel("Email*");
-		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblEmail.setBounds(506, 89, 56, 16);
-		RegisterPage.add(lblEmail);
-		
-		JLabel lblNewLabel = new JLabel("Password*");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(506, 132, 71, 16);
-		RegisterPage.add(lblNewLabel);
-		
-		JLabel lblFirstName = new JLabel("First Name*");
-		lblFirstName.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblFirstName.setBounds(141, 87, 88, 16);
-		RegisterPage.add(lblFirstName);
-		
-		textField_6 = new JTextField();
-		textField_6.setBounds(241, 85, 116, 22);
-		RegisterPage.add(textField_6);
-		textField_6.setColumns(10);
-		
-		JLabel lblNewLabel_1 = new JLabel("Middle Name");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1.setBounds(141, 132, 88, 16);
-		RegisterPage.add(lblNewLabel_1);
-		
-		textField_7 = new JTextField();
-		textField_7.setBounds(241, 129, 116, 22);
-		RegisterPage.add(textField_7);
-		textField_7.setColumns(10);
-		
-		JLabel lblNewLabel_2 = new JLabel("Last Name*");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_2.setBounds(141, 174, 88, 16);
-		RegisterPage.add(lblNewLabel_2);
-		
-		textField_8 = new JTextField();
-		textField_8.setBounds(241, 172, 116, 22);
-		RegisterPage.add(textField_8);
-		textField_8.setColumns(10);
-		
-		JLabel lblPersonalInformation = new JLabel("Personal Information");
-		lblPersonalInformation.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblPersonalInformation.setBounds(86, 33, 159, 27);
-		RegisterPage.add(lblPersonalInformation);
-		
-		JLabel lblContactInformation = new JLabel("Contact Information");
-		lblContactInformation.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblContactInformation.setBounds(459, 33, 175, 27);
-		RegisterPage.add(lblContactInformation);
-		
-		JLabel lblPhoneNumber = new JLabel("Phone*");
-		lblPhoneNumber.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPhoneNumber.setBounds(506, 175, 71, 16);
-		RegisterPage.add(lblPhoneNumber);
-		
-		textField_9 = new JTextField();
-		textField_9.setBounds(584, 173, 116, 22);
-		RegisterPage.add(textField_9);
-		textField_9.setColumns(10);
-		
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setBounds(584, 130, 116, 22);
-		RegisterPage.add(passwordField_1);
-		
-		JButton btnBack_5 = new JButton("Back");
-		btnBack_5.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				RegisterPage.setVisible(false);
-				LoginWithSearchResults.setVisible(true);
-			}
-		});
-		btnBack_5.setBounds(12, 525, 97, 25);
-		RegisterPage.add(btnBack_5);
-		
-		JButton btnExit_6 = new JButton("Exit");
-		btnExit_6.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-				dispose();
-			}
-		});
-		btnExit_6.setBounds(909, 525, 97, 25);
-		RegisterPage.add(btnExit_6);
-		
-		JLabel lblAddress = new JLabel("Address*");
-		lblAddress.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblAddress.setBounds(141, 217, 56, 16);
-		RegisterPage.add(lblAddress);
-		
-		textField_5 = new JTextField();
-		textField_5.setBounds(241, 215, 116, 22);
-		RegisterPage.add(textField_5);
-		textField_5.setColumns(10);
-		
-		textField_10 = new JTextField();
-		textField_10.setBounds(241, 260, 116, 22);
-		RegisterPage.add(textField_10);
-		textField_10.setColumns(10);
-		
-		JLabel lblCity = new JLabel("City*");
-		lblCity.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCity.setBounds(141, 308, 56, 16);
-		RegisterPage.add(lblCity);
-		
-		textField_11 = new JTextField();
-		textField_11.setBounds(241, 306, 116, 22);
-		RegisterPage.add(textField_11);
-		textField_11.setColumns(10);
-		
-		JLabel lblAddress_1 = new JLabel("Address 2");
-		lblAddress_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblAddress_1.setBounds(141, 263, 77, 16);
-		RegisterPage.add(lblAddress_1);
-		
-		JLabel lblZip = new JLabel("Zip*");
-		lblZip.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblZip.setBounds(141, 402, 56, 16);
-		RegisterPage.add(lblZip);
-		
-		textField_12 = new JTextField();
-		textField_12.setBounds(241, 400, 116, 22);
-		RegisterPage.add(textField_12);
-		textField_12.setColumns(10);
-		
-		JLabel lblState = new JLabel("State*");
-		lblState.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblState.setBounds(141, 355, 56, 16);
-		RegisterPage.add(lblState);
-		
-		textField_13 = new JTextField();
-		textField_13.setBounds(241, 353, 116, 22);
-		RegisterPage.add(textField_13);
-		textField_13.setColumns(10);
-		
-		JLabel lblRequired = new JLabel("* = required");
-		lblRequired.setBounds(301, 39, 88, 16);
-		RegisterPage.add(lblRequired);
-		
-		JLabel lblLicenseInfo = new JLabel("License Information");
-		lblLicenseInfo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblLicenseInfo.setBounds(459, 257, 148, 27);
-		RegisterPage.add(lblLicenseInfo);
-		
-		JLabel lblNumber = new JLabel("Number*");
-		lblNumber.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNumber.setBounds(506, 310, 71, 16);
-		RegisterPage.add(lblNumber);
-		
-		textField_14 = new JTextField();
-		textField_14.setBounds(599, 308, 116, 22);
-		RegisterPage.add(textField_14);
-		textField_14.setColumns(10);
-		
-		JLabel lblDateOfBirth = new JLabel("Date of Birth*");
-		lblDateOfBirth.setBounds(506, 358, 88, 16);
-		RegisterPage.add(lblDateOfBirth);
-		
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}));
-		comboBox_3.setBounds(599, 355, 59, 22);
-		RegisterPage.add(comboBox_3);
-		
-		JComboBox comboBox_4 = new JComboBox();
-		comboBox_4.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
-		comboBox_4.setBounds(673, 355, 45, 22);
-		RegisterPage.add(comboBox_4);
-		
-		List<Integer> years = new ArrayList<Integer>();
-		for (int i = 1915; i <= 2015; ++i) {
-		    years.add(i);
-		}
-		
-		JComboBox comboBox_5 = new JComboBox(years.toArray());
-		comboBox_5.setBounds(736, 355, 71, 22);
-		RegisterPage.add(comboBox_5);
-		
-		JButton btnContinue = new JButton("Continue ->");
-		btnContinue.setBounds(674, 428, 133, 34);
-		RegisterPage.add(btnContinue);
+		createRegisterPage();
 		
 		////////////////////////////////////////////////////////////////////////////////
 		////////////////////////   Login With Search Results Page  /////////////////////
@@ -551,12 +407,23 @@ public class Customer extends JFrame {
 		btnViewPastOrders.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				jsonObject = new JsonHandler(RES_URL).getJsonObject();
 				listModel.clear();
+				JSONArray arr = jsonObject.getJSONArray("reservations");
+				
+				for (int i = 0; i < arr.length(); ++i) {
+					JSONObject obj = arr.getJSONObject(i);
+					
+					System.out.println(obj.toString());
+					listModel.addElement(obj.getString("start_date"));
+				}
+				/*
 				DatabaseRowSet rowSet = databaseProvider.getRows("`ALLEN_EATON_AUTO.RESERVATION`");
 				while (rowSet.next()) {
 					System.out.println(rowSet.getField("reservation_start_date").toString());
 					listModel.addElement(rowSet.getField("reservation_start_date").toString());
 				}
+				*/
 				CustomerHomePage.setVisible(false);
 				PastOrdersPage.setVisible(true);
 			}
@@ -603,7 +470,7 @@ public class Customer extends JFrame {
 				}
 			}
 		});
-		btnReserveAsMember.setBounds(109, 389, 245, 36);
+		btnReserveAsMember.setBounds(27, 389, 245, 36);
 		CustomerHomePage.add(btnReserveAsMember);
 		
 		JLabel lblChooseRentalLocation = new JLabel("Choose rental location:");
@@ -698,7 +565,7 @@ public class Customer extends JFrame {
 				}
 			}
 		});
-		btnReserveAsGuest.setBounds(407, 389, 245, 36);
+		btnReserveAsGuest.setBounds(284, 389, 245, 36);
 		CustomerHomePage.add(btnReserveAsGuest);
 		
 		JLabel lblSelectAnAge = new JLabel("Select an age range:");
@@ -886,6 +753,21 @@ public class Customer extends JFrame {
 		lblCartInfo.setBounds(782, 24, 121, 16);
 		CustomerHomePage.add(lblCartInfo);
 		
+		JButton registerButton = new JButton("Register");
+		registerButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CustomerHomePage.setVisible(false);
+				RegisterPage.setVisible(true);
+			}
+		});
+		registerButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		registerButton.setBounds(541, 389, 245, 36);
+		CustomerHomePage.add(registerButton);
+		
 		////////////////////////////////////////////////////////////////////////////////
 		//////////////////////  Additional Options Page   //////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////
@@ -1062,5 +944,201 @@ public class Customer extends JFrame {
 				popup.show(e.getComponent(), e.getX(), e.getY());
 			}
 		});
+	}
+	
+	private void createRegisterPage() {
+		getContentPane().add(RegisterPage, "name_22846752421143");
+		RegisterPage.setLayout(null);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(584, 87, 116, 22);
+		RegisterPage.add(textField_2);
+		textField_2.setColumns(10);
+		
+		JLabel lblEmail = new JLabel("Email*");
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblEmail.setBounds(506, 89, 56, 16);
+		RegisterPage.add(lblEmail);
+		
+		JLabel lblNewLabel = new JLabel("Password*");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setBounds(506, 132, 71, 16);
+		RegisterPage.add(lblNewLabel);
+		
+		JLabel lblFirstName = new JLabel("First Name*");
+		lblFirstName.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblFirstName.setBounds(141, 87, 88, 16);
+		RegisterPage.add(lblFirstName);
+		
+		textField_6 = new JTextField();
+		textField_6.setBounds(241, 85, 116, 22);
+		RegisterPage.add(textField_6);
+		textField_6.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("Middle Name");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1.setBounds(141, 132, 88, 16);
+		RegisterPage.add(lblNewLabel_1);
+		
+		textField_7 = new JTextField();
+		textField_7.setBounds(241, 129, 116, 22);
+		RegisterPage.add(textField_7);
+		textField_7.setColumns(10);
+		
+		JLabel lblNewLabel_2 = new JLabel("Last Name*");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_2.setBounds(141, 174, 88, 16);
+		RegisterPage.add(lblNewLabel_2);
+		
+		textField_8 = new JTextField();
+		textField_8.setBounds(241, 172, 116, 22);
+		RegisterPage.add(textField_8);
+		textField_8.setColumns(10);
+		
+		JLabel lblPersonalInformation = new JLabel("Personal Information");
+		lblPersonalInformation.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblPersonalInformation.setBounds(86, 33, 159, 27);
+		RegisterPage.add(lblPersonalInformation);
+		
+		JLabel lblContactInformation = new JLabel("Contact Information");
+		lblContactInformation.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblContactInformation.setBounds(459, 33, 175, 27);
+		RegisterPage.add(lblContactInformation);
+		
+		JLabel lblPhoneNumber = new JLabel("Phone*");
+		lblPhoneNumber.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblPhoneNumber.setBounds(506, 175, 71, 16);
+		RegisterPage.add(lblPhoneNumber);
+		
+		textField_9 = new JTextField();
+		textField_9.setBounds(584, 173, 116, 22);
+		RegisterPage.add(textField_9);
+		textField_9.setColumns(10);
+		
+		passwordField_1 = new JPasswordField();
+		passwordField_1.setBounds(584, 130, 116, 22);
+		RegisterPage.add(passwordField_1);
+		
+		JButton btnBack_5 = new JButton("Back");
+		btnBack_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnBack_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				RegisterPage.setVisible(false);
+				LoginWithSearchResults.setVisible(true);
+			}
+		});
+		btnBack_5.setBounds(12, 525, 97, 25);
+		RegisterPage.add(btnBack_5);
+		
+		JButton btnExit_6 = new JButton("Exit");
+		btnExit_6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				dispose();
+			}
+		});
+		btnExit_6.setBounds(909, 525, 97, 25);
+		RegisterPage.add(btnExit_6);
+		
+		JLabel lblAddress = new JLabel("Address*");
+		lblAddress.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblAddress.setBounds(141, 217, 56, 16);
+		RegisterPage.add(lblAddress);
+		
+		textField_5 = new JTextField();
+		textField_5.setBounds(241, 215, 116, 22);
+		RegisterPage.add(textField_5);
+		textField_5.setColumns(10);
+		
+		textField_10 = new JTextField();
+		textField_10.setBounds(241, 260, 116, 22);
+		RegisterPage.add(textField_10);
+		textField_10.setColumns(10);
+		
+		JLabel lblCity = new JLabel("City*");
+		lblCity.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblCity.setBounds(141, 308, 56, 16);
+		RegisterPage.add(lblCity);
+		
+		textField_11 = new JTextField();
+		textField_11.setBounds(241, 306, 116, 22);
+		RegisterPage.add(textField_11);
+		textField_11.setColumns(10);
+		
+		JLabel lblAddress_1 = new JLabel("Address 2");
+		lblAddress_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblAddress_1.setBounds(141, 263, 77, 16);
+		RegisterPage.add(lblAddress_1);
+		
+		JLabel lblZip = new JLabel("Zip*");
+		lblZip.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblZip.setBounds(141, 402, 56, 16);
+		RegisterPage.add(lblZip);
+		
+		textField_12 = new JTextField();
+		textField_12.setBounds(241, 400, 116, 22);
+		RegisterPage.add(textField_12);
+		textField_12.setColumns(10);
+		
+		JLabel lblState = new JLabel("State*");
+		lblState.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblState.setBounds(141, 355, 56, 16);
+		RegisterPage.add(lblState);
+		
+		textField_13 = new JTextField();
+		textField_13.setBounds(241, 353, 116, 22);
+		RegisterPage.add(textField_13);
+		textField_13.setColumns(10);
+		
+		JLabel lblRequired = new JLabel("* = required");
+		lblRequired.setBounds(301, 39, 88, 16);
+		RegisterPage.add(lblRequired);
+		
+		JLabel lblLicenseInfo = new JLabel("License Information");
+		lblLicenseInfo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblLicenseInfo.setBounds(459, 257, 148, 27);
+		RegisterPage.add(lblLicenseInfo);
+		
+		JLabel lblNumber = new JLabel("Number*");
+		lblNumber.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNumber.setBounds(506, 310, 71, 16);
+		RegisterPage.add(lblNumber);
+		
+		textField_14 = new JTextField();
+		textField_14.setBounds(599, 308, 116, 22);
+		RegisterPage.add(textField_14);
+		textField_14.setColumns(10);
+		
+		JLabel lblDateOfBirth = new JLabel("Date of Birth*");
+		lblDateOfBirth.setBounds(506, 358, 88, 16);
+		RegisterPage.add(lblDateOfBirth);
+		
+		JComboBox comboBox_3 = new JComboBox();
+		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}));
+		comboBox_3.setBounds(599, 355, 59, 22);
+		RegisterPage.add(comboBox_3);
+		
+		JComboBox comboBox_4 = new JComboBox();
+		comboBox_4.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
+		comboBox_4.setBounds(673, 355, 45, 22);
+		RegisterPage.add(comboBox_4);
+		
+		List<Integer> years = new ArrayList<Integer>();
+		for (int i = 1915; i <= 2015; ++i) {
+		    years.add(i);
+		}
+		
+		JComboBox comboBox_5 = new JComboBox(years.toArray());
+		comboBox_5.setBounds(736, 355, 71, 22);
+		RegisterPage.add(comboBox_5);
+		
+		JButton btnContinue = new JButton("Continue ->");
+		btnContinue.setBounds(674, 428, 133, 34);
+		RegisterPage.add(btnContinue);
 	}
 }
