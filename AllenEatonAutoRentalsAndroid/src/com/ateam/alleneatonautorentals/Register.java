@@ -90,9 +90,7 @@ public class Register extends Activity {
 	}
 	
 	class AttemptRegister extends AsyncTask <String, String, String> {
-
-		boolean failure = false;
-		
+	
 		@Override
 		protected void onPreExecute() {
 			// Initiate
@@ -148,7 +146,7 @@ public class Register extends Activity {
 				
 				// Getting the JSON back from PHP server
 				JSONObject json = jsonParser.makeHttpRequest (REGISTER_URL, "POST", params);
-				Log.d("Login Attempt", json.toString());
+				Log.d("Register Attempt", json.toString());
 				
 				success = json.getInt(TAG_SUCCESS);
 				if (success == 1) {
