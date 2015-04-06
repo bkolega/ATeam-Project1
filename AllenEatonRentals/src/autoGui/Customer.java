@@ -88,6 +88,10 @@ import org.json.JSONObject;
 
 import javax.swing.JToolBar;
 
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+import javax.swing.SwingConstants;
+
 public class Customer extends JFrame {
 	private JTextField textField;
 	private JPasswordField passwordField;
@@ -108,9 +112,13 @@ public class Customer extends JFrame {
 	private JLabel lblInvalidRange = new JLabel("Please select a valid range of dates");
 	private long dayReserved =0;
 	private long dayReturned =0;
-	private long totalReserved=0;
-	private JLabel lblCartInfo = new JLabel(totalReserved + " days reserved");
+	private long minuteReserved =0;
+	private long minuteReturned =0;
+	private long totalDaysReserved =0;
+	private long totalMinutesReserved =0;
+	private JLabel lblCartInfo = new JLabel("Cart :        " + totalDaysReserved + " Days Reserved");
 	private RegisterPagePanel RegisterPage;
+	private String carType = "";
 
 	JSONObject jsonObject;
 
@@ -213,6 +221,7 @@ public class Customer extends JFrame {
 		/////////////////////////////////////////////////////////////////////////////
 		
 		RegisterPage = new RegisterPagePanel(this);
+		//RegisterPage.getPanel().add(lblCartInfo);
 		
 		////////////////////////////////////////////////////////////////////////////////
 		////////////////////////   Login With Search Results Page  /////////////////////
@@ -255,6 +264,7 @@ public class Customer extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				LoginWithSearchResults.setVisible(false);
 				CustomerHomePage.setVisible(true);
+				CustomerHomePage.add(lblCartInfo);
 			}
 		});
 		btnBack_3.setBounds(12, 525, 97, 25);
@@ -266,8 +276,6 @@ public class Customer extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
 				dispose();
-				//TabbedPane Login = new TabbedPane();
-				//Login.setVisible(true);
 			}
 		});
 		btnExit_4.setBounds(909, 525, 97, 25);
@@ -283,6 +291,7 @@ public class Customer extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				LoginWithSearchResults.setVisible(false);
 				RegisterPage.getPanel().setVisible(true);
+				RegisterPage.getPanel().add(lblCartInfo);
 			}
 		});
 		btnNewButton_1.setBounds(357, 409, 258, 42);
@@ -305,15 +314,14 @@ public class Customer extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				setVisible(false);
 				dispose();
-				//TabbedPane Login = new TabbedPane();
-				//Login.setVisible(true);
 			}
 		});
 		btnExit_1.setBounds(909, 525, 97, 25);
 		SearchResultsPage.add(btnExit_1);
 		
 		JLabel lblTheseAreYour_1 = DefaultComponentFactory.getInstance().createLabel("These are your search results: ");
-		lblTheseAreYour_1.setBounds(12, 13, 189, 16);
+		lblTheseAreYour_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblTheseAreYour_1.setBounds(12, 13, 287, 33);
 		SearchResultsPage.add(lblTheseAreYour_1);
 		
 		JButton btnBack = new JButton("Back");
@@ -321,6 +329,7 @@ public class Customer extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				SearchResultsPage.setVisible(false);
 				CustomerHomePage.setVisible(true);
+				CustomerHomePage.add(lblCartInfo);
 				//make array of image labels that is removed here
 			}
 		});
@@ -346,6 +355,13 @@ public class Customer extends JFrame {
 		JComboBox comboBoxVehicleType = new JComboBox();
 		comboBoxVehicleType.setModel(new DefaultComboBoxModel(new String[] {"Any class", "Economy", "Compact", "Standard", "Premium", "Small SUV", "Standard SUV", "Minivan"}));
 		comboBoxVehicleType.setBounds(233, 297, 121, 27);
+		comboBoxVehicleType.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				carType = (String) comboBoxVehicleType.getSelectedItem();
+				updateCart();
+			}
+		});
+
 		CustomerHomePage.add(comboBoxVehicleType);
 		
 		JButton btnViewPastOrders = new JButton("View past orders");
@@ -382,6 +398,7 @@ public class Customer extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				CustomerHomePage.setVisible(false);
 				ModifyExistingOrdersPage.setVisible(true);
+				ModifyExistingOrdersPage.add(lblCartInfo);
 			}
 		});
 		btnModifyExistingReservation.setBounds(109, 487, 245, 27);
@@ -402,10 +419,11 @@ public class Customer extends JFrame {
 		btnReserveAsMember.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(totalReserved > 0)
+				if(totalDaysReserved > 0)
 				{
 					CustomerHomePage.setVisible(false);
-					LoginWithSearchResults.setVisible(true);	
+					LoginWithSearchResults.setVisible(true);
+					LoginWithSearchResults.add(lblCartInfo);
 					lblInvalid.setVisible(false);
 					lblInvalidRange.setVisible(false);
 				}
@@ -434,11 +452,14 @@ public class Customer extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				
-				if(totalReserved > 0)
+				carType = (String) comboBoxVehicleType.getSelectedItem();
+				
+				if(totalDaysReserved > 0)
 				{
 					lblInvalidRange.setVisible(false);
 					CustomerHomePage.setVisible(false);
 					SearchResultsPage.setVisible(true);
+					SearchResultsPage.add(lblCartInfo);
 	
 					if(comboBoxVehicleType.getSelectedItem().equals("Economy"))
 					{
@@ -529,11 +550,6 @@ public class Customer extends JFrame {
 		chckbxReturnCarTo.setBounds(407, 336, 208, 25);
 		CustomerHomePage.add(chckbxReturnCarTo);
 		
-		JLabel lblCart_2 = new JLabel("Cart:");
-		lblCart_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCart_2.setBounds(730, 23, 56, 16);
-		CustomerHomePage.add(lblCart_2);
-		
 		JCalendarButton calendarButton = new JCalendarButton();
 		calendarButton.setBounds(514, 13, 32, 30);
 		CustomerHomePage.add(calendarButton);
@@ -552,7 +568,12 @@ public class Customer extends JFrame {
 						calendarButton.setTargetDate(date);
 						
 						dayReserved = (date.getTime()/(1000*60*60*24));
-						lblCartInfo.setText(totalReserved + " days reserved");
+						totalDaysReserved = (dayReturned - dayReserved);
+						//System.out.println(totalDaysReserved);
+						if (totalDaysReserved > 0)
+						{
+							updateCart();
+						}
 						
 						if(calendarButton.getTargetDate() != null)
 						{
@@ -587,8 +608,12 @@ public class Customer extends JFrame {
 						calendarButton_1.setTargetDate(date);
 						
 						dayReturned = (date.getTime()/(1000*60*60*24));
-						totalReserved = (dayReturned - dayReserved);
-						lblCartInfo.setText(totalReserved + " days reserved");
+						totalDaysReserved = (dayReturned - dayReserved);
+						System.out.println(totalDaysReserved);
+						if (totalDaysReserved > 0)
+						{
+							updateCart();
+						}
 						
 						if(calendarButton_1.getTargetDate() != null)
 						{
@@ -616,7 +641,20 @@ public class Customer extends JFrame {
 						java.util.Date date = null;
 						date = (java.util.Date) evt.getNewValue();
 						timeButton_1.setTargetDate(date);
+						minuteReturned = (date.getTime()/(1000*60));
+						totalMinutesReserved = minuteReturned - minuteReserved;
 						
+						if(minuteReturned - minuteReserved > 0)
+						{
+							totalMinutesReserved = minuteReturned - minuteReserved;
+							updateCart();
+						}
+						else
+						{
+							totalMinutesReserved = 0;
+							updateCart();
+						}
+						System.out.println(minuteReturned - minuteReserved);
 						if(timeButton_1.getTargetDate() != null)
 						{
 							String s = DateFormat.getTimeInstance(DateFormat.SHORT, getLocale()).format(date);
@@ -639,6 +677,19 @@ public class Customer extends JFrame {
 						java.util.Date date = null;
 						date = (java.util.Date) evt.getNewValue();
 						timeButton.setTargetDate(date);
+						minuteReserved = (date.getTime()/(1000*60));
+						
+						if(minuteReturned - minuteReserved > 0)
+						{
+							totalMinutesReserved = minuteReturned - minuteReserved;
+							updateCart();
+						}
+						else
+						{
+							totalMinutesReserved = 0;
+							updateCart();
+						}
+						System.out.println(minuteReturned - minuteReserved);
 						
 						if(timeButton.getTargetDate() != null)
 						{
@@ -693,10 +744,13 @@ public class Customer extends JFrame {
 		lblInvalidRange.setVisible(false);
 		CustomerHomePage.add(lblInvalidRange);
 		
-		
-		lblCartInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCartInfo.setBounds(782, 24, 121, 16);
+		lblCartInfo.setVerticalAlignment(SwingConstants.TOP);
+		lblCartInfo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblCartInfo.setBounds(752, 21, 205, 60);
 		CustomerHomePage.add(lblCartInfo);
+		//SearchResultsPage.add(lblCartInfo);
+		
+		//LoginWithSearchResults.add(lblCartInfo);
 		
 		JButton registerButton = new JButton("Register");
 		registerButton.addMouseListener(new MouseAdapter() {
@@ -704,6 +758,7 @@ public class Customer extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				CustomerHomePage.setVisible(false);
 				RegisterPage.getPanel().setVisible(true);
+				RegisterPage.getPanel().add(lblCartInfo);
 			}
 		});
 		registerButton.addActionListener(new ActionListener() {
@@ -760,6 +815,7 @@ public class Customer extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				AdditionalOptionsPage.setVisible(false);
 				SearchResultsPage.setVisible(true);
+				SearchResultsPage.add(lblCartInfo);
 			}
 		});
 		btnBack_4.setBounds(12, 525, 97, 25);
@@ -775,11 +831,6 @@ public class Customer extends JFrame {
 		lblQuantity.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblQuantity.setBounds(236, 346, 84, 16);
 		AdditionalOptionsPage.add(lblQuantity);
-		
-		JLabel lblCart = new JLabel("Cart:");
-		lblCart.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblCart.setBounds(666, 19, 171, 26);
-		AdditionalOptionsPage.add(lblCart);
 		
 		JButton btnExit_5 = new JButton("Exit");
 		btnExit_5.addMouseListener(new MouseAdapter() {
@@ -813,7 +864,7 @@ public class Customer extends JFrame {
 		
 		JLabel lblYouCanModify = DefaultComponentFactory.getInstance().createLabel("You can modify existing orders here:");
 		lblYouCanModify.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblYouCanModify.setBounds(12, 13, 295, 25);
+		lblYouCanModify.setBounds(12, 13, 394, 25);
 		ModifyExistingOrdersPage.add(lblYouCanModify);
 		
 		JButton btnBack_2 = new JButton("Back");
@@ -821,15 +872,11 @@ public class Customer extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ModifyExistingOrdersPage.setVisible(false);
 				CustomerHomePage.setVisible(true);
+				CustomerHomePage.add(lblCartInfo);
 			}
 		});
 		btnBack_2.setBounds(12, 525, 97, 25);
 		ModifyExistingOrdersPage.add(btnBack_2);
-		
-		JLabel lblCart_1 = new JLabel("Cart:");
-		lblCart_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblCart_1.setBounds(678, 18, 76, 20);
-		ModifyExistingOrdersPage.add(lblCart_1);
 		
 		
 		
@@ -843,8 +890,6 @@ public class Customer extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
 				dispose();
-				//TabbedPane Login = new TabbedPane();
-				//Login.setVisible(true);
 			}
 		});
 		btnExit_2.setBounds(909, 525, 97, 25);
@@ -852,7 +897,7 @@ public class Customer extends JFrame {
 		
 		JLabel lblTheseAreYour = DefaultComponentFactory.getInstance().createLabel("These are your past orders: ");
 		lblTheseAreYour.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblTheseAreYour.setBounds(12, 13, 201, 25);
+		lblTheseAreYour.setBounds(12, 13, 297, 25);
 		PastOrdersPage.add(lblTheseAreYour);
 		
 		JButton btnBack_1 = new JButton("Back");
@@ -860,6 +905,7 @@ public class Customer extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				PastOrdersPage.setVisible(false);
 				CustomerHomePage.setVisible(true);
+				CustomerHomePage.add(lblCartInfo);
 			}
 		});
 		btnBack_1.setBounds(12, 525, 97, 25);
@@ -872,6 +918,14 @@ public class Customer extends JFrame {
 		
 
 
+	}
+	private void updateCart()
+	{
+		if(totalMinutesReserved > 0 || totalDaysReserved > 0)
+		{
+			lblCartInfo.setText("<html>" +"Cart :        " + totalDaysReserved + " Days Reserved"+ "<br>" + " + " + totalMinutesReserved 
+					+ " Minutes " + "<br>" + "Car: " +  carType + "</html>" );
+		}
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {

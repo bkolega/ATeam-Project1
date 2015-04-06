@@ -117,6 +117,7 @@ public class RegisterPagePanel {
 			public void mouseClicked(MouseEvent e) {
 				RegisterPage.setVisible(false);
 				parent.setVisible(true);
+				
 			}
 		});
 		btnBack_5.setBounds(12, 525, 97, 25);
