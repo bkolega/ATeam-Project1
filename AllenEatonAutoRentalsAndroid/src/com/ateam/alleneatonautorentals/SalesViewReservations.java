@@ -22,9 +22,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class SalesViewReservations extends ListActivity{
 	private ProgressDialog progressDialog;
@@ -52,7 +57,22 @@ public class SalesViewReservations extends ListActivity{
 	private static final String TAG_CARMAKE = "car_make";
 	private static final String TAG_CARMODEL = "car_model";
 	private static final String TAG_CARLICENSE = "car_license_plate";
-	
+	/*private String car_id;
+	private String car_make;
+	private String car_model;
+	private String car_type;
+	private String city;
+	private String state;
+	private String license;
+	private String start_date;
+	private String end_date;
+	private String per_week;
+	private String GPS;
+	private String child_seat;
+	private String k_tag;
+	private String assistance;
+	private String dinsurance;
+	private String ainsurance;*/
 	private String userEmail;
 	private String name;
 	private String key;
@@ -72,7 +92,51 @@ public class SalesViewReservations extends ListActivity{
 		resList = new ArrayList<HashMap<String, String>>();
 		
 		new LoadAllUserRes().execute();
+		
+		ListView lv = getListView();
+		
+		lv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				String gps = ((TextView)view.findViewById(R.id.carres_GPS_list)).getText().toString();
+				String child_seat = ((TextView)view.findViewById(R.id.carres_child_seat_list)).getText().toString();
+				String k_tag = ((TextView)view.findViewById(R.id.carres_k_tag_list)).getText().toString();
+				String assistance = ((TextView)view.findViewById(R.id.carres_assistance_list)).getText().toString();
+				String dinsurance = ((TextView)view.findViewById(R.id.carres_dinsurance_list)).getText().toString();
+				String ainsurance = ((TextView)view.findViewById(R.id.carres_ainsurance_list)).getText().toString();
+				String state = ((TextView)view.findViewById(R.id.carres_state_list)).getText().toString();
+				String city = ((TextView)view.findViewById(R.id.carres_city_list)).getText().toString();
+				String start_date = ((TextView)view.findViewById(R.id.carres_start_list)).getText().toString();
+				String end_date = ((TextView)view.findViewById(R.id.carres_end_list)).getText().toString();
+				String per_week = ((TextView)view.findViewById(R.id.carres_per_week_list)).getText().toString();
+				
+				Intent ii = new Intent(getApplicationContext(), SalesCheckoutCar.class);
+				
+				ii.putExtra("state", state); 
+				ii.putExtra("city", city); 
+				ii.putExtra("start_date", start_date); 
+				ii.putExtra("end_date", end_date); 
+				ii.putExtra("per_week", per_week); 
+				ii.putExtra("gps", gps);
+				ii.putExtra("child_seat", child_seat);
+				ii.putExtra("ktag", k_tag);
+				ii.putExtra("assistance", assistance);
+				ii.putExtra("dinsurance", dinsurance);
+				ii.putExtra("ainsurance", ainsurance);
+				ii.putExtra("reservation", "1");
+				ii.putExtra("email", userEmail); 
+				ii.putExtra("key", key);
+				ii.putExtra("name", name);
+				
+				startActivity(ii);
+				finish();
+			}
+			
+		});
 	}
+	
 	
 	@Override
 	public boolean onCreateOptionsMenu (Menu menu) {

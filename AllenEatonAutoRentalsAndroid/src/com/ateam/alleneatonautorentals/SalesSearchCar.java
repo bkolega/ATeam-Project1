@@ -23,9 +23,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class SalesSearchCar extends ListActivity {
 	String keyword = "";
@@ -73,6 +77,26 @@ public class SalesSearchCar extends ListActivity {
 		carsList = new ArrayList<HashMap<String, String>>();
 		
 		new LoadFoundCars().execute();
+		
+		ListView lv = getListView();
+		
+		lv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {				
+				Intent ii = new Intent(getApplicationContext(), SalesCheckoutCar.class);
+				
+				ii.putExtra("reservation", "0");
+				ii.putExtra("email", userEmail); 
+				ii.putExtra("key", keyword);
+				ii.putExtra("name", name);
+				
+				startActivity(ii);
+				finish();
+			}
+			
+		});
 	}
 	
 	@Override
