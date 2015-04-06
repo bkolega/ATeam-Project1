@@ -58,4 +58,20 @@
 	<string name="add">Add!</string>
 	<string name="add_note_success">Service Note Added Successfully!</string>
 	<string name="customer_email">Customer Email</string>
+	<string name="additional_services">Additional Services</string>
+	<string name="gps">GPS</string>
+	<string name="ktag">K-Tag</string>
+	<string name="roadside">Roadside Assistance</string>
+	<string name="damage_insurance">Loss Damage Waiver Insurance</string>
+	<string name="accident_insurance">Personal Accident Insurance</string>
+	<string name="child_seat">Child Seat</string>
+	<string name="reservation_info">Reservation Information</string>
+	<string name="start_date">Start Date</string>
+	<string name="end_date">End Date</string>
+	<string name="car_price">Car Price</string>
+	<string name="week">Week</string>
+	<string name="day">Day</string>
+	<string name="check_out">Check Out</string>
+	<string name="next">Next</string>
+    
 </resources>

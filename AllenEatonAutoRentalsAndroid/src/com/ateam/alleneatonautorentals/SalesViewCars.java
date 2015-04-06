@@ -75,6 +75,26 @@ public class SalesViewCars extends ListActivity {
 		carsList = new ArrayList<HashMap<String, String>>();
 	
 		new LoadAllCars().execute();
+		
+		ListView lv = getListView();
+		
+		lv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {		
+				Intent ii = new Intent(getApplicationContext(), SalesCheckoutCar.class);
+				
+				ii.putExtra("reservation", "0");
+				ii.putExtra("email", userEmail); 
+				ii.putExtra("key", key);
+				ii.putExtra("name", name);
+				
+				startActivity(ii);
+				finish();
+			}
+			
+		});
 	}
 	
 	@Override
