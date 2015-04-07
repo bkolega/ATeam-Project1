@@ -91,6 +91,8 @@ import javax.swing.JToolBar;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import javax.swing.SwingConstants;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class Customer extends JFrame {
 	private JTextField textField;
@@ -110,15 +112,27 @@ public class Customer extends JFrame {
 	private JButton btnLogout;
 	private boolean loggedIn = false;
 	private JLabel lblInvalidRange = new JLabel("Please select a valid range of dates");
-	private long dayReserved =0;
-	private long dayReturned =0;
-	private long minuteReserved =0;
-	private long minuteReturned =0;
-	private long totalDaysReserved =0;
-	private long totalMinutesReserved =0;
+	private int dayReserved =0;
+	private int dayReturned =0;
+	private int minuteReserved =0;
+	private int minuteReturned =0;
+	private int totalDaysReserved =0;
+	private int totalMinutesReserved =0;
 	private JLabel lblCartInfo = new JLabel("Cart :        " + totalDaysReserved + " Days Reserved");
 	private RegisterPagePanel RegisterPage;
 	private String carType = "";
+	private int dailyCarCost = 0;
+	private int weeklyCarCost = 0;
+	private int totalWeeksReserved =0;
+	private int additionalOptionsCost=0;
+	private int estimatedCostRange1=0;
+	private int estimatedCostRange2=0;
+	private int estimatedCost=0;
+	private int totalCost=0;
+	private JLabel lblTotalCost = new JLabel();
+	private int totalCostRange1=0;
+	private int totalCostRange2=0;
+	
 
 	JSONObject jsonObject;
 
@@ -183,11 +197,6 @@ public class Customer extends JFrame {
 		////////////////////////////////////////////////////////////////////////////////
 		
 		CustomerHomePage = new JPanel();
-		CustomerHomePage.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
 		CustomerHomePage.setForeground(Color.BLACK);
 		getContentPane().add(CustomerHomePage, "name_52494973958178");
 		CustomerHomePage.setLayout(null);
@@ -215,6 +224,8 @@ public class Customer extends JFrame {
 		JPanel ReviewAndSubmit = new JPanel();
 		getContentPane().add(ReviewAndSubmit, "name_52495068223220");
 		ReviewAndSubmit.setLayout(null);
+		
+		
 		
 		/////////////////////////////////////////////////////////////////////////////
 		//////////////////////////// Register Page //////////////////////////////////
@@ -335,6 +346,25 @@ public class Customer extends JFrame {
 		});
 		btnBack.setBounds(12, 525, 97, 25);
 		SearchResultsPage.add(btnBack);
+		
+		JLabel lblEstimatedCost = new JLabel();
+		lblEstimatedCost.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblEstimatedCost.setBounds(12, 330, 450, 33);
+		SearchResultsPage.add(lblEstimatedCost);
+		
+		JButton btnContinue = new JButton("Continue ->");
+		btnContinue.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				SearchResultsPage.setVisible(false);
+				AdditionalOptionsPage.setVisible(true);
+				AdditionalOptionsPage.add(lblCartInfo);
+			}
+		});
+		btnContinue.setBounds(674, 428, 133, 34);
+		SearchResultsPage.add(btnContinue);
+		
+
 		
 		////////////////////////////////////////////////////////////////////////////////
 		/////////////////////////  Customer Home Page   ////////////////////////////////
@@ -460,6 +490,18 @@ public class Customer extends JFrame {
 					CustomerHomePage.setVisible(false);
 					SearchResultsPage.setVisible(true);
 					SearchResultsPage.add(lblCartInfo);
+					
+					JLabel lblChooseACar = new JLabel("Choose a car type for a more exact price");
+					lblChooseACar.setVisible(false);
+					lblChooseACar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+					lblChooseACar.setBounds(12, 375, 265, 48);
+					SearchResultsPage.add(lblChooseACar);
+					
+					if(comboBoxVehicleType.getSelectedItem().equals("Any class"))
+					{
+							picLabel.setIcon(null);
+							lblChooseACar.setVisible(true);	
+					}
 	
 					if(comboBoxVehicleType.getSelectedItem().equals("Economy"))
 					{
@@ -469,6 +511,8 @@ public class Customer extends JFrame {
 							picLabel.setBounds(10, 25, 300, 400);
 							SearchResultsPage.add(picLabel);
 							picLabel.setVisible(true);
+							dailyCarCost = 45;
+							weeklyCarCost = 300;
 					}
 					if(comboBoxVehicleType.getSelectedItem().equals("Compact"))
 					{
@@ -478,6 +522,8 @@ public class Customer extends JFrame {
 							picLabel.setBounds(10, 25, 300, 400);
 							SearchResultsPage.add(picLabel);
 							picLabel.setVisible(true);
+							dailyCarCost = 50;
+							weeklyCarCost = 325;
 					}
 					if(comboBoxVehicleType.getSelectedItem().equals("Standard"))
 					{
@@ -487,6 +533,8 @@ public class Customer extends JFrame {
 							picLabel.setBounds(10, 25, 300, 400);
 							SearchResultsPage.add(picLabel);
 							picLabel.setVisible(true);
+							dailyCarCost = 60;
+							weeklyCarCost = 400;
 					}
 					if(comboBoxVehicleType.getSelectedItem().equals("Small SUV"))
 					{
@@ -496,6 +544,8 @@ public class Customer extends JFrame {
 							picLabel.setBounds(10, 25, 300, 400);
 							SearchResultsPage.add(picLabel);
 							picLabel.setVisible(true);
+							dailyCarCost = 70;
+							weeklyCarCost = 475;
 					}
 					if(comboBoxVehicleType.getSelectedItem().equals("Minivan"))
 					{
@@ -505,6 +555,8 @@ public class Customer extends JFrame {
 							picLabel.setBounds(10, 25, 300, 400);
 							SearchResultsPage.add(picLabel);
 							picLabel.setVisible(true);
+							dailyCarCost = 85;
+							weeklyCarCost = 575;
 					}
 					if(comboBoxVehicleType.getSelectedItem().equals("Standard SUV"))
 					{
@@ -514,6 +566,8 @@ public class Customer extends JFrame {
 							picLabel.setBounds(10, 25, 300, 400);
 							SearchResultsPage.add(picLabel);
 							picLabel.setVisible(true);
+							dailyCarCost = 75;
+							weeklyCarCost = 500;
 					}
 					if(comboBoxVehicleType.getSelectedItem().equals("Premium"))
 					{
@@ -523,12 +577,53 @@ public class Customer extends JFrame {
 							picLabel.setBounds(10, 25, 300, 400);
 							SearchResultsPage.add(picLabel);
 							picLabel.setVisible(true);
+							dailyCarCost = 65;
+							weeklyCarCost = 435;
 					}
 				}
 				else
 				{
 					lblInvalidRange.setVisible(true);
 				}
+				
+				if(comboBoxVehicleType.getSelectedItem().equals("Any class"))
+				{
+					if(totalDaysReserved < 7)
+					{
+						
+						lblEstimatedCost.setText("Estimated cost is between: $" + 45 * totalDaysReserved 
+												 + " - " + 85 * totalDaysReserved + " plus tax ");
+						
+						estimatedCostRange1 = 45 * totalDaysReserved;
+						estimatedCostRange2 = 85 * totalDaysReserved;
+					}
+					else
+					{
+						totalWeeksReserved = Math.floorDiv(totalDaysReserved, 7);
+						lblEstimatedCost.setText("Estimated cost is between: $" + ((totalWeeksReserved * 300) 
+												 + ((totalDaysReserved % 7) * 35)) + " - " + ((totalWeeksReserved * 575) 
+												 + ((totalDaysReserved % 7) * 85)) + " plus tax");
+						estimatedCostRange1 = totalWeeksReserved * 300 + ((totalDaysReserved % 7) * 35);
+						estimatedCostRange2 = totalWeeksReserved * 575 + ((totalDaysReserved % 7) * 85);
+					}	
+				}
+				else // car class is chosen
+				{
+					if(totalDaysReserved < 7)
+					{
+						lblEstimatedCost.setText("Estimated cost: $" + totalDaysReserved * dailyCarCost + " plus tax");
+						estimatedCost = totalDaysReserved * dailyCarCost;
+						System.out.println(estimatedCost);
+					}
+					else
+					{
+						totalWeeksReserved = Math.floorDiv(totalDaysReserved, 7);
+						lblEstimatedCost.setText("Estimated cost: $" + ((totalWeeksReserved * weeklyCarCost) 
+												 + ((totalDaysReserved % 7) * dailyCarCost)) + " plus tax");
+						estimatedCost = totalWeeksReserved * weeklyCarCost + ((totalDaysReserved % 7) * dailyCarCost);
+					}
+				}
+				
 			}
 		});
 		btnReserveAsGuest.setBounds(284, 389, 245, 36);
@@ -567,7 +662,7 @@ public class Customer extends JFrame {
 						date = (java.util.Date) evt.getNewValue();
 						calendarButton.setTargetDate(date);
 						
-						dayReserved = (date.getTime()/(1000*60*60*24));
+						dayReserved = (int) (date.getTime()/(1000*60*60*24));
 						totalDaysReserved = (dayReturned - dayReserved);
 						//System.out.println(totalDaysReserved);
 						if (totalDaysReserved > 0)
@@ -607,7 +702,7 @@ public class Customer extends JFrame {
 						date = (java.util.Date) evt.getNewValue();
 						calendarButton_1.setTargetDate(date);
 						
-						dayReturned = (date.getTime()/(1000*60*60*24));
+						dayReturned = (int) (date.getTime()/(1000*60*60*24));
 						totalDaysReserved = (dayReturned - dayReserved);
 						System.out.println(totalDaysReserved);
 						if (totalDaysReserved > 0)
@@ -624,7 +719,7 @@ public class Customer extends JFrame {
 				}
 			}
 		
-	);
+		);
 		
 		calendarButton_1.setBounds(514, 121, 32, 30);
 		CustomerHomePage.add(calendarButton_1);
@@ -641,7 +736,7 @@ public class Customer extends JFrame {
 						java.util.Date date = null;
 						date = (java.util.Date) evt.getNewValue();
 						timeButton_1.setTargetDate(date);
-						minuteReturned = (date.getTime()/(1000*60));
+						minuteReturned = (int) (date.getTime()/(1000*60));
 						totalMinutesReserved = minuteReturned - minuteReserved;
 						
 						if(minuteReturned - minuteReserved > 0)
@@ -677,7 +772,7 @@ public class Customer extends JFrame {
 						java.util.Date date = null;
 						date = (java.util.Date) evt.getNewValue();
 						timeButton.setTargetDate(date);
-						minuteReserved = (date.getTime()/(1000*60));
+						minuteReserved = (int) (date.getTime()/(1000*60));
 						
 						if(minuteReturned - minuteReserved > 0)
 						{
@@ -772,22 +867,28 @@ public class Customer extends JFrame {
 		//////////////////////  Additional Options Page   //////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////
 		
-
 		
-		JLabel lblOptions = new JLabel("Options:");
-		lblOptions.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		JLabel lblOptions = new JLabel("Options: ");
+		lblOptions.setFont(new Font("Tahoma", Font.PLAIN, 16)); //title
 		lblOptions.setBounds(12, 13, 84, 26);
 		AdditionalOptionsPage.add(lblOptions);
 		
-		JCheckBox chckbxGpsReciever = new JCheckBox("GPS Reciever - $15/day");
+		JCheckBox chckbxGpsReciever = new JCheckBox("GPS Reciever - $15/day"); // GPS check box
 		chckbxGpsReciever.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		chckbxGpsReciever.setBounds(40, 72, 188, 25);
 		AdditionalOptionsPage.add(chckbxGpsReciever);
 		
-		JCheckBox chckbxChildSeat = new JCheckBox("Child Seat - $10/day");
+		JCheckBox chckbxChildSeat = new JCheckBox("Child Seat - $10/day"); // child seat check box
 		chckbxChildSeat.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		chckbxChildSeat.setBounds(40, 342, 171, 25);
 		AdditionalOptionsPage.add(chckbxChildSeat);
+		
+		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4"})); // Number of child seats
+		comboBox_2.setBounds(332, 343, 108, 22);
+		AdditionalOptionsPage.add(comboBox_2);
 		
 		JCheckBox chckbxKtagRental = new JCheckBox("K-TAG Rental - $2/day (plus accumulated tolls)");
 		chckbxKtagRental.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -821,12 +922,6 @@ public class Customer extends JFrame {
 		btnBack_4.setBounds(12, 525, 97, 25);
 		AdditionalOptionsPage.add(btnBack_4);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4"}));
-		comboBox_2.setBounds(332, 343, 108, 22);
-		AdditionalOptionsPage.add(comboBox_2);
-		
 		JLabel lblQuantity = new JLabel("Quantity:");
 		lblQuantity.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblQuantity.setBounds(236, 346, 84, 16);
@@ -843,7 +938,38 @@ public class Customer extends JFrame {
 		btnExit_5.setBounds(909, 525, 97, 25);
 		AdditionalOptionsPage.add(btnExit_5);
 		
-		
+		JButton btnContinue_1 = new JButton("Continue->");
+		btnContinue_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AdditionalOptionsPage.setVisible(false);
+				ReviewAndSubmit.setVisible(true);
+				if(chckbxGpsReciever.isSelected()) { additionalOptionsCost += 15; }
+				if(chckbxChildSeat.isSelected()) { additionalOptionsCost += (10 * (comboBox_2.getSelectedIndex()+1)); }
+				if(chckbxKtagRental.isSelected()) { additionalOptionsCost += 2; }
+				if(chckbxRoadsideAssistance.isSelected()) { additionalOptionsCost += 7; }
+				if(chckbxLossDamageWaiver.isSelected()) { additionalOptionsCost += 25; }
+				if(chckbxPersonalAccidentInsurance.isSelected()) { additionalOptionsCost += 5; }
+				additionalOptionsCost *= totalDaysReserved;
+				
+				if(comboBoxVehicleType.getSelectedItem().equals("Any class"))
+				{
+					totalCostRange1 = additionalOptionsCost + estimatedCostRange1;
+					totalCostRange2 = additionalOptionsCost + estimatedCostRange2;
+					lblTotalCost.setText("Total Cost: $" + totalCostRange1 + " - " + totalCostRange2 + " plus tax");
+					System.out.println("RANGE of total cost: $" + totalCostRange1 + " - " + totalCostRange2 + " plus tax");
+				}
+				else
+				{
+					totalCost = additionalOptionsCost + estimatedCost;
+					lblTotalCost.setText("Total Cost: $" + totalCost + " plus tax");
+					System.out.println("total cost: $" + totalCost + " plus tax");
+				}
+				
+			}
+		});
+		btnContinue_1.setBounds(674, 428, 133, 34);
+		AdditionalOptionsPage.add(btnContinue_1);
 		
 		////////////////////////////////////////////////////////////////////////////////
 		/////////////////////////  Modify Orders Page   ////////////////////////////////
@@ -855,8 +981,6 @@ public class Customer extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
 				dispose();
-				//TabbedPane Login = new TabbedPane();
-				//Login.setVisible(true);
 			}
 		});
 		btnExit_3.setBounds(909, 525, 97, 25);
@@ -916,6 +1040,31 @@ public class Customer extends JFrame {
 		list.setModel(listModel);
 		PastOrdersPage.add(list);
 		
+		////////////////////////////////////////////////////////////////////////////////
+		///////////////////////////  Review and Submit   ///////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////
+		
+		JButton btnBack_5 = new JButton("Back");
+		btnBack_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ReviewAndSubmit.setVisible(false);
+				AdditionalOptionsPage.setVisible(true);
+				AdditionalOptionsPage.add(lblCartInfo);
+				additionalOptionsCost = 0;
+			}
+		});
+		btnBack_5.setBounds(12, 525, 97, 25);
+		ReviewAndSubmit.add(btnBack_5);
+		
+		JLabel lblNewLabel = new JLabel("Please Review Your Order");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setBounds(394, 61, 202, 36);
+		ReviewAndSubmit.add(lblNewLabel);
+		
+		lblTotalCost.setBounds(394, 444, 260, 25); // set in additional options page
+		lblTotalCost.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		ReviewAndSubmit.add(lblTotalCost);
 
 
 	}
@@ -923,8 +1072,8 @@ public class Customer extends JFrame {
 	{
 		if(totalMinutesReserved > 0 || totalDaysReserved > 0)
 		{
-			lblCartInfo.setText("<html>" +"Cart :        " + totalDaysReserved + " Days Reserved"+ "<br>" + " + " + totalMinutesReserved 
-					+ " Minutes " + "<br>" + "Car: " +  carType + "</html>" );
+			lblCartInfo.setText("<html>" +"Cart :        " + totalDaysReserved + " Days Reserved"+ "<br>" + " + " 
+								+ totalMinutesReserved + " Minutes " + "<br>" + "Car: " +  carType + "</html>" );
 		}
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
