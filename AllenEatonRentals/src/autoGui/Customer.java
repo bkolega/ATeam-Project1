@@ -1,8 +1,6 @@
 package autoGui;
 import java.awt.CardLayout;
 import java.awt.EventQueue;
-import java.awt.TextField;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -19,43 +17,16 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.imageio.ImageIO;
-
-import aerentals.database.DatabaseRowSet;
 import aerentals.database.SqlDatabaseProvider;
-import aerentals.database.SqlDatabaseRowSet;
-
 import com.jgoodies.forms.factories.DefaultComponentFactory;
-import com.toedter.calendar.JCalendar;
-
 import java.awt.Font;
 import java.awt.Color;
 
 import javax.swing.JCheckBox;
 import javax.swing.JList;
-import javax.swing.JScrollPane;
-import javax.swing.JScrollBar;
-
-import java.awt.Scrollbar;
-
-import javax.swing.JSeparator;
 import javax.swing.JPopupMenu;
 
 import java.awt.Component;
@@ -63,36 +34,20 @@ import java.awt.Component;
 import net.sourceforge.jcalendarbutton.JCalendarButton;
 import net.sourceforge.jcalendarbutton.JTimeButton;
 
-import org.sourceforge.jcalendarbutton.JTimePopup;
-
-import sun.util.calendar.BaseCalendar;
-import sun.util.calendar.BaseCalendar.Date;
-import net.sourceforge.jcalendarbutton.JCalendarPopup;
-
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
-import java.text.DateFormat;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.JDatePanelImpl;
 
-import javax.swing.JFormattedTextField.AbstractFormatter;
-
-import org.jdatepicker.util.JDatePickerUtil;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import javax.swing.JToolBar;
 
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import javax.swing.SwingConstants;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import javax.swing.JTextArea;
 
 public class Customer extends JFrame {
 	private JTextField textField;
@@ -843,9 +798,6 @@ public class Customer extends JFrame {
 		lblCartInfo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblCartInfo.setBounds(752, 21, 205, 60);
 		CustomerHomePage.add(lblCartInfo);
-		//SearchResultsPage.add(lblCartInfo);
-		
-		//LoginWithSearchResults.add(lblCartInfo);
 		
 		JButton registerButton = new JButton("Register");
 		registerButton.addMouseListener(new MouseAdapter() {
@@ -866,8 +818,6 @@ public class Customer extends JFrame {
 		////////////////////////////////////////////////////////////////////////////////
 		//////////////////////  Additional Options Page   //////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////
-		
-		
 		
 		JLabel lblOptions = new JLabel("Options: ");
 		lblOptions.setFont(new Font("Tahoma", Font.PLAIN, 16)); //title
@@ -1002,8 +952,6 @@ public class Customer extends JFrame {
 		btnBack_2.setBounds(12, 525, 97, 25);
 		ModifyExistingOrdersPage.add(btnBack_2);
 		
-		
-		
 		////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////  Past Orders Page   ////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////
@@ -1057,14 +1005,47 @@ public class Customer extends JFrame {
 		btnBack_5.setBounds(12, 525, 97, 25);
 		ReviewAndSubmit.add(btnBack_5);
 		
-		JLabel lblNewLabel = new JLabel("Please Review Your Order");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(394, 61, 202, 36);
+		JLabel lblNewLabel = new JLabel("Please Review Your Order: ");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel.setBounds(350, 61, 202, 36);
 		ReviewAndSubmit.add(lblNewLabel);
 		
-		lblTotalCost.setBounds(394, 444, 260, 25); // set in additional options page
-		lblTotalCost.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblTotalCost.setBounds(394, 454, 260, 25); // set in additional options page
+		lblTotalCost.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		ReviewAndSubmit.add(lblTotalCost);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textArea.setBackground(null);
+		textArea.setBounds(394, 134, 450, 280);
+		textArea.setEditable(false);
+		
+		ReviewAndSubmit.add(textArea);
+		
+		ReviewAndSubmit.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent arg0) {
+				textArea.setText("");
+				java.util.Date date = null;
+				date = calendarButton.getTargetDate();
+				String start = DateFormat.getDateInstance(DateFormat.FULL, getLocale()).format(date);
+				
+				java.util.Date date2 = null;
+				date2 = calendarButton_1.getTargetDate();
+				String end = DateFormat.getDateInstance(DateFormat.FULL, getLocale()).format(date2);
+	
+				textArea.append("Car Type: " + carType + "\n\n");
+				textArea.append("Reserved From: " + start + "\n                 To: " + end + "\n\n" + "Additional Options: \n\n");
+				if(chckbxGpsReciever.isSelected()) { textArea.append("        GPS Reciever\n"); }
+				if(chckbxChildSeat.isSelected()) { textArea.append(("        " + (comboBox_2.getSelectedIndex()+1) + " Child Seats"+"\n")); }
+				if(chckbxKtagRental.isSelected()) { textArea.append("        Ktag Rental\n"); }
+				if(chckbxRoadsideAssistance.isSelected()) { textArea.append("        RoadSide Assistance\n"); }
+				if(chckbxLossDamageWaiver.isSelected()) { textArea.append("        Loss Damage Waiver Insurance\n"); }
+				if(chckbxPersonalAccidentInsurance.isSelected()) { textArea.append("        Personal Accident Insurance"); }
+			}
+		});
+		
+
 
 
 	}
