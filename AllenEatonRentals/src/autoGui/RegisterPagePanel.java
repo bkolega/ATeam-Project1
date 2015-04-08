@@ -5,8 +5,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -16,6 +21,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
+import java.time.Month;
 
 public class RegisterPagePanel {
 	private JTextField email;
@@ -31,6 +41,15 @@ public class RegisterPagePanel {
 	private JTextField state;
 	private JTextField license;
 	private JPanel RegisterPage = new JPanel();
+	private JComboBox birthYear;
+	private JComboBox birthDay;
+	private JComboBox birthMonth;
+	private static final String REGISTER_URL = "http://people.eecs.ku.edu/~dyoung/CustomerPHPScripts/register.php";
+	private JPasswordField repassword;
+	private JTextField cardNumber;
+	private JComboBox cardExpMonth;
+	private JComboBox cardExpDay;
+	private JTextField licenseState;
 	
 	RegisterPagePanel(JFrame parent) {
 		parent.getContentPane().add(RegisterPage, "name_22846752421143");
@@ -39,7 +58,7 @@ public class RegisterPagePanel {
 		RegisterPage.setBounds(100, 100, 1036, 608);
 		
 		email = new JTextField();
-		email.setBounds(584, 87, 116, 22);
+		email.setBounds(642, 87, 116, 22);
 		RegisterPage.add(email);
 		email.setColumns(10);
 		
@@ -59,7 +78,7 @@ public class RegisterPagePanel {
 		RegisterPage.add(lblFirstName);
 		
 		firstName = new JTextField();
-		firstName.setBounds(241, 85, 116, 22);
+		firstName.setBounds(241, 85, 142, 22);
 		RegisterPage.add(firstName);
 		firstName.setColumns(10);
 		
@@ -69,7 +88,7 @@ public class RegisterPagePanel {
 		RegisterPage.add(lblNewLabel_1);
 		
 		middleName = new JTextField();
-		middleName.setBounds(241, 129, 116, 22);
+		middleName.setBounds(241, 129, 142, 22);
 		RegisterPage.add(middleName);
 		middleName.setColumns(10);
 		
@@ -79,7 +98,7 @@ public class RegisterPagePanel {
 		RegisterPage.add(lblNewLabel_2);
 		
 		lastName = new JTextField();
-		lastName.setBounds(241, 172, 116, 22);
+		lastName.setBounds(241, 172, 142, 22);
 		RegisterPage.add(lastName);
 		lastName.setColumns(10);
 		
@@ -95,16 +114,16 @@ public class RegisterPagePanel {
 		
 		JLabel lblPhoneNumber = new JLabel("Phone*");
 		lblPhoneNumber.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPhoneNumber.setBounds(506, 175, 71, 16);
+		lblPhoneNumber.setBounds(506, 204, 71, 16);
 		RegisterPage.add(lblPhoneNumber);
 		
 		phone = new JTextField();
-		phone.setBounds(584, 172, 116, 22);
+		phone.setBounds(642, 202, 116, 22);
 		RegisterPage.add(phone);
 		phone.setColumns(10);
 		
 		password = new JPasswordField();
-		password.setBounds(584, 130, 116, 22);
+		password.setBounds(642, 130, 116, 22);
 		RegisterPage.add(password);
 		
 		JButton btnBack_5 = new JButton("Back");
@@ -140,12 +159,12 @@ public class RegisterPagePanel {
 		RegisterPage.add(lblAddress);
 		
 		address = new JTextField();
-		address.setBounds(241, 215, 116, 22);
+		address.setBounds(241, 215, 142, 22);
 		RegisterPage.add(address);
 		address.setColumns(10);
 		
 		address2 = new JTextField();
-		address2.setBounds(241, 260, 116, 22);
+		address2.setBounds(241, 260, 142, 22);
 		RegisterPage.add(address2);
 		address2.setColumns(10);
 		
@@ -155,7 +174,7 @@ public class RegisterPagePanel {
 		RegisterPage.add(lblCity);
 		
 		city = new JTextField();
-		city.setBounds(241, 306, 116, 22);
+		city.setBounds(241, 306, 142, 22);
 		RegisterPage.add(city);
 		city.setColumns(10);
 		
@@ -170,7 +189,7 @@ public class RegisterPagePanel {
 		RegisterPage.add(lblZip);
 		
 		zip = new JTextField();
-		zip.setBounds(241, 400, 116, 22);
+		zip.setBounds(241, 400, 142, 22);
 		RegisterPage.add(zip);
 		zip.setColumns(10);
 		
@@ -180,7 +199,7 @@ public class RegisterPagePanel {
 		RegisterPage.add(lblState);
 		
 		state = new JTextField();
-		state.setBounds(241, 353, 116, 22);
+		state.setBounds(241, 353, 142, 22);
 		RegisterPage.add(state);
 		state.setColumns(10);
 		
@@ -199,22 +218,22 @@ public class RegisterPagePanel {
 		RegisterPage.add(lblNumber);
 		
 		license = new JTextField();
-		license.setBounds(599, 308, 116, 22);
+		license.setBounds(642, 306, 116, 22);
 		RegisterPage.add(license);
 		license.setColumns(10);
 		
 		JLabel lblDateOfBirth = new JLabel("Date of Birth*");
-		lblDateOfBirth.setBounds(506, 358, 88, 16);
+		lblDateOfBirth.setBounds(506, 372, 88, 16);
 		RegisterPage.add(lblDateOfBirth);
 		
-		JComboBox birthMonth = new JComboBox();
+		birthMonth = new JComboBox();
 		birthMonth.setModel(new DefaultComboBoxModel(new String[] {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}));
-		birthMonth.setBounds(599, 355, 59, 22);
+		birthMonth.setBounds(642, 370, 71, 22);
 		RegisterPage.add(birthMonth);
 		
-		JComboBox birthDay = new JComboBox();
+		birthDay = new JComboBox();
 		birthDay.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
-		birthDay.setBounds(673, 355, 45, 22);
+		birthDay.setBounds(708, 370, 62, 22);
 		RegisterPage.add(birthDay);
 		
 		List<Integer> years = new ArrayList<Integer>();
@@ -222,15 +241,127 @@ public class RegisterPagePanel {
 		    years.add(i);
 		}
 		
-		JComboBox birthYear = new JComboBox(years.toArray());
-		birthYear.setBounds(736, 355, 71, 22);
+		birthYear = new JComboBox(years.toArray());
+		birthYear.setBounds(769, 370, 97, 22);
 		RegisterPage.add(birthYear);
 		
 		JButton btnContinue = new JButton("Continue ->");
+		btnContinue.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				register();
+			}
+		});
 		btnContinue.setBounds(674, 428, 133, 34);
 		RegisterPage.add(btnContinue);
 		
+		JLabel lblConfirmPassword = new JLabel("Confirm Password*");
+		lblConfirmPassword.setBounds(506, 160, 121, 16);
+		RegisterPage.add(lblConfirmPassword);
+		
+		repassword = new JPasswordField();
+		repassword.setBounds(642, 157, 116, 22);
+		RegisterPage.add(repassword);
+		
+		JLabel lblNewLabel_3 = new JLabel("Credit card #*");
+		lblNewLabel_3.setBounds(141, 436, 93, 16);
+		RegisterPage.add(lblNewLabel_3);
+		
+		cardNumber = new JTextField();
+		cardNumber.setBounds(241, 434, 142, 28);
+		RegisterPage.add(cardNumber);
+		cardNumber.setColumns(10);
+		
+		JLabel lblCardExp = new JLabel("Card exp*");
+		lblCardExp.setBounds(141, 464, 82, 16);
+		RegisterPage.add(lblCardExp);
+		
+		cardExpMonth = new JComboBox();
+		cardExpMonth.setModel(new DefaultComboBoxModel(new String[] {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}));
+		cardExpMonth.setBounds(238, 460, 77, 27);
+		RegisterPage.add(cardExpMonth);
+		
+		cardExpDay = new JComboBox();
+		cardExpDay.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
+		cardExpDay.setBounds(312, 460, 71, 27);
+		RegisterPage.add(cardExpDay);
+		
+		JLabel lblLicenseState = new JLabel("License state*");
+		lblLicenseState.setBounds(506, 338, 88, 16);
+		RegisterPage.add(lblLicenseState);
+		
+		licenseState = new JTextField();
+		licenseState.setBounds(642, 330, 116, 28);
+		RegisterPage.add(licenseState);
+		licenseState.setColumns(10);
+		
 		RegisterPage.setVisible(false);
+	}
+	
+	private void register() {
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+
+		params.add(new BasicNameValuePair("firstname", firstName.getText()));
+		params.add(new BasicNameValuePair("middlename", middleName.getText()));
+		params.add(new BasicNameValuePair("lastname", lastName.getText()));
+		
+		params.add(new BasicNameValuePair("address", address.getText()));
+		params.add(new BasicNameValuePair("address2", address2.getText()));
+		
+		params.add(new BasicNameValuePair("city", city.getText()));
+		params.add(new BasicNameValuePair("state", state.getText()));
+		params.add(new BasicNameValuePair("zip", zip.getText()));
+
+		params.add(new BasicNameValuePair("username", email.getText()));
+		params.add(new BasicNameValuePair("password", password.getText()));
+		params.add(new BasicNameValuePair("repassword", repassword.getText()));
+		
+		params.add(new BasicNameValuePair("phone", phone.getText()));
+		
+		params.add(new BasicNameValuePair("license", license.getText()));
+		
+		params.add(new BasicNameValuePair("licensestate", licenseState.getText()));
+		
+		try {
+			Date date = new SimpleDateFormat("MMM", Locale.ENGLISH).parse(birthMonth.getSelectedItem().toString());
+			Calendar cal = Calendar.getInstance();
+			
+			cal.setTime(date);
+			Integer monthNum = new Integer(cal.get(Calendar.MONTH)) + 1;
+			
+			String birthDate = birthYear.getSelectedItem()
+			                 + "-" + addLeadingZero(monthNum.toString())
+			                 + "-" + addLeadingZero(birthDay.getSelectedItem().toString());
+			
+			params.add(new BasicNameValuePair("birthdate", birthDate));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		params.add(new BasicNameValuePair("cardnumber", cardNumber.getText()));
+		
+		String cardExp = addLeadingZero(cardExpMonth.getSelectedItem().toString()) + "/" + addLeadingZero(cardExpDay.getSelectedItem().toString());
+		params.add(new BasicNameValuePair("cardexp", cardExp));
+
+		JsonHandler handler = new JsonHandler(REGISTER_URL, params);
+		JSONObject result = handler.getJsonObject();
+		System.out.println(result.toString());
+
+		// TODO: **** Add proper error display ****
+		if (result.getInt("success") == 1) {
+			System.out.println("Registration successful!");
+		} else {
+			System.out.println("Registration failed");
+		}
+	}
+	
+	private String addLeadingZero(String s) {
+		if (s.length() == 1) {
+			return "0" + s;
+		} else {
+			return s;
+		}
 	}
 	
 	JPanel getPanel() {

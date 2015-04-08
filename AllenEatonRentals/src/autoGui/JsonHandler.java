@@ -77,6 +77,8 @@ public class JsonHandler {
 			
 			is.close();
 			
+//			System.out.println("Raw string: " + strBuilder.toString());
+			
 			jsonObject = new JSONObject(strBuilder.toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

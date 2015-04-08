@@ -96,7 +96,6 @@ public class Customer extends JFrame {
 	private final static String LOGIN_URL = "http://people.eecs.ku.edu/~dyoung/CustomerPHPScripts/login.php";
 	
 	public void login(String userEmail, String pass) {
-		// XXX: This works with employee users right now, so it will need to be changed.
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("username", userEmail));
 		params.add(new BasicNameValuePair("password", pass));

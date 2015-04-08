@@ -1,5 +1,6 @@
 <?php
-
+ini_set("display_errors", "1");
+error_reporting(E_ALL);
 include 'db_access.php';
 
 $response['success'] = 1;
@@ -9,7 +10,7 @@ function fail_response($message) {
   global $response;
 
   $response['success'] = 0;
-  $response .= $message;
+  $response['message'] .= $message;
 }
 
 if (empty($_POST['username'])) {
@@ -71,10 +72,6 @@ if (empty($_POST['zip'])) {
   fail_response('Zip is required.\n');
 }
 
-if (empty($_POST['email'])) {
-  fail_response('Email is required.\n');
-}
-
 if (empty($_POST['phone'])) {
   fail_response('Phone number is required.\n');
 }
@@ -83,12 +80,23 @@ if (empty($_POST['license'])) {
   fail_response('License is required.\n');
 }
 
-if (empty($_POST['birthday'])) {
+if (empty($_POST['birthdate'])) {
   fail_response('Date of birth is required.\n');
 
 } else if (!preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $_POST['birthdate'])) {
   // XXX: This shouldn't happen
   fail_response('Invalid date of birth.\n');
+}
+
+$middleName = '';
+$address2 = '';
+
+if (array_key_exists('middlename', $_POST)) {
+  $middleName = $_POST['middlename'];
+}
+
+if (array_key_exists('address2', $_POST)) {
+  $address2 = $_POST['address2'];
 }
 
 if ($response['success'] == 1) {
@@ -99,7 +107,7 @@ if ($response['success'] == 1) {
                            ,user_middle_name
                            ,user_last_name
                            ,user_address_street
-                           ,user_address_street2
+                           ,user_address_street_2
                            ,user_address_city
                            ,user_address_state
                            ,user_address_zip
@@ -107,13 +115,17 @@ if ($response['success'] == 1) {
                            )
                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
 
+  if (!$stmt) {
+    die('MySQL error: ' . $conn->error);
+  }
+
   $stmt->bind_param('sssssssssss', $_POST['username']
                                  , $password
                                  , $_POST['firstname']
-                                 , $_POST['middlename']
+                                 , $middleName
                                  , $_POST['lastname']
-                                 , $_POST['street']
-                                 , $_POST['street2']
+                                 , $_POST['address']
+                                 , $address2
                                  , $_POST['city']
                                  , $_POST['state']
                                  , $_POST['zip']
@@ -123,7 +135,7 @@ if ($response['success'] == 1) {
   if (!$stmt->execute()) {
     $conn->rollback();
     $response['success'] = 0;
-    $response['message'] = 'Error inserting user.\n';
+    $response['message'] = 'Error inserting user.\n' . $stmt->error;
     die(json_encode($response));
   }
 
@@ -148,7 +160,7 @@ if ($response['success'] == 1) {
   if (!$stmt->execute()) {
     $conn->rollback();
     $response['success'] = 0;
-    $response['message'] = 'Error inserting user.\n';
+    $response['message'] = 'Error inserting user\n' . $stmt->error;
     die(json_encode($response));
   }
 
@@ -159,6 +171,9 @@ if ($response['success'] == 1) {
 
   $conn->close();
 
+} else {
+  die(json_encode($response));
+  $conn->close();
 }
 
 ?>
