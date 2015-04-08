@@ -141,7 +141,10 @@
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:ems="10"
-                         android:inputType="date" />
+                         android:inputType="date"
+                         android:hint="@string/date_format" >
+                         <requestFocus />  
+                         </EditText>
 
                  </TableRow>
 
@@ -162,10 +165,9 @@
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:ems="10"
-                         android:inputType="date" >
+                         android:inputType="date"
+                         android:hint="@string/date_format" />
 
-                         <requestFocus />
-                     </EditText>
 
                  </TableRow>
 
@@ -235,6 +237,7 @@
     						<RadioButton android:id="@+id/radio_day"
         						android:layout_width="wrap_content"
         						android:layout_height="wrap_content"
+        						android:checked="true"
         						android:text="@string/day"/>
     						<RadioButton android:id="@+id/radio_week"
         						android:layout_width="wrap_content"
@@ -255,6 +258,7 @@
              android:layout_below="@+id/linearLayout1"
              android:layout_centerHorizontal="true"
              android:layout_marginTop="26dp"
+             android:onClick="clickButtons"
              android:text="@string/check_out" />
 
      </RelativeLayout>

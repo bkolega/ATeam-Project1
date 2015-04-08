@@ -19,6 +19,7 @@
 	<string name="middle_name">Middle Name</string>
 	<string name="last_name">*Last Name</string>
 	<string name="birthdate">*Birth Date (YYYY-MM-DD)</string>
+	<string name="date_format">YYYY-MM-DD</string>
 	<string name="address">*Street Address</string>
 	<string name="address2">Street Address 2</string>
 	<string name="city">*City</string>

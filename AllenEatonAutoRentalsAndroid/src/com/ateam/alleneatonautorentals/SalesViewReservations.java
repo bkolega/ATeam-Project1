@@ -111,9 +111,11 @@ public class SalesViewReservations extends ListActivity{
 				String start_date = ((TextView)view.findViewById(R.id.carres_start_list)).getText().toString();
 				String end_date = ((TextView)view.findViewById(R.id.carres_end_list)).getText().toString();
 				String per_week = ((TextView)view.findViewById(R.id.carres_per_week_list)).getText().toString();
+				String carid = ((TextView)view.findViewById(R.id.carres_id_list)).getText().toString();
 				
 				Intent ii = new Intent(getApplicationContext(), SalesCheckoutCar.class);
-				
+
+				ii.putExtra("carid", carid);
 				ii.putExtra("state", state); 
 				ii.putExtra("city", city); 
 				ii.putExtra("start_date", start_date); 

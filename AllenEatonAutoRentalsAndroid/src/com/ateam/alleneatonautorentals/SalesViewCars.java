@@ -84,7 +84,9 @@ public class SalesViewCars extends ListActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {		
 				Intent ii = new Intent(getApplicationContext(), SalesCheckoutCar.class);
+				String carid = ((TextView)view.findViewById(R.id.car_id_list)).getText().toString();
 				
+				ii.putExtra("carid", carid);
 				ii.putExtra("reservation", "0");
 				ii.putExtra("email", userEmail); 
 				ii.putExtra("key", key);
