@@ -6,11 +6,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javafx.scene.layout.Border;
+
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,8 +24,11 @@ import javax.swing.JTextField;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
 import aerentals.database.SqlDatabaseProvider;
+
 import com.jgoodies.forms.factories.DefaultComponentFactory;
+
 import java.awt.Font;
 import java.awt.Color;
 
@@ -36,24 +43,27 @@ import net.sourceforge.jcalendarbutton.JTimeButton;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+
 import javax.swing.SwingConstants;
+
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+
 import javax.swing.JTextArea;
 
 public class Customer extends JFrame {
 	private JTextField textField;
 	private JPasswordField passwordField;
 	private SqlDatabaseProvider databaseProvider;
-	private DefaultListModel<String> listModel = new DefaultListModel();
+	private DefaultListModel<String> listModel = new DefaultListModel<String>();
 	private JTextField txtDate;
 	private JTextField txtDate_1;
 	private JTextField txtTime;
@@ -73,7 +83,7 @@ public class Customer extends JFrame {
 	private int minuteReturned =0;
 	private int totalDaysReserved =0;
 	private int totalMinutesReserved =0;
-	private JLabel lblCartInfo = new JLabel("Cart :        " + totalDaysReserved + " Days Reserved");
+	private JTextArea lblCartInfo = new JTextArea("Cart :    " + totalDaysReserved + " Days Reserved");
 	private RegisterPagePanel RegisterPage;
 	private String carType = "";
 	private int dailyCarCost = 0;
@@ -88,7 +98,6 @@ public class Customer extends JFrame {
 	private int totalCostRange1=0;
 	private int totalCostRange2=0;
 	
-
 	JSONObject jsonObject;
 
 	private final static String RES_URL = "http://people.eecs.ku.edu/~kwu96/ATeamScripts/list_reservations.php";
@@ -143,9 +152,9 @@ public class Customer extends JFrame {
 		setBounds(100, 100, 1036, 608);
 		getContentPane().setLayout(new CardLayout(0, 0));
 		
+		javax.swing.border.Border padding = BorderFactory.createLineBorder(Color.GRAY, 1, true);
+		((JComponent) getContentPane()).setBorder(padding);
 
-		
-		
 		////////////////////////////////////////////////////////////////////////////////
 		/////////////////////////////   PANELS   ///////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////
@@ -178,15 +187,12 @@ public class Customer extends JFrame {
 		JPanel ReviewAndSubmit = new JPanel();
 		getContentPane().add(ReviewAndSubmit, "name_52495068223220");
 		ReviewAndSubmit.setLayout(null);
-		
-		
-		
+
 		/////////////////////////////////////////////////////////////////////////////
 		//////////////////////////// Register Page //////////////////////////////////
 		/////////////////////////////////////////////////////////////////////////////
 		
 		RegisterPage = new RegisterPagePanel(this);
-		//RegisterPage.getPanel().add(lblCartInfo);
 		
 		////////////////////////////////////////////////////////////////////////////////
 		////////////////////////   Login With Search Results Page  /////////////////////
@@ -266,9 +272,7 @@ public class Customer extends JFrame {
 		lblToContinueLog.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		lblToContinueLog.setBounds(316, 70, 363, 42);
 		LoginWithSearchResults.add(lblToContinueLog);
-		
-		
-		
+
 		////////////////////////////////////////////////////////////////////////////////
 		////////////////////////  Search Results Page   ////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////
@@ -317,13 +321,16 @@ public class Customer extends JFrame {
 		});
 		btnContinue.setBounds(674, 428, 133, 34);
 		SearchResultsPage.add(btnContinue);
-		
 
-		
 		////////////////////////////////////////////////////////////////////////////////
 		/////////////////////////  Customer Home Page   ////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////
 		
+		lblCartInfo.setEditable(false);
+		lblCartInfo.setBorder(padding);
+		lblCartInfo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblCartInfo.setBounds(752, 21, 215, 83);
+		CustomerHomePage.add(lblCartInfo);
 		
 		JLabel lblEnterAPick = DefaultComponentFactory.getInstance().createLabel("Enter a pick up date:");
 		lblEnterAPick.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -793,10 +800,7 @@ public class Customer extends JFrame {
 		lblInvalidRange.setVisible(false);
 		CustomerHomePage.add(lblInvalidRange);
 		
-		lblCartInfo.setVerticalAlignment(SwingConstants.TOP);
-		lblCartInfo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblCartInfo.setBounds(752, 21, 205, 60);
-		CustomerHomePage.add(lblCartInfo);
+
 		
 		JButton registerButton = new JButton("Register");
 		registerButton.addMouseListener(new MouseAdapter() {
@@ -807,10 +811,7 @@ public class Customer extends JFrame {
 				RegisterPage.getPanel().add(lblCartInfo);
 			}
 		});
-		registerButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+
 		registerButton.setBounds(541, 389, 245, 36);
 		CustomerHomePage.add(registerButton);
 		
@@ -823,10 +824,10 @@ public class Customer extends JFrame {
 		lblOptions.setBounds(12, 13, 84, 26);
 		AdditionalOptionsPage.add(lblOptions);
 		
-		JCheckBox chckbxGpsReciever = new JCheckBox("GPS Reciever - $15/day"); // GPS check box
-		chckbxGpsReciever.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		chckbxGpsReciever.setBounds(40, 72, 188, 25);
-		AdditionalOptionsPage.add(chckbxGpsReciever);
+		JCheckBox chckbxGpsReceiver = new JCheckBox("GPS Receiver - $15/day"); // GPS check box
+		chckbxGpsReceiver.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		chckbxGpsReceiver.setBounds(40, 72, 188, 25);
+		AdditionalOptionsPage.add(chckbxGpsReceiver);
 		
 		JCheckBox chckbxChildSeat = new JCheckBox("Child Seat - $10/day"); // child seat check box
 		chckbxChildSeat.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -893,7 +894,7 @@ public class Customer extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				AdditionalOptionsPage.setVisible(false);
 				ReviewAndSubmit.setVisible(true);
-				if(chckbxGpsReciever.isSelected()) { additionalOptionsCost += 15; }
+				if(chckbxGpsReceiver.isSelected()) { additionalOptionsCost += 15; }
 				if(chckbxChildSeat.isSelected()) { additionalOptionsCost += (10 * (comboBox_2.getSelectedIndex()+1)); }
 				if(chckbxKtagRental.isSelected()) { additionalOptionsCost += 2; }
 				if(chckbxRoadsideAssistance.isSelected()) { additionalOptionsCost += 7; }
@@ -982,7 +983,7 @@ public class Customer extends JFrame {
 		btnBack_1.setBounds(12, 525, 97, 25);
 		PastOrdersPage.add(btnBack_1);
 		
-		JList list = new JList();
+		JList<String> list = new JList<String>();
 		list.setBounds(22, 50, 460, 431);
 		list.setModel(listModel);
 		PastOrdersPage.add(list);
@@ -1009,22 +1010,26 @@ public class Customer extends JFrame {
 		lblNewLabel.setBounds(350, 61, 202, 36);
 		ReviewAndSubmit.add(lblNewLabel);
 		
-		lblTotalCost.setBounds(394, 454, 260, 25); // set in additional options page
+		lblTotalCost.setBounds(350, 454, 260, 25); // set in additional options page
 		lblTotalCost.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		ReviewAndSubmit.add(lblTotalCost);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textArea.setBackground(null);
-		textArea.setBounds(394, 134, 450, 280);
-		textArea.setEditable(false);
+		JTextArea receipt = new JTextArea();
+		receipt.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		receipt.setBorder(padding);
+		receipt.setBackground(Color.WHITE);
+		receipt.setBounds(350, 134, 375, 280);
+		receipt.setEditable(false);
+		ReviewAndSubmit.add(receipt);
 		
-		ReviewAndSubmit.add(textArea);
+		JButton btnSubmitOrder = new JButton("Submit Order");
+		btnSubmitOrder.setBounds(600, 447, 125, 36);
+		ReviewAndSubmit.add(btnSubmitOrder);
 		
 		ReviewAndSubmit.addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentShown(ComponentEvent arg0) {
-				textArea.setText("");
+				receipt.setText("");
 				java.util.Date date = null;
 				date = calendarButton.getTargetDate();
 				String start = DateFormat.getDateInstance(DateFormat.FULL, getLocale()).format(date);
@@ -1033,18 +1038,16 @@ public class Customer extends JFrame {
 				date2 = calendarButton_1.getTargetDate();
 				String end = DateFormat.getDateInstance(DateFormat.FULL, getLocale()).format(date2);
 	
-				textArea.append("Car Type: " + carType + "\n\n");
-				textArea.append("Reserved From: " + start + "\n                 To: " + end + "\n\n" + "Additional Options: \n\n");
-				if(chckbxGpsReciever.isSelected()) { textArea.append("        GPS Reciever\n"); }
-				if(chckbxChildSeat.isSelected()) { textArea.append(("        " + (comboBox_2.getSelectedIndex()+1) + " Child Seats"+"\n")); }
-				if(chckbxKtagRental.isSelected()) { textArea.append("        Ktag Rental\n"); }
-				if(chckbxRoadsideAssistance.isSelected()) { textArea.append("        RoadSide Assistance\n"); }
-				if(chckbxLossDamageWaiver.isSelected()) { textArea.append("        Loss Damage Waiver Insurance\n"); }
-				if(chckbxPersonalAccidentInsurance.isSelected()) { textArea.append("        Personal Accident Insurance"); }
+				receipt.append("Car Type: " + carType + "\n\n");
+				receipt.append("Reserved From: " + start + "\n                 To: " + end + "\n\n" + "Additional Options: \n\n");
+				if(chckbxGpsReceiver.isSelected()) { receipt.append("        GPS Receiver\n"); }
+				if(chckbxChildSeat.isSelected()) { receipt.append(("        " + (comboBox_2.getSelectedIndex()+1) + " Child Seats"+"\n")); }
+				if(chckbxKtagRental.isSelected()) { receipt.append("        Ktag Rental\n"); }
+				if(chckbxRoadsideAssistance.isSelected()) { receipt.append("        RoadSide Assistance\n"); }
+				if(chckbxLossDamageWaiver.isSelected()) { receipt.append("        Loss Damage Waiver Insurance\n"); }
+				if(chckbxPersonalAccidentInsurance.isSelected()) { receipt.append("        Personal Accident Insurance"); }
 			}
 		});
-		
-
 
 
 	}
@@ -1052,8 +1055,8 @@ public class Customer extends JFrame {
 	{
 		if(totalMinutesReserved > 0 || totalDaysReserved > 0)
 		{
-			lblCartInfo.setText("<html>" +"Cart :        " + totalDaysReserved + " Days Reserved"+ "<br>" + " + " 
-								+ totalMinutesReserved + " Minutes " + "<br>" + "Car: " +  carType + "</html>" );
+			lblCartInfo.setText("Cart :    " + totalDaysReserved + " Days Reserved\n"+ " + " 
+								+ totalMinutesReserved + " Minutes\n" +  "Car: " +  carType );
 		}
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
