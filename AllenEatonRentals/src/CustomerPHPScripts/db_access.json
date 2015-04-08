@@ -1,0 +1,6 @@
+{
+    "host"     : "mysql.eecs.ku.edu",
+    "user"     : "csoden42",
+    "password" : "#1Jayhawk",
+    "db"       : "csoden42"
+}
