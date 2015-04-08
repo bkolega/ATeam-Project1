@@ -192,7 +192,12 @@ public class Customer extends JFrame {
 		//////////////////////////// Register Page //////////////////////////////////
 		/////////////////////////////////////////////////////////////////////////////
 		
-		RegisterPage = new RegisterPagePanel(this);
+		RegisterPage = new RegisterPagePanel(this, new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				CustomerHomePage.add(lblCartInfo);
+			}
+		});
 		
 		////////////////////////////////////////////////////////////////////////////////
 		////////////////////////   Login With Search Results Page  /////////////////////
@@ -262,7 +267,6 @@ public class Customer extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				LoginWithSearchResults.setVisible(false);
 				RegisterPage.getPanel().setVisible(true);
-				RegisterPage.getPanel().add(lblCartInfo);
 			}
 		});
 		btnNewButton_1.setBounds(357, 409, 258, 42);
@@ -808,7 +812,6 @@ public class Customer extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				CustomerHomePage.setVisible(false);
 				RegisterPage.getPanel().setVisible(true);
-				RegisterPage.getPanel().add(lblCartInfo);
 			}
 		});
 
