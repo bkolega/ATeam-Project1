@@ -91,7 +91,7 @@ public class SalesCheckoutCar extends Activity {
 			
 			end = child_seat.length(); 
 			begin = child_seat.lastIndexOf(":")+2; 
-			String cs_num = child_seat.substring(begin+1, end);
+			String cs_num = child_seat.substring(begin, end);
 			
 			begin = state_full.indexOf(":")+2;
 			end = state_full.length(); 
