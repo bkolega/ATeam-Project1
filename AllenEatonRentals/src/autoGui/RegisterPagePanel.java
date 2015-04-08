@@ -51,7 +51,7 @@ public class RegisterPagePanel {
 	private JComboBox cardExpDay;
 	private JTextField licenseState;
 	
-	RegisterPagePanel(JFrame parent) {
+	RegisterPagePanel(JFrame parent, MouseAdapter backHandler) {
 		parent.getContentPane().add(RegisterPage, "name_22846752421143");
 		RegisterPage.setLayout(null);
 		
@@ -131,12 +131,13 @@ public class RegisterPagePanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		
 		btnBack_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				RegisterPage.setVisible(false);
 				parent.setVisible(true);
-				
+				backHandler.mouseClicked(e);
 			}
 		});
 		btnBack_5.setBounds(12, 525, 97, 25);
