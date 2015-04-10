@@ -471,7 +471,7 @@ public class Customer extends JFrame {
 					if(comboBoxVehicleType.getSelectedItem().equals("Economy"))
 					{
 							picLabel.setIcon(null);
-							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/economyCar.jpg")));
+							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/economyCar.png")));
 							picLabel.setIcon(testImg);
 							picLabel.setBounds(10, 25, 300, 400);
 							SearchResultsPage.add(picLabel);
@@ -482,7 +482,7 @@ public class Customer extends JFrame {
 					if(comboBoxVehicleType.getSelectedItem().equals("Compact"))
 					{
 							picLabel.setIcon(null);
-							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/compactCar.jpg")));
+							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/compactCar.png")));
 							picLabel.setIcon(testImg);
 							picLabel.setBounds(10, 25, 300, 400);
 							SearchResultsPage.add(picLabel);
@@ -493,7 +493,7 @@ public class Customer extends JFrame {
 					if(comboBoxVehicleType.getSelectedItem().equals("Standard"))
 					{
 							picLabel.setIcon(null);
-							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/standardCar.jpg")));
+							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/standardCar.png")));
 							picLabel.setIcon(testImg);
 							picLabel.setBounds(10, 25, 300, 400);
 							SearchResultsPage.add(picLabel);
@@ -504,7 +504,7 @@ public class Customer extends JFrame {
 					if(comboBoxVehicleType.getSelectedItem().equals("Small SUV"))
 					{
 							picLabel.setIcon(null);
-							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/smallSUV.jpg")));
+							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/smallSUV.png")));
 							picLabel.setIcon(testImg);
 							picLabel.setBounds(10, 25, 300, 400);
 							SearchResultsPage.add(picLabel);
@@ -515,7 +515,7 @@ public class Customer extends JFrame {
 					if(comboBoxVehicleType.getSelectedItem().equals("Minivan"))
 					{
 							picLabel.setIcon(null);
-							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/minivan.jpg")));
+							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/minivan.png")));
 							picLabel.setIcon(testImg);
 							picLabel.setBounds(10, 25, 300, 400);
 							SearchResultsPage.add(picLabel);
@@ -526,7 +526,7 @@ public class Customer extends JFrame {
 					if(comboBoxVehicleType.getSelectedItem().equals("Standard SUV"))
 					{
 							picLabel.setIcon(null);
-							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/standardSUV.jpg")));
+							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/standardSUV.png")));
 							picLabel.setIcon(testImg);
 							picLabel.setBounds(10, 25, 300, 400);
 							SearchResultsPage.add(picLabel);
@@ -537,7 +537,7 @@ public class Customer extends JFrame {
 					if(comboBoxVehicleType.getSelectedItem().equals("Premium"))
 					{
 							picLabel.setIcon(null);
-							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/premiumCar.jpg")));
+							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/premiumCar.png")));
 							picLabel.setIcon(testImg);
 							picLabel.setBounds(10, 25, 300, 400);
 							SearchResultsPage.add(picLabel);
