@@ -348,7 +348,7 @@ public class Customer extends JFrame {
 		CustomerHomePage.add(lblChooseVehicleType);
 		
 		JComboBox comboBoxVehicleType = new JComboBox();
-		comboBoxVehicleType.setModel(new DefaultComboBoxModel(new String[] {"Any class", "Economy", "Compact", "Standard", "Premium", "Small SUV", "Standard SUV", "Minivan"}));
+		comboBoxVehicleType.setModel(new DefaultComboBoxModel(new String[] {"Economy", "Compact", "Standard", "Premium", "Small SUV", "Standard SUV", "Minivan"}));
 		comboBoxVehicleType.setBounds(233, 297, 121, 27);
 		comboBoxVehicleType.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
