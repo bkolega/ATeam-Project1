@@ -86,6 +86,9 @@ public class Customer extends JFrame {
 	private JTextArea lblCartInfo = new JTextArea("Cart :    " + totalDaysReserved + " Days Reserved");
 	private RegisterPagePanel RegisterPage;
 	private String carType = "";
+	private JPanel SearchResultsPage; 
+	private JComboBox comboBoxVehicleType;
+	private JLabel lblEstimatedCost;
 	private int dailyCarCost = 0;
 	private int weeklyCarCost = 0;
 	private int totalWeeksReserved =0;
@@ -103,6 +106,7 @@ public class Customer extends JFrame {
 	private final static String RES_URL = "http://people.eecs.ku.edu/~kwu96/ATeamScripts/list_reservations.php";
 	private final static String USER_URL = "http://people.eecs.ku.edu/~kwu96/ATeamScripts/list_customers.php";
 	private final static String LOGIN_URL = "http://people.eecs.ku.edu/~dyoung/CustomerPHPScripts/login.php";
+	private JLabel picLabel;
 	
 	public void login(String userEmail, String pass) {
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -116,7 +120,8 @@ public class Customer extends JFrame {
 			this.userEmail = userEmail;
 			lblInvalid.setVisible(false);
 			LoginWithSearchResults.setVisible(false);
-			CustomerHomePage.setVisible(true);
+			reserveCar();
+			SearchResultsPage.setVisible(true);
 			btnLogout.setVisible(true);
 			btnReserveAsGuest.setVisible(false);
 			btnReserveAsMember.setVisible(false);
@@ -164,7 +169,7 @@ public class Customer extends JFrame {
 		getContentPane().add(CustomerHomePage, "name_52494973958178");
 		CustomerHomePage.setLayout(null);
 		
-		JPanel SearchResultsPage = new JPanel();
+		SearchResultsPage = new JPanel();
 		getContentPane().add(SearchResultsPage, "name_52494991163566");
 		SearchResultsPage.setLayout(null);
 		
@@ -309,7 +314,7 @@ public class Customer extends JFrame {
 		btnBack.setBounds(12, 525, 97, 25);
 		SearchResultsPage.add(btnBack);
 		
-		JLabel lblEstimatedCost = new JLabel();
+		lblEstimatedCost = new JLabel();
 		lblEstimatedCost.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblEstimatedCost.setBounds(12, 330, 450, 33);
 		SearchResultsPage.add(lblEstimatedCost);
@@ -347,7 +352,7 @@ public class Customer extends JFrame {
 		lblChooseVehicleType.setBounds(77, 301, 144, 16);
 		CustomerHomePage.add(lblChooseVehicleType);
 		
-		JComboBox comboBoxVehicleType = new JComboBox();
+		comboBoxVehicleType = new JComboBox();
 		comboBoxVehicleType.setModel(new DefaultComboBoxModel(new String[] {"Economy", "Compact", "Standard", "Premium", "Small SUV", "Standard SUV", "Minivan"}));
 		comboBoxVehicleType.setBounds(233, 297, 121, 27);
 		comboBoxVehicleType.addItemListener(new ItemListener() {
@@ -442,153 +447,12 @@ public class Customer extends JFrame {
 		CustomerHomePage.add(comboBox);
 		
 		btnReserveAsGuest = new JButton("Reserve as guest");
-		JLabel picLabel = new JLabel();
+		picLabel = new JLabel();
 		btnReserveAsGuest.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				
-				carType = (String) comboBoxVehicleType.getSelectedItem();
-				
-				if(totalDaysReserved > 0)
-				{
-					lblInvalidRange.setVisible(false);
-					CustomerHomePage.setVisible(false);
-					SearchResultsPage.setVisible(true);
-					SearchResultsPage.add(lblCartInfo);
-					
-					JLabel lblChooseACar = new JLabel("Choose a car type for a more exact price");
-					lblChooseACar.setVisible(false);
-					lblChooseACar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-					lblChooseACar.setBounds(12, 375, 265, 48);
-					SearchResultsPage.add(lblChooseACar);
-					
-					if(comboBoxVehicleType.getSelectedItem().equals("Any class"))
-					{
-							picLabel.setIcon(null);
-							lblChooseACar.setVisible(true);	
-					}
-	
-					if(comboBoxVehicleType.getSelectedItem().equals("Economy"))
-					{
-							picLabel.setIcon(null);
-							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/economyCar.png")));
-							picLabel.setIcon(testImg);
-							picLabel.setBounds(10, 25, 300, 400);
-							SearchResultsPage.add(picLabel);
-							picLabel.setVisible(true);
-							dailyCarCost = 45;
-							weeklyCarCost = 300;
-					}
-					if(comboBoxVehicleType.getSelectedItem().equals("Compact"))
-					{
-							picLabel.setIcon(null);
-							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/compactCar.png")));
-							picLabel.setIcon(testImg);
-							picLabel.setBounds(10, 25, 300, 400);
-							SearchResultsPage.add(picLabel);
-							picLabel.setVisible(true);
-							dailyCarCost = 50;
-							weeklyCarCost = 325;
-					}
-					if(comboBoxVehicleType.getSelectedItem().equals("Standard"))
-					{
-							picLabel.setIcon(null);
-							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/standardCar.png")));
-							picLabel.setIcon(testImg);
-							picLabel.setBounds(10, 25, 300, 400);
-							SearchResultsPage.add(picLabel);
-							picLabel.setVisible(true);
-							dailyCarCost = 60;
-							weeklyCarCost = 400;
-					}
-					if(comboBoxVehicleType.getSelectedItem().equals("Small SUV"))
-					{
-							picLabel.setIcon(null);
-							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/smallSUV.png")));
-							picLabel.setIcon(testImg);
-							picLabel.setBounds(10, 25, 300, 400);
-							SearchResultsPage.add(picLabel);
-							picLabel.setVisible(true);
-							dailyCarCost = 70;
-							weeklyCarCost = 475;
-					}
-					if(comboBoxVehicleType.getSelectedItem().equals("Minivan"))
-					{
-							picLabel.setIcon(null);
-							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/minivan.png")));
-							picLabel.setIcon(testImg);
-							picLabel.setBounds(10, 25, 300, 400);
-							SearchResultsPage.add(picLabel);
-							picLabel.setVisible(true);
-							dailyCarCost = 85;
-							weeklyCarCost = 575;
-					}
-					if(comboBoxVehicleType.getSelectedItem().equals("Standard SUV"))
-					{
-							picLabel.setIcon(null);
-							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/standardSUV.png")));
-							picLabel.setIcon(testImg);
-							picLabel.setBounds(10, 25, 300, 400);
-							SearchResultsPage.add(picLabel);
-							picLabel.setVisible(true);
-							dailyCarCost = 75;
-							weeklyCarCost = 500;
-					}
-					if(comboBoxVehicleType.getSelectedItem().equals("Premium"))
-					{
-							picLabel.setIcon(null);
-							ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/premiumCar.png")));
-							picLabel.setIcon(testImg);
-							picLabel.setBounds(10, 25, 300, 400);
-							SearchResultsPage.add(picLabel);
-							picLabel.setVisible(true);
-							dailyCarCost = 65;
-							weeklyCarCost = 435;
-					}
-				}
-				else
-				{
-					lblInvalidRange.setVisible(true);
-				}
-				
-				if(comboBoxVehicleType.getSelectedItem().equals("Any class"))
-				{
-					if(totalDaysReserved < 7)
-					{
-						
-						lblEstimatedCost.setText("Estimated cost is between: $" + 45 * totalDaysReserved 
-												 + " - " + 85 * totalDaysReserved + " plus tax ");
-						
-						estimatedCostRange1 = 45 * totalDaysReserved;
-						estimatedCostRange2 = 85 * totalDaysReserved;
-					}
-					else
-					{
-						totalWeeksReserved = Math.floorDiv(totalDaysReserved, 7);
-						lblEstimatedCost.setText("Estimated cost is between: $" + ((totalWeeksReserved * 300) 
-												 + ((totalDaysReserved % 7) * 35)) + " - " + ((totalWeeksReserved * 575) 
-												 + ((totalDaysReserved % 7) * 85)) + " plus tax");
-						estimatedCostRange1 = totalWeeksReserved * 300 + ((totalDaysReserved % 7) * 35);
-						estimatedCostRange2 = totalWeeksReserved * 575 + ((totalDaysReserved % 7) * 85);
-					}	
-				}
-				else // car class is chosen
-				{
-					if(totalDaysReserved < 7)
-					{
-						lblEstimatedCost.setText("Estimated cost: $" + totalDaysReserved * dailyCarCost + " plus tax");
-						estimatedCost = totalDaysReserved * dailyCarCost;
-						System.out.println(estimatedCost);
-					}
-					else
-					{
-						totalWeeksReserved = Math.floorDiv(totalDaysReserved, 7);
-						lblEstimatedCost.setText("Estimated cost: $" + ((totalWeeksReserved * weeklyCarCost) 
-												 + ((totalDaysReserved % 7) * dailyCarCost)) + " plus tax");
-						estimatedCost = totalWeeksReserved * weeklyCarCost + ((totalDaysReserved % 7) * dailyCarCost);
-					}
-				}
-				
+
+				reserveCar();
 			}
 		});
 		btnReserveAsGuest.setBounds(284, 389, 245, 36);
@@ -601,7 +465,7 @@ public class Customer extends JFrame {
 		
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"25+", "23-24", "20-22", "18-19", ""}));
-		comboBox_1.setBounds(563, 300, 121, 21);
+		comboBox_1.setBounds(563, 301, 121, 20);
 		CustomerHomePage.add(comboBox_1);
 		
 		JCheckBox chckbxReturnCarTo = new JCheckBox("Return car to same location");
@@ -1078,5 +942,149 @@ public class Customer extends JFrame {
 				popup.show(e.getComponent(), e.getX(), e.getY());
 			}
 		});
+	}
+	
+	private void reserveCar() {
+		carType = (String) comboBoxVehicleType.getSelectedItem();
+		
+		if(totalDaysReserved > 0)
+		{
+			lblInvalidRange.setVisible(false);
+			CustomerHomePage.setVisible(false);
+			SearchResultsPage.setVisible(true);
+			SearchResultsPage.add(lblCartInfo);
+			
+			JLabel lblChooseACar = new JLabel("Choose a car type for a more exact price");
+			lblChooseACar.setVisible(false);
+			lblChooseACar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			lblChooseACar.setBounds(12, 375, 265, 48);
+			SearchResultsPage.add(lblChooseACar);
+			
+			if(comboBoxVehicleType.getSelectedItem().equals("Any class"))
+			{
+					picLabel.setIcon(null);
+					lblChooseACar.setVisible(true);	
+			}
+
+			if(comboBoxVehicleType.getSelectedItem().equals("Economy"))
+			{
+					picLabel.setIcon(null);
+					ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/economyCar.png")));
+					picLabel.setIcon(testImg);
+					picLabel.setBounds(10, 25, 300, 400);
+					SearchResultsPage.add(picLabel);
+					picLabel.setVisible(true);
+					dailyCarCost = 45;
+					weeklyCarCost = 300;
+			}
+			if(comboBoxVehicleType.getSelectedItem().equals("Compact"))
+			{
+					picLabel.setIcon(null);
+					ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/compactCar.png")));
+					picLabel.setIcon(testImg);
+					picLabel.setBounds(10, 25, 300, 400);
+					SearchResultsPage.add(picLabel);
+					picLabel.setVisible(true);
+					dailyCarCost = 50;
+					weeklyCarCost = 325;
+			}
+			if(comboBoxVehicleType.getSelectedItem().equals("Standard"))
+			{
+					picLabel.setIcon(null);
+					ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/standardCar.png")));
+					picLabel.setIcon(testImg);
+					picLabel.setBounds(10, 25, 300, 400);
+					SearchResultsPage.add(picLabel);
+					picLabel.setVisible(true);
+					dailyCarCost = 60;
+					weeklyCarCost = 400;
+			}
+			if(comboBoxVehicleType.getSelectedItem().equals("Small SUV"))
+			{
+					picLabel.setIcon(null);
+					ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/smallSUV.png")));
+					picLabel.setIcon(testImg);
+					picLabel.setBounds(10, 25, 300, 400);
+					SearchResultsPage.add(picLabel);
+					picLabel.setVisible(true);
+					dailyCarCost = 70;
+					weeklyCarCost = 475;
+			}
+			if(comboBoxVehicleType.getSelectedItem().equals("Minivan"))
+			{
+					picLabel.setIcon(null);
+					ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/minivan.png")));
+					picLabel.setIcon(testImg);
+					picLabel.setBounds(10, 25, 300, 400);
+					SearchResultsPage.add(picLabel);
+					picLabel.setVisible(true);
+					dailyCarCost = 85;
+					weeklyCarCost = 575;
+			}
+			if(comboBoxVehicleType.getSelectedItem().equals("Standard SUV"))
+			{
+					picLabel.setIcon(null);
+					ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/standardSUV.png")));
+					picLabel.setIcon(testImg);
+					picLabel.setBounds(10, 25, 300, 400);
+					SearchResultsPage.add(picLabel);
+					picLabel.setVisible(true);
+					dailyCarCost = 75;
+					weeklyCarCost = 500;
+			}
+			if(comboBoxVehicleType.getSelectedItem().equals("Premium"))
+			{
+					picLabel.setIcon(null);
+					ImageIcon testImg = new ImageIcon(this.getClass().getResource(("images/premiumCar.png")));
+					picLabel.setIcon(testImg);
+					picLabel.setBounds(10, 25, 300, 400);
+					SearchResultsPage.add(picLabel);
+					picLabel.setVisible(true);
+					dailyCarCost = 65;
+					weeklyCarCost = 435;
+			}
+		}
+		else
+		{
+			lblInvalidRange.setVisible(true);
+		}
+		
+		if(comboBoxVehicleType.getSelectedItem().equals("Any class"))
+		{
+			if(totalDaysReserved < 7)
+			{
+				
+				lblEstimatedCost.setText("Estimated cost is between: $" + 45 * totalDaysReserved 
+										 + " - " + 85 * totalDaysReserved + " plus tax ");
+				
+				estimatedCostRange1 = 45 * totalDaysReserved;
+				estimatedCostRange2 = 85 * totalDaysReserved;
+			}
+			else
+			{
+				totalWeeksReserved = Math.floorDiv(totalDaysReserved, 7);
+				lblEstimatedCost.setText("Estimated cost is between: $" + ((totalWeeksReserved * 300) 
+										 + ((totalDaysReserved % 7) * 35)) + " - " + ((totalWeeksReserved * 575) 
+										 + ((totalDaysReserved % 7) * 85)) + " plus tax");
+				estimatedCostRange1 = totalWeeksReserved * 300 + ((totalDaysReserved % 7) * 35);
+				estimatedCostRange2 = totalWeeksReserved * 575 + ((totalDaysReserved % 7) * 85);
+			}	
+		}
+		else // car class is chosen
+		{
+			if(totalDaysReserved < 7)
+			{
+				lblEstimatedCost.setText("Estimated cost: $" + totalDaysReserved * dailyCarCost + " plus tax");
+				estimatedCost = totalDaysReserved * dailyCarCost;
+				System.out.println(estimatedCost);
+			}
+			else
+			{
+				totalWeeksReserved = Math.floorDiv(totalDaysReserved, 7);
+				lblEstimatedCost.setText("Estimated cost: $" + ((totalWeeksReserved * weeklyCarCost) 
+										 + ((totalDaysReserved % 7) * dailyCarCost)) + " plus tax");
+				estimatedCost = totalWeeksReserved * weeklyCarCost + ((totalDaysReserved % 7) * dailyCarCost);
+			}
+		}
 	}
 }
