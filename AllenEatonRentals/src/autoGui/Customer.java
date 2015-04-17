@@ -123,8 +123,6 @@ public class Customer extends JFrame {
 			reserveCar();
 			SearchResultsPage.setVisible(true);
 			btnLogout.setVisible(true);
-			btnReserveAsGuest.setVisible(false);
-			btnReserveAsMember.setVisible(false);
 		} else {
 			this.userEmail = null;
 			loggedIn = false;
@@ -421,6 +419,14 @@ public class Customer extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if(totalDaysReserved > 0)
 				{
+					if (loggedIn) {
+						lblInvalid.setVisible(false);
+						LoginWithSearchResults.setVisible(false);
+						reserveCar();
+						SearchResultsPage.setVisible(true);
+						btnLogout.setVisible(true);
+						return;
+					}
 					CustomerHomePage.setVisible(false);
 					LoginWithSearchResults.setVisible(true);
 					LoginWithSearchResults.add(lblCartInfo);
