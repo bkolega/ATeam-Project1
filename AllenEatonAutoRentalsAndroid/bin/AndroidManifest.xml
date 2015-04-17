@@ -94,7 +94,14 @@
               android:name="com.ateam.alleneatonautorentals.SalesCheckoutCar"
               android:label="@string/app_name" >         
         </activity>
-        
+        <activity
+              android:name="com.ateam.alleneatonautorentals.SalesCheckinCar"
+              android:label="@string/app_name" >         
+        </activity>
+        <activity
+              android:name="com.ateam.alleneatonautorentals.SalesViewCheckedOutCars"
+              android:label="@string/app_name" >         
+        </activity>
     </application>
 
 </manifest>

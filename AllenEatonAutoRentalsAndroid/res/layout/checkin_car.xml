@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutContainer"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    tools:context=".FrontPage" >
+  	
+	<RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.15">
+    </RelativeLayout>
+    
+     <RelativeLayout
+         android:layout_width="0dip"
+         android:layout_height="fill_parent"
+         android:layout_weight="0.7" >
+
+         <TableLayout
+             android:id="@+id/tableLayout1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_centerInParent="true"
+             android:layout_marginRight="72dp"
+             android:layout_marginTop="92dp" >
+
+             <TableRow
+                 android:id="@+id/tableRow1"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" >
+
+                 <TextView
+                     android:id="@+id/checkin_carID"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="TextView" />
+             </TableRow>
+
+             <TableRow
+                 android:id="@+id/tableRow2"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" >
+
+                 <TextView
+                     android:id="@+id/checkin_carType"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="TextView" />
+             </TableRow>
+
+             <TableRow
+                 android:id="@+id/tableRow3"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" >
+
+                 <TextView
+                     android:id="@+id/checkin_city"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="TextView" />
+             </TableRow>
+
+             <TableRow
+                 android:id="@+id/tableRow4"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" >
+
+                 <TextView
+                     android:id="@+id/checkin_state"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="TextView" />
+             </TableRow>
+
+             <TableRow
+                 android:id="@+id/tableRow5"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" >
+
+                 <TextView
+                     android:id="@+id/checkin_start_date"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="TextView" />
+             </TableRow>
+
+             <TableRow
+                 android:id="@+id/tableRow6"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" >
+
+                 <TextView
+                     android:id="@+id/checkin_end_date"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="TextView" />
+             </TableRow>
+
+             <TableRow
+                 android:id="@+id/tableRow7"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" >
+
+                 <TextView
+                     android:id="@+id/checkin_rental_type"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="TextView" />
+             </TableRow>
+
+             <TableRow
+                 android:id="@+id/tableRow8"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" >
+
+                 <TextView
+                     android:id="@+id/checkin_gps"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="TextView" />
+             </TableRow>
+
+             <TableRow
+                 android:id="@+id/tableRow9"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" >
+
+                 <TextView
+                     android:id="@+id/checkin_child_seat"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="TextView" />
+             </TableRow>
+
+             <TableRow
+                 android:id="@+id/tableRow10"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" >
+
+                 <TextView
+                     android:id="@+id/checkin_ktag"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="TextView" />
+             </TableRow>
+
+             <TableRow
+                 android:id="@+id/tableRow11"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" >
+
+                 <TextView
+                     android:id="@+id/checkin_road_assistance"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="TextView" />
+             </TableRow>
+
+             <TableRow
+                 android:id="@+id/tableRow12"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" >
+
+                 <TextView
+                     android:id="@+id/checkin_damage_insurance"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="TextView" />
+             </TableRow>
+
+             <TableRow
+                 android:id="@+id/tableRow13"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" >
+
+                 <TextView
+                     android:id="@+id/checkin_personal_insurance"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="TextView" />
+             </TableRow>
+         </TableLayout>
+
+         <TextView
+             android:id="@+id/textView1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentTop="true"
+             android:layout_centerHorizontal="true"
+             android:layout_marginTop="41dp"
+             android:text="@string/checkin_car"
+             android:textAppearance="?android:attr/textAppearanceLarge" />
+
+         <Button
+             android:id="@+id/checkin_car_button"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentBottom="true"
+             android:layout_centerHorizontal="true"
+             android:layout_marginBottom="30dp"
+             android:text="@string/checkin" />
+
+     </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.15">
+    </RelativeLayout>
+    
+</LinearLayout>
