@@ -1,31 +1,28 @@
 <?php
 	include("db_access.php");
-	$listResQuery = "SELECT R.car_id, reservation_GPS, reservation_child_seat,
-		      	       	reservation_k_tag, reservation_assistance,
-			       	reservation_damage_insurance, 
-			       	reservation_accident_insurance, reservation_start_date,
-			       	reservation_end_date, reservation_city, reservation_state,
-			       	per_week, car_type, car_make, car_model, car_license_plate
-			 FROM `ALLEN_EATON_AUTO.RESERVATION` R, `ALLEN_EATON_AUTO.CAR` C 
-			 WHERE checked_out=0
-			 AND user_email='".$_POST['username']."'
-			 AND R.car_id=C.car_id
-			 AND checked_in_date IS NULL
-			 AND (C.car_id NOT IN
-			   (SELECT US.car_id FROM `ALLEN_EATON_AUTO.USED_SALES` US))";
-
-	$listResResult = mysqli_query($c, $listResQuery);
-
-	if (!$listResResult) {		 
+	$listUserCarsQuery = "SELECT R.car_id, reservation_GPS, reservation_child_seat,
+			     	     reservation_k_tag, reservation_assistance,
+				     reservation_damage_insurance,
+				     reservation_accident_insurance, reservation_start_date,
+				     reservation_end_date, reservation_city,
+				     reservation_state, per_week, car_type, car_make,
+				     car_model, car_license_plate
+			     FROM `ALLEN_EATON_AUTO.RESERVATION` R, `ALLEN_EATON_AUTO.CAR` C
+			     WHERE checked_out=1
+			     AND user_email='".$_POST['username']."'
+			     AND R.car_id=C.car_id";
+	$listUserCarsResult = mysqli_query($c, $listUserCarsQuery);
+	
+	if (!$listUserCarsResult) {
 	   $response["success"] = 0;
 	   $response["reservations"] = array();
 	   die(json_encode($response));
 	}
 
-	if (mysqli_num_rows($listResResult) > 0) {
+	if (mysqli_num_rows($listUserCarsResult) > 0) {
 	   $response["reservations"] = array();
 
-	   while ($row = mysqli_fetch_array($listResResult)) {
+	   while ($row = mysqli_fetch_array($listUserCarsResult)) {
 	   	 $reservation = array();
 
 		 $reservation["car_id"] = $row["car_id"]; 
@@ -46,7 +43,7 @@
 		 $reservation["car_license_plate"] = $row["car_license_plate"];
 		 
 		 array_push($response["reservations"], $reservation);
-	   }
+	   } 
 	   
 	   $response["success"] = 1;
 	}

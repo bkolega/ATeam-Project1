@@ -7,10 +7,9 @@
 			       	reservation_end_date, reservation_city, reservation_state,
 			       	per_week, car_type, car_make, car_model, car_license_plate
 			 FROM `ALLEN_EATON_AUTO.RESERVATION` R, `ALLEN_EATON_AUTO.CAR` C 
-			 WHERE checked_out=0
+			 WHERE checked_out=1
 			 AND user_email='".$_POST['username']."'
 			 AND R.car_id=C.car_id
-			 AND checked_in_date IS NULL
 			 AND (C.car_id NOT IN
 			   (SELECT US.car_id FROM `ALLEN_EATON_AUTO.USED_SALES` US))";
 

@@ -26,13 +26,15 @@ import android.widget.Toast;
 import com.ateam.alleneatonautorentals.SalesCheckoutCar.CheckoutCar;
 
 public class SalesCheckinCar extends Activity {
-	private String userEmail;
-	private String name;
-	private String key;
-	
-	
+	private String userEmail, name, key, carid, cartype, gps, child_seat, ktag,
+				   assistance, dinsurance, ainsurance, start_date, end_date,
+				   per_week, state, city;
 	private ProgressDialog progressDialog;
 	JSONParser jsonParser = new JSONParser();
+	private static final String CHECKIN_URL =
+			"http://people.eecs.ku.edu/~kwu96/ATeamScripts/checkin_car.php";
+	private static final String TAG_SUCCESS = "success";
+	private static final String TAG_MESSAGE = "message";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,19 +47,19 @@ public class SalesCheckinCar extends Activity {
 		name= getIntent.getStringExtra("name"); 
 		key = getIntent.getStringExtra("key");
 		
-		String carid = getIntent.getStringExtra("carid");
-		String cartype = getIntent.getStringExtra("cartype");
-		String gps = getIntent.getStringExtra("gps");
-		String child_seat = getIntent.getStringExtra("child_seat");
-		String ktag = getIntent.getStringExtra("ktag");
-		String assistance = getIntent.getStringExtra("assistance");
-		String dinsurance = getIntent.getStringExtra("dinsurance");
-		String ainsurance = getIntent.getStringExtra("ainsurance");			
-		String start_date = getIntent.getStringExtra("start_date"); 
-		String end_date = getIntent.getStringExtra("end_date"); 
-		String per_week = getIntent.getStringExtra("per_week");
-		String state = getIntent.getStringExtra("state"); 
-		String city = getIntent.getStringExtra("city");
+		carid = getIntent.getStringExtra("carid");
+		cartype = getIntent.getStringExtra("cartype");
+		gps = getIntent.getStringExtra("gps");
+		child_seat = getIntent.getStringExtra("child_seat");
+		ktag = getIntent.getStringExtra("ktag");
+		assistance = getIntent.getStringExtra("assistance");
+		dinsurance = getIntent.getStringExtra("dinsurance");
+		ainsurance = getIntent.getStringExtra("ainsurance");			
+		start_date = getIntent.getStringExtra("start_date"); 
+		end_date = getIntent.getStringExtra("end_date"); 
+		per_week = getIntent.getStringExtra("per_week");
+		state = getIntent.getStringExtra("state"); 
+		city = getIntent.getStringExtra("city");
 						
 		TextView tview = (TextView)findViewById(R.id.checkin_carID);
 		tview.setText(carid);
@@ -99,11 +101,70 @@ public class SalesCheckinCar extends Activity {
 		
 		switch (id) {
 			case R.id.checkin_car_button: 
+				new CheckinCar().execute();
 				break;
 			default:
 				break;
 		}
 
+	}
+	
+	class CheckinCar extends AsyncTask <String, String, String> {
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			progressDialog = new ProgressDialog(SalesCheckinCar.this);
+			progressDialog.setMessage("Attempting to check in car...");
+			progressDialog.setIndeterminate(false);
+			progressDialog.setCancelable(true);
+			progressDialog.show();
+		}
+		
+		@Override
+		protected String doInBackground(String... args) {
+			int success;
+			
+			try {
+				List <NameValuePair> params = new ArrayList <NameValuePair>();
+				
+				params.add(new BasicNameValuePair("username", userEmail));
+				params.add(new BasicNameValuePair("carid", carid.substring(8)));
+			
+				Log.d("request!", "starting");
+				
+				JSONObject json = jsonParser.makeHttpRequest(CHECKIN_URL, "POST", params);
+				Log.d("Checkin Attempt", json.toString());
+				
+				success = json.getInt(TAG_SUCCESS);
+				
+				if (success == 1) {
+					Log.d("Car successfully checked in!", json.toString());
+					
+					Intent ii;
+					ii = new Intent(SalesCheckinCar.this, SalesUserMenu.class);
+					
+					ii.putExtra("email", userEmail);
+					ii.putExtra("key", key);
+					ii.putExtra("name", name);
+					
+					startActivity(ii);		
+					finish();
+				}
+				return json.getString(TAG_MESSAGE);
+			}
+			catch (JSONException e) {
+				e.printStackTrace();
+			}
+			
+			return null;
+		}
+		
+		protected void onPostExecute (String message) {
+			progressDialog.dismiss();
+			if (message != null) {
+				Toast.makeText(SalesCheckinCar.this, message, Toast.LENGTH_LONG).show();
+			}
+		}
 	}
 		
 	@Override

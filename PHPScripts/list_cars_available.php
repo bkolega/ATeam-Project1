@@ -3,10 +3,12 @@
 	
 	$listCarQuery = "SELECT DISTINCT C.*
 			 FROM `ALLEN_EATON_AUTO.CAR` C, `ALLEN_EATON_AUTO.RESERVATION` R
-			 WHERE C.car_id NOT IN 
+			 WHERE (C.car_id NOT IN 
 			       (SELECT RE.car_id FROM `ALLEN_EATON_AUTO.RESERVATION` RE)
-			 OR (C.car_id=R.car_id
-			    AND checked_out=0)";
+			       OR (C.car_id=R.car_id
+			       	  AND checked_out=0))
+			 AND C.car_id NOT IN
+			     (SELECT US.car_id FROM `ALLEN_EATON_AUTO.USED_SALES` US)";
 	
 	$listCarResult = mysqli_query($c, $listCarQuery);
 	

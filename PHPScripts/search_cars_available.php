@@ -13,7 +13,9 @@
 			   OR car_location='".$_POST['keyword']."')
 			   AND (C.car_id NOT IN 
 			   (SELECT RE.car_id FROM `ALLEN_EATON_AUTO.RESERVATION` RE)
-			   OR (C.car_id=R.car_id AND checked_out=0))";
+			   OR (C.car_id=R.car_id AND checked_out=0))
+			   AND (C.car_id NOT IN
+			   (SELECT US.car_id FROM `ALLEN_EATON_AUTO.USED_SALES` US))";
 
 	$searchCarResult = mysqli_query($c, $searchCarQuery);
 
