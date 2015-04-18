@@ -123,6 +123,7 @@ public class Customer extends JFrame {
 			reserveCar();
 			SearchResultsPage.setVisible(true);
 			btnLogout.setVisible(true);
+			btnReserveAsGuest.setVisible(false);
 		} else {
 			this.userEmail = null;
 			loggedIn = false;
@@ -765,8 +766,7 @@ public class Customer extends JFrame {
 		btnContinue_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				AdditionalOptionsPage.setVisible(false);
-				ReviewAndSubmit.setVisible(true);
+				
 				if(chckbxGpsReceiver.isSelected()) { additionalOptionsCost += 15; }
 				if(chckbxChildSeat.isSelected()) { additionalOptionsCost += (10 * (comboBox_2.getSelectedIndex()+1)); }
 				if(chckbxKtagRental.isSelected()) { additionalOptionsCost += 2; }
@@ -774,21 +774,22 @@ public class Customer extends JFrame {
 				if(chckbxLossDamageWaiver.isSelected()) { additionalOptionsCost += 25; }
 				if(chckbxPersonalAccidentInsurance.isSelected()) { additionalOptionsCost += 5; }
 				additionalOptionsCost *= totalDaysReserved;
+				totalCost = additionalOptionsCost + estimatedCost;
+				lblTotalCost.setText("Total Cost: $" + totalCost + " plus tax");
+				System.out.println("total cost: $" + totalCost + " plus tax");
 				
-				if(comboBoxVehicleType.getSelectedItem().equals("Any class"))
+				if (loggedIn == true)
 				{
-					totalCostRange1 = additionalOptionsCost + estimatedCostRange1;
-					totalCostRange2 = additionalOptionsCost + estimatedCostRange2;
-					lblTotalCost.setText("Total Cost: $" + totalCostRange1 + " - " + totalCostRange2 + " plus tax");
-					System.out.println("RANGE of total cost: $" + totalCostRange1 + " - " + totalCostRange2 + " plus tax");
+					AdditionalOptionsPage.setVisible(false);
+					ReviewAndSubmit.setVisible(true);
+
 				}
 				else
 				{
-					totalCost = additionalOptionsCost + estimatedCost;
-					lblTotalCost.setText("Total Cost: $" + totalCost + " plus tax");
-					System.out.println("total cost: $" + totalCost + " plus tax");
+					AdditionalOptionsPage.setVisible(false);
+					RegisterPage.getPanel().setVisible(true);
 				}
-				
+			
 			}
 		});
 		btnContinue_1.setBounds(674, 428, 133, 34);
@@ -960,18 +961,6 @@ public class Customer extends JFrame {
 			SearchResultsPage.setVisible(true);
 			SearchResultsPage.add(lblCartInfo);
 			
-			JLabel lblChooseACar = new JLabel("Choose a car type for a more exact price");
-			lblChooseACar.setVisible(false);
-			lblChooseACar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			lblChooseACar.setBounds(12, 375, 265, 48);
-			SearchResultsPage.add(lblChooseACar);
-			
-			if(comboBoxVehicleType.getSelectedItem().equals("Any class"))
-			{
-					picLabel.setIcon(null);
-					lblChooseACar.setVisible(true);	
-			}
-
 			if(comboBoxVehicleType.getSelectedItem().equals("Economy"))
 			{
 					picLabel.setIcon(null);
@@ -1055,42 +1044,20 @@ public class Customer extends JFrame {
 			lblInvalidRange.setVisible(true);
 		}
 		
-		if(comboBoxVehicleType.getSelectedItem().equals("Any class"))
+
+		if(totalDaysReserved < 7)
 		{
-			if(totalDaysReserved < 7)
-			{
-				
-				lblEstimatedCost.setText("Estimated cost is between: $" + 45 * totalDaysReserved 
-										 + " - " + 85 * totalDaysReserved + " plus tax ");
-				
-				estimatedCostRange1 = 45 * totalDaysReserved;
-				estimatedCostRange2 = 85 * totalDaysReserved;
-			}
-			else
-			{
-				totalWeeksReserved = Math.floorDiv(totalDaysReserved, 7);
-				lblEstimatedCost.setText("Estimated cost is between: $" + ((totalWeeksReserved * 300) 
-										 + ((totalDaysReserved % 7) * 35)) + " - " + ((totalWeeksReserved * 575) 
-										 + ((totalDaysReserved % 7) * 85)) + " plus tax");
-				estimatedCostRange1 = totalWeeksReserved * 300 + ((totalDaysReserved % 7) * 35);
-				estimatedCostRange2 = totalWeeksReserved * 575 + ((totalDaysReserved % 7) * 85);
-			}	
+			lblEstimatedCost.setText("Estimated cost: $" + totalDaysReserved * dailyCarCost + " plus tax");
+			estimatedCost = totalDaysReserved * dailyCarCost;
+			System.out.println(estimatedCost);
 		}
-		else // car class is chosen
+		else
 		{
-			if(totalDaysReserved < 7)
-			{
-				lblEstimatedCost.setText("Estimated cost: $" + totalDaysReserved * dailyCarCost + " plus tax");
-				estimatedCost = totalDaysReserved * dailyCarCost;
-				System.out.println(estimatedCost);
-			}
-			else
-			{
-				totalWeeksReserved = Math.floorDiv(totalDaysReserved, 7);
-				lblEstimatedCost.setText("Estimated cost: $" + ((totalWeeksReserved * weeklyCarCost) 
-										 + ((totalDaysReserved % 7) * dailyCarCost)) + " plus tax");
-				estimatedCost = totalWeeksReserved * weeklyCarCost + ((totalDaysReserved % 7) * dailyCarCost);
-			}
+			totalWeeksReserved = Math.floorDiv(totalDaysReserved, 7);
+			lblEstimatedCost.setText("Estimated cost: $" + ((totalWeeksReserved * weeklyCarCost) 
+									 + ((totalDaysReserved % 7) * dailyCarCost)) + " plus tax");
+			estimatedCost = totalWeeksReserved * weeklyCarCost + ((totalDaysReserved % 7) * dailyCarCost);
 		}
+		
 	}
 }
