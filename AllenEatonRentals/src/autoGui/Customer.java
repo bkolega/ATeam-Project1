@@ -75,7 +75,7 @@ public class Customer extends JFrame {
 	private JButton btnReserveAsMember;
 	private JButton btnReserveAsGuest;
 	private JButton btnLogout;
-	private boolean loggedIn = false;
+	boolean loggedIn = false;
 	private JLabel lblInvalidRange = new JLabel("Please select a valid range of dates");
 	private int dayReserved =0;
 	private int dayReturned =0;
@@ -271,6 +271,7 @@ public class Customer extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				LoginWithSearchResults.setVisible(false);
 				RegisterPage.getPanel().setVisible(true);
+				RegisterPage.setLastPage(2);
 			}
 		});
 		btnNewButton_1.setBounds(357, 409, 258, 42);
@@ -683,6 +684,7 @@ public class Customer extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				CustomerHomePage.setVisible(false);
 				RegisterPage.getPanel().setVisible(true);
+				RegisterPage.setLastPage(0);
 			}
 		});
 
@@ -778,16 +780,16 @@ public class Customer extends JFrame {
 				lblTotalCost.setText("Total Cost: $" + totalCost + " plus tax");
 				System.out.println("total cost: $" + totalCost + " plus tax");
 				
-				if (loggedIn == true)
+				if (loggedIn == true || RegisterPage.isRegistered())
 				{
 					AdditionalOptionsPage.setVisible(false);
 					ReviewAndSubmit.setVisible(true);
-
 				}
 				else
 				{
 					AdditionalOptionsPage.setVisible(false);
 					RegisterPage.getPanel().setVisible(true);
+					RegisterPage.setLastPage(6);
 				}
 			
 			}

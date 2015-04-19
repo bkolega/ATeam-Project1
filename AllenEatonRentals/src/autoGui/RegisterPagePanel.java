@@ -50,11 +50,14 @@ public class RegisterPagePanel {
 	private JComboBox cardExpMonth;
 	private JComboBox cardExpDay;
 	private JTextField licenseState;
+	private int lastPage =0;
+	
+	private boolean isRegistered = false;
 	
 	RegisterPagePanel(JFrame parent, MouseAdapter backHandler) {
 		parent.getContentPane().add(RegisterPage, "name_22846752421143");
 		RegisterPage.setLayout(null);
-		
+		System.out.println(parent.getContentPane());
 		RegisterPage.setBounds(100, 100, 1036, 608);
 		
 		email = new JTextField();
@@ -250,7 +253,8 @@ public class RegisterPagePanel {
 		btnContinue.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				register();
+					register(parent);
+
 			}
 		});
 		btnContinue.setBounds(674, 428, 133, 34);
@@ -299,7 +303,7 @@ public class RegisterPagePanel {
 		RegisterPage.setVisible(false);
 	}
 	
-	private void register() {
+	private void register(JFrame parent) {
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 
 		params.add(new BasicNameValuePair("firstname", firstName.getText()));
@@ -352,6 +356,10 @@ public class RegisterPagePanel {
 		// TODO: **** Add proper error display ****
 		if (result.getInt("success") == 1) {
 			System.out.println("Registration successful!");
+			RegisterPage.setVisible(false);
+			parent.getContentPane().getComponent(getLastPage()).setVisible(true);
+			isRegistered=true;
+			
 		} else {
 			System.out.println("Registration failed");
 		}
@@ -363,6 +371,18 @@ public class RegisterPagePanel {
 		} else {
 			return s;
 		}
+	}
+	
+	public boolean isRegistered() {
+		return isRegistered;
+	}
+	
+	public void setLastPage(int i) {
+		lastPage=i;
+	}
+	
+	public int getLastPage() {
+		return lastPage;
 	}
 	
 	JPanel getPanel() {
