@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -58,8 +59,9 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 import javax.swing.JTextArea;
-
 import javax.swing.Icon;
+
+import java.lang.Thread;
 
 public class Customer extends JFrame {
 	private JTextField textField;
@@ -101,6 +103,8 @@ public class Customer extends JFrame {
 	private int totalCost=0;
 	private JLabel lblTotalCost = new JLabel();
 	private int loginReturnPage = 0;
+	private JLabel lblProcessing = new JLabel("Processing ");
+	AnimatedIcon iconProcessing = new AnimatedIcon( lblProcessing );
 	
 	
 	JSONObject jsonObject;
@@ -111,6 +115,7 @@ public class Customer extends JFrame {
 	private JLabel picLabel;
 	
 	public void login(String userEmail, String pass) {
+		 
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("username", userEmail));
 		params.add(new BasicNameValuePair("password", pass));
@@ -118,6 +123,7 @@ public class Customer extends JFrame {
 		System.out.println(handler.getJsonObject().toString());
 		
 		if (handler.getJsonObject().getInt("success") == 1) {
+		
 			loggedIn = true;
 			this.userEmail = userEmail;
 			lblInvalid.setVisible(false);
@@ -130,10 +136,15 @@ public class Customer extends JFrame {
 			//SearchResultsPage.setVisible(true);
 			btnLogout.setVisible(true);
 			btnReserveAsGuest.setVisible(false);
+			lblProcessing.setVisible(false);
+			iconProcessing.stop();
+			
 		} else {
 			this.userEmail = null;
 			loggedIn = false;
 			lblInvalid.setVisible(true);
+			lblProcessing.setVisible(false);
+			iconProcessing.stop();
 		}
 	}
 
@@ -214,6 +225,16 @@ public class Customer extends JFrame {
 		////////////////////////////////   Login Page  /////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////
 		
+		lblProcessing.setBounds(430, 475, 258, 42);
+		lblProcessing.setHorizontalTextPosition( JLabel.LEADING );
+		iconProcessing.setAlignmentX( AnimatedIcon.LEFT );
+		iconProcessing.addIcon( new TextIcon(lblProcessing, ".") );
+		iconProcessing.addIcon( new TextIcon(lblProcessing, "..") );
+		iconProcessing.addIcon( new TextIcon(lblProcessing, "...") );
+		lblProcessing.setIcon( iconProcessing );
+		lblProcessing.setVisible(false);
+		LoginPage.add(lblProcessing);
+		
 		JLabel lblLogin = new JLabel("Login:");
 		lblLogin.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblLogin.setBounds(357, 195, 68, 42);
@@ -239,7 +260,17 @@ public class Customer extends JFrame {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				login(textField.getText(), passwordField.getText());
+			  lblProcessing.setVisible(true);
+			  iconProcessing.restart();
+			  iconProcessing.start();
+			  SwingWorker worker = new SwingWorker() {
+			     @Override
+			     public Object doInBackground() {
+			       login(textField.getText(), passwordField.getText());
+			       return null;
+			     }
+			   };
+			    worker.execute();
 			}
 		});
 		btnNewButton.setBounds(357, 354, 258, 42);
@@ -467,7 +498,6 @@ public class Customer extends JFrame {
 		btnReserveAsGuest.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-
 				reserveCar();
 			}
 		});
