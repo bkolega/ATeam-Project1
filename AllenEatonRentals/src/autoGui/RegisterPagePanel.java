@@ -57,7 +57,7 @@ public class RegisterPagePanel {
 	RegisterPagePanel(JFrame parent, MouseAdapter backHandler) {
 		parent.getContentPane().add(RegisterPage, "name_22846752421143");
 		RegisterPage.setLayout(null);
-		System.out.println(parent.getContentPane());
+		//System.out.println(parent.getContentPane());
 		RegisterPage.setBounds(100, 100, 1036, 608);
 		
 		email = new JTextField();

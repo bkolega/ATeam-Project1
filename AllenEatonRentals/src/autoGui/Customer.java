@@ -59,6 +59,8 @@ import java.awt.event.ComponentEvent;
 
 import javax.swing.JTextArea;
 
+import javax.swing.Icon;
+
 public class Customer extends JFrame {
 	private JTextField textField;
 	private JPasswordField passwordField;
@@ -70,7 +72,7 @@ public class Customer extends JFrame {
 	private JTextField txtTime_1;
 	private String userEmail;
 	private JLabel lblInvalid;
-	private JPanel LoginWithSearchResults;
+	private JPanel LoginPage;
 	private JPanel CustomerHomePage;
 	private JButton btnReserveAsMember;
 	private JButton btnReserveAsGuest;
@@ -98,8 +100,8 @@ public class Customer extends JFrame {
 	private int estimatedCost=0;
 	private int totalCost=0;
 	private JLabel lblTotalCost = new JLabel();
-	private int totalCostRange1=0;
-	private int totalCostRange2=0;
+	private int loginReturnPage = 0;
+	
 	
 	JSONObject jsonObject;
 
@@ -119,9 +121,13 @@ public class Customer extends JFrame {
 			loggedIn = true;
 			this.userEmail = userEmail;
 			lblInvalid.setVisible(false);
-			LoginWithSearchResults.setVisible(false);
-			reserveCar();
-			SearchResultsPage.setVisible(true);
+			LoginPage.setVisible(false);
+			if(loginReturnPage==1) 
+			{
+				reserveCar();
+			}
+			getContentPane().getComponent(loginReturnPage).setVisible(true);
+			//SearchResultsPage.setVisible(true);
 			btnLogout.setVisible(true);
 			btnReserveAsGuest.setVisible(false);
 		} else {
@@ -150,6 +156,7 @@ public class Customer extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings({ "deprecation", "rawtypes", "unchecked" })
 	public Customer() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -172,9 +179,9 @@ public class Customer extends JFrame {
 		getContentPane().add(SearchResultsPage, "name_52494991163566");
 		SearchResultsPage.setLayout(null);
 		
-		LoginWithSearchResults = new JPanel();
-		getContentPane().add(LoginWithSearchResults, "name_52495009040667");
-		LoginWithSearchResults.setLayout(null);
+		LoginPage = new JPanel();
+		getContentPane().add(LoginPage, "name_52495009040667");
+		LoginPage.setLayout(null);
 		
 		JPanel PastOrdersPage = new JPanel();
 		getContentPane().add(PastOrdersPage, "name_52495023942527");
@@ -204,29 +211,29 @@ public class Customer extends JFrame {
 		});
 		
 		////////////////////////////////////////////////////////////////////////////////
-		////////////////////////   Login With Search Results Page  /////////////////////
+		////////////////////////////////   Login Page  /////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////
 		
 		JLabel lblLogin = new JLabel("Login:");
 		lblLogin.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblLogin.setBounds(357, 195, 68, 42);
-		LoginWithSearchResults.add(lblLogin);
+		LoginPage.add(lblLogin);
 		
 		textField = new JTextField();
 		textField.setBounds(473, 206, 142, 22);
-		LoginWithSearchResults.add(textField);
+		LoginPage.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblPassword.setBounds(357, 261, 100, 42);
-		LoginWithSearchResults.add(lblPassword);
+		LoginPage.add(lblPassword);
 		
 		lblInvalid = new JLabel("Invalid Login/Password Combination");
 		lblInvalid.setForeground(Color.RED);
 		lblInvalid.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblInvalid.setBounds(357, 316, 270, 25);
-		LoginWithSearchResults.add(lblInvalid);		
+		LoginPage.add(lblInvalid);		
 		
 		JButton btnNewButton = new JButton("Submit");
 		btnNewButton.addMouseListener(new MouseAdapter() {
@@ -236,19 +243,19 @@ public class Customer extends JFrame {
 			}
 		});
 		btnNewButton.setBounds(357, 354, 258, 42);
-		LoginWithSearchResults.add(btnNewButton);
+		LoginPage.add(btnNewButton);
 		
 		JButton btnBack_3 = new JButton("Back");
 		btnBack_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				LoginWithSearchResults.setVisible(false);
+				LoginPage.setVisible(false);
 				CustomerHomePage.setVisible(true);
 				CustomerHomePage.add(lblCartInfo);
 			}
 		});
 		btnBack_3.setBounds(12, 525, 97, 25);
-		LoginWithSearchResults.add(btnBack_3);
+		LoginPage.add(btnBack_3);
 		
 		JButton btnExit_4 = new JButton("Exit");
 		btnExit_4.addMouseListener(new MouseAdapter() {
@@ -259,28 +266,28 @@ public class Customer extends JFrame {
 			}
 		});
 		btnExit_4.setBounds(909, 525, 97, 25);
-		LoginWithSearchResults.add(btnExit_4);
+		LoginPage.add(btnExit_4);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(473, 273, 142, 22);
-		LoginWithSearchResults.add(passwordField);
+		LoginPage.add(passwordField);
 		
 		JButton btnNewButton_1 = new JButton("New User? ");
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				LoginWithSearchResults.setVisible(false);
+				LoginPage.setVisible(false);
 				RegisterPage.getPanel().setVisible(true);
 				RegisterPage.setLastPage(2);
 			}
 		});
 		btnNewButton_1.setBounds(357, 409, 258, 42);
-		LoginWithSearchResults.add(btnNewButton_1);
+		LoginPage.add(btnNewButton_1);
 		
 		JLabel lblToContinueLog = new JLabel("To Continue, Log in or Create an account");
 		lblToContinueLog.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		lblToContinueLog.setBounds(316, 70, 363, 42);
-		LoginWithSearchResults.add(lblToContinueLog);
+		LoginPage.add(lblToContinueLog);
 
 		////////////////////////////////////////////////////////////////////////////////
 		////////////////////////  Search Results Page   ////////////////////////////////
@@ -423,15 +430,16 @@ public class Customer extends JFrame {
 				{
 					if (loggedIn) {
 						lblInvalid.setVisible(false);
-						LoginWithSearchResults.setVisible(false);
+						LoginPage.setVisible(false);
 						reserveCar();
 						SearchResultsPage.setVisible(true);
 						btnLogout.setVisible(true);
 						return;
 					}
 					CustomerHomePage.setVisible(false);
-					LoginWithSearchResults.setVisible(true);
-					LoginWithSearchResults.add(lblCartInfo);
+					LoginPage.setVisible(true);
+					loginReturnPage = 1;
+					LoginPage.add(lblCartInfo);
 					lblInvalid.setVisible(false);
 					lblInvalidRange.setVisible(false);
 				}
@@ -665,7 +673,7 @@ public class Customer extends JFrame {
 				btnReserveAsGuest.setVisible(true);
 			}
 		});
-		btnLogout.setBounds(318, 437, 117, 29);
+		btnLogout.setBounds(412, 438, 117, 29);
 		btnLogout.setVisible(false);
 		CustomerHomePage.add(btnLogout);
 		
@@ -690,6 +698,19 @@ public class Customer extends JFrame {
 
 		registerButton.setBounds(541, 389, 245, 36);
 		CustomerHomePage.add(registerButton);
+		
+		JButton btnNewButton_2 = new JButton("Log in");
+		btnNewButton_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				CustomerHomePage.setVisible(false);
+				LoginPage.setVisible(true);
+				lblInvalid.setVisible(false);
+				loginReturnPage=0;
+			}
+		});
+		btnNewButton_2.setBounds(284, 438, 116, 27);
+		CustomerHomePage.add(btnNewButton_2);
 		
 		////////////////////////////////////////////////////////////////////////////////
 		//////////////////////  Additional Options Page   //////////////////////////////
@@ -924,8 +945,6 @@ public class Customer extends JFrame {
 				if(chckbxPersonalAccidentInsurance.isSelected()) { receipt.append("        Personal Accident Insurance"); }
 			}
 		});
-
-
 	}
 	private void updateCart()
 	{
