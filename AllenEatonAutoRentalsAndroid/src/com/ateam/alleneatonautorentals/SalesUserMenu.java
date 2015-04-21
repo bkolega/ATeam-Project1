@@ -34,7 +34,14 @@ public class SalesUserMenu extends Activity {
 		Intent ii;
 		switch (id) {
 			case R.id.printContractButtonSales:
+				ii = new Intent(SalesUserMenu.this, SalesViewContracts.class);
 				
+				ii.putExtra("email", userEmail);
+				ii.putExtra("key", key);
+				ii.putExtra("name", name);
+				
+				startActivity(ii);		
+				finish();
 				break;
 			case R.id.CheckinCarButtonSales:
 				ii = new Intent(SalesUserMenu.this, SalesViewCheckedOutCars.class);

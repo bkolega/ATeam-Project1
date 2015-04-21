@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutContainer"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    tools:context=".FrontPage" >
+  	
+	<RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.15">
+    </RelativeLayout>
+    
+     <RelativeLayout
+         android:layout_width="0dip"
+         android:layout_height="fill_parent"
+         android:layout_weight="0.7" >
+
+         <LinearLayout
+             android:id="@+id/linearLayout1"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:layout_centerInParent="true"
+             android:orientation="vertical" >
+
+             <TextView
+                 android:id="@+id/checkoutcar_title"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:gravity="center"
+                 android:text="@string/contract"
+                 android:textSize="40sp" />
+
+             <TableLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content" >
+
+                 <TableRow
+                     android:id="@+id/tableRow1"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_customer_info"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="@string/customer_info"
+                         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow2"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_user_name"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow3"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_user_email"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow4"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_card_number"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <Space
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" />
+
+                 <TableRow
+                     android:id="@+id/tableRow5"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_employee_info"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="@string/employee_info"
+                         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow6"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_employee_email"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow7"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_car_info"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="@string/car_info"
+                         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow8"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_car_id"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow9"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_car_type"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow10"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_car_make"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow11"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_car_model"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow12"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_car_year"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow13"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_license_plate"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow14"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_license_plate_state"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow15"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_reservation_info"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="@string/reservation_info"
+                         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow16"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_start_date"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow17"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_end_date"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow18"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_city_reservation"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow27"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_state_reservation"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow19"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_per_week"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow28"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_price"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow20"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_gps"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow21"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_ktag"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow26"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_child_seat"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow22"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_assistence"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow23"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_dinsurance"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow24"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_ainsurance"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <TableRow
+                     android:id="@+id/tableRow25"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/contract_checkin_date"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="TextView" />
+
+                 </TableRow>
+
+                 <Space
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" />
+
+             </TableLayout>
+
+         </LinearLayout>
+     </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.15">
+
+    </RelativeLayout>
+    
+</LinearLayout>

@@ -57,22 +57,6 @@ public class SalesViewReservations extends ListActivity{
 	private static final String TAG_CARMAKE = "car_make";
 	private static final String TAG_CARMODEL = "car_model";
 	private static final String TAG_CARLICENSE = "car_license_plate";
-	/*private String car_id;
-	private String car_make;
-	private String car_model;
-	private String car_type;
-	private String city;
-	private String state;
-	private String license;
-	private String start_date;
-	private String end_date;
-	private String per_week;
-	private String GPS;
-	private String child_seat;
-	private String k_tag;
-	private String assistance;
-	private String dinsurance;
-	private String ainsurance;*/
 	private String userEmail;
 	private String name;
 	private String key;

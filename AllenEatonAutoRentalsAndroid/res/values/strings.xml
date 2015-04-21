@@ -74,5 +74,9 @@
 	<string name="day">Day</string>
 	<string name="check_out">Check Out</string>
 	<string name="next">Next</string>
-    
+	<string name="contract">Contract</string>
+    <string name="customer_info">Customer Information</string>
+    <string name="employee_info">Employee Information</string>
+    <string name="car_info">Car Information</string>
+    <string name="view_contracts">View Contracts</string>
 </resources>

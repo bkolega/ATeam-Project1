@@ -102,6 +102,14 @@
               android:name="com.ateam.alleneatonautorentals.SalesViewCheckedOutCars"
               android:label="@string/app_name" >         
         </activity>
+        <activity
+              android:name="com.ateam.alleneatonautorentals.SalesViewContracts"
+              android:label="@string/app_name" >         
+        </activity>
+        <activity
+              android:name="com.ateam.alleneatonautorentals.SalesPrintContract"
+              android:label="@string/app_name" >         
+        </activity>
     </application>
 
 </manifest>
