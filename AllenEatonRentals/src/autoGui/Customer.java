@@ -23,7 +23,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import aerentals.database.SqlDatabaseProvider;
@@ -105,13 +107,16 @@ public class Customer extends JFrame {
 	private int loginReturnPage = 0;
 	private JLabel lblProcessing = new JLabel("Processing ");
 	AnimatedIcon iconProcessing = new AnimatedIcon( lblProcessing );
-	
+	Date date = null;
+	Date date2 = null;
 	
 	JSONObject jsonObject;
 
 	private final static String RES_URL = "http://people.eecs.ku.edu/~kwu96/ATeamScripts/list_reservations.php";
 	private final static String USER_URL = "http://people.eecs.ku.edu/~kwu96/ATeamScripts/list_customers.php";
 	private final static String LOGIN_URL = "http://people.eecs.ku.edu/~dyoung/CustomerPHPScripts/login.php";
+	private final static String RESERVE_URL = "http://people.eecs.ku.edu/~dyoung/CustomerPHPScripts/reserve_car.php";
+	private final static String CAR_ID_URL = "http://people.eecs.ku.edu/~dyoung/CustomerPHPScripts/car_id.php";
 	private JLabel picLabel;
 	
 	public void login(String userEmail, String pass) {
@@ -952,16 +957,13 @@ public class Customer extends JFrame {
 		JButton btnSubmitOrder = new JButton("Submit Order");
 		btnSubmitOrder.setBounds(600, 447, 125, 36);
 		ReviewAndSubmit.add(btnSubmitOrder);
-		
 		ReviewAndSubmit.addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentShown(ComponentEvent arg0) {
 				receipt.setText("");
-				java.util.Date date = null;
 				date = calendarButton.getTargetDate();
 				String start = DateFormat.getDateInstance(DateFormat.FULL, getLocale()).format(date);
 				
-				java.util.Date date2 = null;
 				date2 = calendarButton_1.getTargetDate();
 				String end = DateFormat.getDateInstance(DateFormat.FULL, getLocale()).format(date2);
 	
@@ -973,6 +975,62 @@ public class Customer extends JFrame {
 				if(chckbxRoadsideAssistance.isSelected()) { receipt.append("        RoadSide Assistance\n"); }
 				if(chckbxLossDamageWaiver.isSelected()) { receipt.append("        Loss Damage Waiver Insurance\n"); }
 				if(chckbxPersonalAccidentInsurance.isSelected()) { receipt.append("        Personal Accident Insurance"); }
+			}
+		});
+		
+		btnSubmitOrder.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				List<NameValuePair> params = new ArrayList<NameValuePair>();
+				
+				List<NameValuePair> carIdParams = new ArrayList<NameValuePair>();
+				carIdParams.add(new BasicNameValuePair("cartype", carType));
+				
+				JsonHandler carIdHandler = new JsonHandler(CAR_ID_URL, carIdParams);
+				
+				String carId = new Integer(carIdHandler.getJsonObject().getJSONObject("message").getInt("car_id")).toString();
+				
+				String childSeats;
+				if (chckbxChildSeat.isSelected()) {
+					childSeats = new Integer(comboBox_2.getSelectedIndex()+1).toString();
+				} else {
+					childSeats = "0";
+				}
+				
+				String startDate = formatDate(date);
+				String endDate   = formatDate(date2);
+				
+				System.out.println(startDate);
+				
+				params.add(new BasicNameValuePair("username", userEmail));
+				params.add(new BasicNameValuePair("carid", carId));
+				params.add(new BasicNameValuePair("gps", chckbxGpsReceiver.isSelected() ? "1" : "0"));
+				params.add(new BasicNameValuePair("childseat", childSeats));
+				params.add(new BasicNameValuePair("ktag", chckbxKtagRental.isSelected() ? "1" : "0"));
+				params.add(new BasicNameValuePair("assistance", chckbxRoadsideAssistance.isSelected() ? "1" : "0"));
+				params.add(new BasicNameValuePair("dinsurance", chckbxLossDamageWaiver.isSelected() ? "1" : "0"));
+				params.add(new BasicNameValuePair("ainsurance", chckbxPersonalAccidentInsurance.isSelected() ? "1" : "0"));
+				
+				params.add(new BasicNameValuePair("cartype", carType));
+				params.add(new BasicNameValuePair("start", startDate));
+				params.add(new BasicNameValuePair("end", endDate));
+				params.add(new BasicNameValuePair("perweek", "1"));
+				String[] splitLocation = comboBox.getSelectedItem().toString().split(", ");
+				String city = splitLocation[0];
+				String state = splitLocation[1];
+				if (state.toUpperCase().equals("KS")) {
+					state = "Kansas";
+				} else if (state.toUpperCase().equals("MO")) {
+					state = "Missouri";
+				} else {
+					System.err.println("Invalid state");
+				}
+				params.add(new BasicNameValuePair("city", city));
+				params.add(new BasicNameValuePair("state", state));
+				
+				JsonHandler handler = new JsonHandler(RESERVE_URL, params);
+				JSONObject result = handler.getJsonObject();
+				// TODO: Show success message and go back to main page
 			}
 		});
 	}
@@ -1110,5 +1168,10 @@ public class Customer extends JFrame {
 			estimatedCost = totalWeeksReserved * weeklyCarCost + ((totalDaysReserved % 7) * dailyCarCost);
 		}
 		
+	}
+	
+	private String formatDate(Date d) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		return format.format(d);
 	}
 }

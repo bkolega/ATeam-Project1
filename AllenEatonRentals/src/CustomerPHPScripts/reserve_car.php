@@ -76,8 +76,13 @@
 	   $response["success"] = 0;
 	   $response["message"] .= "Please pick rent per day or rent per week.\n";
 	}
-	
-	 mysqli_query($c, "START TRANSACTION");
+
+  if (empty($_POST['empemail'])) {
+    $empemail = "";
+  } else {
+    $empemail = $_POST['empemail'];
+  }
+	 mysqli_query($conn, "START TRANSACTION");
 	 $insertResQuery = "INSERT INTO `ALLEN_EATON_AUTO.RESERVATION`
 						   (`user_email`,
 					`car_id`,
@@ -107,15 +112,15 @@
 				'".$_POST['end']."',
 				'".$_POST['city']."',
 				'".$_POST['state']."',
-				'".$_POST['empemail']."',
+				'".$empemail."',
 				'".$_POST['perweek']."',
 				0 )"; //set to 0, bc it is not checked out
-	 if (!mysqli_query($c, $insertResQuery)) {
+	 if (!mysqli_query($conn, $insertResQuery)) {
 		mysqli_query($c, "ROLLBACK");
 		$response["success"] = 0;
 	$response["message"] = "Error in inserting into database.";
 	 }
-	 else if (mysqli_query($c, "COMMIT")) {
+	 else if (mysqli_query($conn, "COMMIT")) {
 		  $response["success"] = 1;
 	  $response["message"] = "Car reservation created!";
 	 }
@@ -129,5 +134,5 @@
 	
 	
 	die(json_encode($response));
-	mysqli_close($c);
+	mysqli_close($conn);
 ?>

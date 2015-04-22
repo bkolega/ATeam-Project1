@@ -117,11 +117,11 @@ public class RegisterPagePanel {
 		
 		JLabel lblPhoneNumber = new JLabel("Phone*");
 		lblPhoneNumber.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPhoneNumber.setBounds(506, 204, 71, 16);
+		lblPhoneNumber.setBounds(506, 217, 71, 16);
 		RegisterPage.add(lblPhoneNumber);
 		
 		phone = new JTextField();
-		phone.setBounds(642, 202, 116, 22);
+		phone.setBounds(642, 215, 116, 22);
 		RegisterPage.add(phone);
 		phone.setColumns(10);
 		
@@ -261,42 +261,46 @@ public class RegisterPagePanel {
 		RegisterPage.add(btnContinue);
 		
 		JLabel lblConfirmPassword = new JLabel("Confirm Password*");
-		lblConfirmPassword.setBounds(506, 160, 121, 16);
+		lblConfirmPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblConfirmPassword.setBounds(506, 174, 121, 16);
 		RegisterPage.add(lblConfirmPassword);
 		
 		repassword = new JPasswordField();
-		repassword.setBounds(642, 157, 116, 22);
+		repassword.setBounds(642, 172, 116, 22);
 		RegisterPage.add(repassword);
 		
 		JLabel lblNewLabel_3 = new JLabel("Credit card #*");
-		lblNewLabel_3.setBounds(141, 436, 93, 16);
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_3.setBounds(141, 448, 93, 16);
 		RegisterPage.add(lblNewLabel_3);
 		
 		cardNumber = new JTextField();
-		cardNumber.setBounds(241, 434, 142, 28);
+		cardNumber.setBounds(241, 443, 142, 28);
 		RegisterPage.add(cardNumber);
 		cardNumber.setColumns(10);
 		
 		JLabel lblCardExp = new JLabel("Card exp*");
-		lblCardExp.setBounds(141, 464, 82, 16);
+		lblCardExp.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblCardExp.setBounds(141, 496, 82, 16);
 		RegisterPage.add(lblCardExp);
 		
 		cardExpMonth = new JComboBox();
 		cardExpMonth.setModel(new DefaultComboBoxModel(new String[] {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}));
-		cardExpMonth.setBounds(238, 460, 77, 27);
+		cardExpMonth.setBounds(238, 493, 77, 27);
 		RegisterPage.add(cardExpMonth);
 		
 		cardExpDay = new JComboBox();
 		cardExpDay.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
-		cardExpDay.setBounds(312, 460, 71, 27);
+		cardExpDay.setBounds(312, 493, 71, 27);
 		RegisterPage.add(cardExpDay);
 		
 		JLabel lblLicenseState = new JLabel("License state*");
+		lblLicenseState.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblLicenseState.setBounds(506, 338, 88, 16);
 		RegisterPage.add(lblLicenseState);
 		
 		licenseState = new JTextField();
-		licenseState.setBounds(642, 330, 116, 28);
+		licenseState.setBounds(642, 333, 116, 28);
 		RegisterPage.add(licenseState);
 		licenseState.setColumns(10);
 		
