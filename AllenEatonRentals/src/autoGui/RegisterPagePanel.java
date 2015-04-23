@@ -138,8 +138,13 @@ public class RegisterPagePanel {
 		btnBack_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if(lastPage == 6)
+				{
+					lastPage = 4;
+					
+				}
 				RegisterPage.setVisible(false);
-				parent.setVisible(true);
+				parent.getContentPane().getComponent(lastPage).setVisible(true);
 				backHandler.mouseClicked(e);
 			}
 		});
