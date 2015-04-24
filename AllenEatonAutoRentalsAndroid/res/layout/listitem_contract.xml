@@ -109,14 +109,6 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/list_contract_per_week"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="fill_horizontal"
-        android:gravity="start"
-        android:textSize="20sp" />
-
-    <TextView
         android:id="@+id/list_contract_gps"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

@@ -115,10 +115,11 @@
 				'".$empemail."',
 				'".$_POST['perweek']."',
 				0 )"; //set to 0, bc it is not checked out
-	 if (!mysqli_query($conn, $insertResQuery)) {
-		mysqli_query($c, "ROLLBACK");
+   if (!mysqli_query($conn, $insertResQuery)) {
+     $err = mysqli_error($conn);
+		mysqli_query($conn, "ROLLBACK");
 		$response["success"] = 0;
-	$response["message"] = "Error in inserting into database.";
+	$response["message"] = "Error in inserting into database:\n" . $err;
 	 }
 	 else if (mysqli_query($conn, "COMMIT")) {
 		  $response["success"] = 1;
