@@ -60,7 +60,7 @@
                          android:id="@+id/contract_user_name"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
+                     />
 
                  </TableRow>
 
@@ -73,7 +73,7 @@
                          android:id="@+id/contract_user_email"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
+                     />
 
                  </TableRow>
 
@@ -86,7 +86,7 @@
                          android:id="@+id/contract_card_number"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
+                     />
 
                  </TableRow>
 
@@ -117,7 +117,7 @@
                          android:id="@+id/contract_employee_email"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
+                     />
 
                  </TableRow>
 
@@ -144,7 +144,7 @@
                          android:id="@+id/contract_car_id"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
+                     />
 
                  </TableRow>
 
@@ -157,7 +157,7 @@
                          android:id="@+id/contract_car_type"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
+                     />
 
                  </TableRow>
 
@@ -170,7 +170,7 @@
                          android:id="@+id/contract_car_make"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
+                     />
 
                  </TableRow>
 
@@ -183,7 +183,7 @@
                          android:id="@+id/contract_car_model"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
+                      />
 
                  </TableRow>
 
@@ -196,7 +196,7 @@
                          android:id="@+id/contract_car_year"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
+                    />
 
                  </TableRow>
 
@@ -209,7 +209,7 @@
                          android:id="@+id/contract_license_plate"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
+                     />
 
                  </TableRow>
 
@@ -222,7 +222,7 @@
                          android:id="@+id/contract_license_plate_state"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
+                      />
 
                  </TableRow>
 
@@ -249,7 +249,7 @@
                          android:id="@+id/contract_start_date"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
+                      />
 
                  </TableRow>
 
@@ -262,7 +262,7 @@
                          android:id="@+id/contract_end_date"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
+                     />
 
                  </TableRow>
 
@@ -275,7 +275,7 @@
                          android:id="@+id/contract_city_reservation"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
+                     />
 
                  </TableRow>
 
@@ -288,20 +288,7 @@
                          android:id="@+id/contract_state_reservation"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
-
-                 </TableRow>
-
-                 <TableRow
-                     android:id="@+id/tableRow19"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content" >
-
-                     <TextView
-                         android:id="@+id/contract_per_week"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text="TextView" />
+                     />
 
                  </TableRow>
 
@@ -314,7 +301,7 @@
                          android:id="@+id/contract_price"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
+                     />
 
                  </TableRow>
 
@@ -327,7 +314,7 @@
                          android:id="@+id/contract_gps"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
+                      />
 
                  </TableRow>
 
@@ -340,7 +327,7 @@
                          android:id="@+id/contract_ktag"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
+                     />
 
                  </TableRow>
 
@@ -353,7 +340,7 @@
                          android:id="@+id/contract_child_seat"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
+                    />
 
                  </TableRow>
 
@@ -366,7 +353,7 @@
                          android:id="@+id/contract_assistence"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
+                     />
 
                  </TableRow>
 
@@ -379,7 +366,7 @@
                          android:id="@+id/contract_dinsurance"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
+                     />
 
                  </TableRow>
 
@@ -392,7 +379,7 @@
                          android:id="@+id/contract_ainsurance"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
+                     />
 
                  </TableRow>
 
@@ -405,7 +392,7 @@
                          android:id="@+id/contract_checkin_date"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="TextView" />
+                     />
 
                  </TableRow>
 

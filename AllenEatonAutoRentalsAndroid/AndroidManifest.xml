@@ -47,10 +47,6 @@
               android:label="@string/app_name" >         
         </activity>
         <activity
-              android:name="com.ateam.alleneatonautorentals.CheckOutCar"
-              android:label="@string/app_name" >         
-        </activity>
-        <activity
               android:name="com.ateam.alleneatonautorentals.SalesSearchCar"
               android:label="@string/app_name" >         
         </activity>

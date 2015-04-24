@@ -32,7 +32,7 @@ import com.ateam.alleneatonautorentals.SalesViewReservations.LoadAllUserRes;
 
 public class SalesPrintContract extends Activity {
 	private String userEmail, name, key, carid, gps, ktag, childseat, assistance, dinsurance, ainsurance,
-					start_date, end_date, city, state, perweek, eemail, car_type, car_model, car_make, 
+					start_date, end_date, city, state, eemail, car_type, car_model, car_make, 
 					license_plate, license_state, car_year, checkin, card_number;
 
 	@Override
@@ -57,7 +57,6 @@ public class SalesPrintContract extends Activity {
 		end_date = getIntent.getStringExtra("end_date");
 		city = getIntent.getStringExtra("city"); 
 		state = getIntent.getStringExtra("state"); 
-		perweek = getIntent.getStringExtra("per_week");
 		eemail = getIntent.getStringExtra("eemail"); 
 		car_type = getIntent.getStringExtra("cartype");
 		car_model = getIntent.getStringExtra("carmodel");
@@ -101,8 +100,6 @@ public class SalesPrintContract extends Activity {
 		tview.setText(city);
 		tview = (TextView)findViewById(R.id.contract_state_reservation);
 		tview.setText(state);
-		tview = (TextView)findViewById(R.id.contract_per_week);
-		tview.setText(perweek);
 		//tview = (TextView)findViewById(R.id.contract_price);
 		//tview.setText(userEmail);
 		tview = (TextView)findViewById(R.id.contract_gps);

@@ -51,7 +51,6 @@ public class SalesViewContracts extends ListActivity{
 		private static final String TAG_END = "end_date";
 		private static final String TAG_CITY = "city";
 		private static final String TAG_STATE = "state";
-		private static final String TAG_PERWEEK = "per_week";
 		private static final String TAG_EMPLOYEEEMAIL = "employee_email";
 		private static final String TAG_CARTYPE = "car_type";
 		private static final String TAG_CARMAKE = "car_make";
@@ -101,7 +100,6 @@ public class SalesViewContracts extends ListActivity{
 					String city = ((TextView)view.findViewById(R.id.list_contract_city)).getText().toString();
 					String start_date = ((TextView)view.findViewById(R.id.list_contract_start_date)).getText().toString();
 					String end_date = ((TextView)view.findViewById(R.id.list_contract_end_date)).getText().toString();
-					String per_week = ((TextView)view.findViewById(R.id.list_contract_per_week)).getText().toString();
 					String gps = ((TextView)view.findViewById(R.id.list_contract_gps)).getText().toString();
 					String child_seat = ((TextView)view.findViewById(R.id.list_contract_child_seat)).getText().toString();
 					String k_tag = ((TextView)view.findViewById(R.id.list_contract_ktag)).getText().toString();
@@ -125,8 +123,7 @@ public class SalesViewContracts extends ListActivity{
 					ii.putExtra("state", state); 
 					ii.putExtra("city", city);
 					ii.putExtra("start_date", start_date); 
-					ii.putExtra("end_date", end_date);					 
-					ii.putExtra("per_week", per_week);
+					ii.putExtra("end_date", end_date);	
 					ii.putExtra("gps", gps);
 					ii.putExtra("child_seat", child_seat);
 					ii.putExtra("ktag", k_tag);
@@ -193,7 +190,6 @@ public class SalesViewContracts extends ListActivity{
 							String enddate = c.getString(TAG_END);
 							String city = c.getString(TAG_CITY);
 							String state = c.getString(TAG_STATE);
-							String per_week = c.getString(TAG_PERWEEK);
 							String eemail = c.getString(TAG_EMPLOYEEEMAIL);
 							String car_type = c.getString(TAG_CARTYPE);
 							String car_make = c.getString(TAG_CARMAKE);
@@ -219,19 +215,16 @@ public class SalesViewContracts extends ListActivity{
 							map.put(TAG_END, "Reservation End Date: ".concat(enddate));
 							map.put(TAG_CITY, "Reservation City: ".concat(city));
 							map.put(TAG_STATE, "Reservation State: ".concat(state));
-							if (per_week.equals("1")) {
-								map.put(TAG_PERWEEK, "Rental per week");
-							}
-							else {
-								map.put(TAG_PERWEEK, "Rental per day");
-							}
 							map.put(TAG_GPS, "GPS: ".concat(GPS));
 							map.put(TAG_CHILDSEAT, "Child seat: ".concat(child_seat));
 							map.put(TAG_KTAG,"K-Tag: ".concat(k_tag));
 							map.put(TAG_ASSISTANCE, "Road Assistance: ".concat(assistance));
 							map.put(TAG_DINSURANCE, "Damage Insurance: ".concat(dinsurance));
 							map.put(TAG_AINSURANCE, "Accident Insurance: ".concat(ainsurance));
-							map.put(TAG_CHECKINDATE, "Check in date: ".concat(checkin)); 
+							if(checkin.equals("null"))
+								map.put(TAG_CHECKINDATE, "Check in date: "); 
+							else 
+								map.put(TAG_CHECKINDATE, "Check in date: ".concat(checkin));
 						
 							
 							resList.add(map);
@@ -271,7 +264,7 @@ public class SalesViewContracts extends ListActivity{
 											 {TAG_CARID, TAG_GPS, TAG_CHILDSEAT, TAG_KTAG, 
 											  TAG_ASSISTANCE, TAG_DINSURANCE, TAG_AINSURANCE,
 											  TAG_START, TAG_END, TAG_CITY, TAG_STATE,
-											  TAG_PERWEEK, TAG_EMPLOYEEEMAIL, TAG_CARTYPE, TAG_CARMAKE,
+											  TAG_EMPLOYEEEMAIL, TAG_CARTYPE, TAG_CARMAKE,
 											  TAG_CARMODEL, TAG_CARLICENSE, TAG_CARLICENSESTATE, TAG_CARYEAR,
 											  TAG_CHECKINDATE, TAG_CARDNUMBER, name, userEmail},
 											  new int[] {R.id.list_contract_car_id, R.id.list_contract_gps,
@@ -279,13 +272,12 @@ public class SalesViewContracts extends ListActivity{
 														 R.id.list_contract_assistance, R.id.list_contract_dinsurance,
 														 R.id.list_contract_ainsurance, R.id.list_contract_start_date,
 														 R.id.list_contract_end_date, R.id.list_contract_city,
-														 R.id.list_contract_state, R.id.list_contract_per_week,
-														 R.id.list_contract_employee_email, R.id.list_contract_car_type,
-														 R.id.list_contract_car_make, R.id.list_contract_car_model,
-														 R.id.list_contract_license_plate, R.id.list_contract_license_state,
-														 R.id.list_contract_car_year, R.id.list_contract_checkin_date,
-														 R.id.list_contract_cardnumber, R.id.list_contract_customer_name, 
-														 R.id.list_contract_customer_email
+														 R.id.list_contract_state, R.id.list_contract_employee_email, 
+														 R.id.list_contract_car_type, R.id.list_contract_car_make, 
+														 R.id.list_contract_car_model,R.id.list_contract_license_plate, 
+														 R.id.list_contract_license_state,R.id.list_contract_car_year, 
+														 R.id.list_contract_checkin_date,R.id.list_contract_cardnumber, 
+														 R.id.list_contract_customer_name, R.id.list_contract_customer_email
 									});
 							setListAdapter(adapter);
 						}

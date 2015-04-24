@@ -504,6 +504,7 @@ public class Customer extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				reserveCar();
+				RegisterPage.setLastPage(4);
 			}
 		});
 		btnReserveAsGuest.setBounds(284, 389, 245, 36);
@@ -824,7 +825,7 @@ public class Customer extends JFrame {
 		btnContinue_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				additionalOptionsCost =0;
 				if(chckbxGpsReceiver.isSelected()) { additionalOptionsCost += 15; }
 				if(chckbxChildSeat.isSelected()) { additionalOptionsCost += (10 * (comboBox_2.getSelectedIndex()+1)); }
 				if(chckbxKtagRental.isSelected()) { additionalOptionsCost += 2; }
@@ -960,6 +961,7 @@ public class Customer extends JFrame {
 		ReviewAndSubmit.addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentShown(ComponentEvent arg0) {
+				
 				receipt.setText("");
 				date = calendarButton.getTargetDate();
 				String start = DateFormat.getDateInstance(DateFormat.FULL, getLocale()).format(date);
