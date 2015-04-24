@@ -49,7 +49,6 @@ public class SalesViewCheckedOutCars extends ListActivity{
 	private static final String TAG_END = "end_date";
 	private static final String TAG_CITY = "city";
 	private static final String TAG_STATE = "state";
-	private static final String TAG_PERWEEK = "per_week";
 	private static final String TAG_CARTYPE = "car_type";
 	private static final String TAG_CARMAKE = "car_make";
 	private static final String TAG_CARMODEL = "car_model";
@@ -91,7 +90,6 @@ public class SalesViewCheckedOutCars extends ListActivity{
 				String city = ((TextView)view.findViewById(R.id.carres_city_list)).getText().toString();
 				String start_date = ((TextView)view.findViewById(R.id.carres_start_list)).getText().toString();
 				String end_date = ((TextView)view.findViewById(R.id.carres_end_list)).getText().toString();
-				String per_week = ((TextView)view.findViewById(R.id.carres_per_week_list)).getText().toString();
 				String carid = ((TextView)view.findViewById(R.id.carres_id_list)).getText().toString();
 				String cartype = ((TextView)view.findViewById(R.id.carres_type_list)).getText().toString();
 				
@@ -103,7 +101,6 @@ public class SalesViewCheckedOutCars extends ListActivity{
 				ii.putExtra("city", city); 
 				ii.putExtra("start_date", start_date); 
 				ii.putExtra("end_date", end_date); 
-				ii.putExtra("per_week", per_week); 
 				ii.putExtra("gps", gps);
 				ii.putExtra("child_seat", child_seat);
 				ii.putExtra("ktag", k_tag);
@@ -168,7 +165,6 @@ public class SalesViewCheckedOutCars extends ListActivity{
 						String license = c.getString(TAG_CARLICENSE);
 						String start_date = c.getString(TAG_START);
 						String end_date = c.getString(TAG_END);
-						String per_week = c.getString(TAG_PERWEEK);
 						String GPS = c.getString(TAG_GPS);
 						String child_seat = c.getString(TAG_CHILDSEAT);
 						String k_tag = c.getString(TAG_KTAG);
@@ -187,14 +183,6 @@ public class SalesViewCheckedOutCars extends ListActivity{
 						map.put(TAG_CARLICENSE, "Car License Plate: ".concat(license));
 						map.put(TAG_START, "Reservation Start Date: ".concat(start_date));
 						map.put(TAG_END, "Reservation End Date: ".concat(end_date));
-						
-						if (per_week.equals("1")) {
-							map.put(TAG_PERWEEK, "Rental per week");
-						}
-						else {
-							map.put(TAG_PERWEEK, "Rental per day");
-						}
-						
 						map.put(TAG_GPS, "GPS : ".concat(GPS));
 						map.put(TAG_CHILDSEAT, "Child Seats: ".concat(child_seat));
 						map.put(TAG_KTAG, "K-tag: ".concat(k_tag));
@@ -239,14 +227,14 @@ public class SalesViewCheckedOutCars extends ListActivity{
 										 {TAG_CARID, TAG_GPS, TAG_CHILDSEAT, TAG_KTAG, 
 										  TAG_ASSISTANCE, TAG_DINSURANCE, TAG_AINSURANCE,
 										  TAG_START, TAG_END, TAG_CITY, TAG_STATE,
-										  TAG_PERWEEK, TAG_CARTYPE, TAG_CARMAKE,
+										  TAG_CARTYPE, TAG_CARMAKE,
 										  TAG_CARMODEL, TAG_CARLICENSE },
 										  new int[] {R.id.carres_id_list, R.id.carres_GPS_list,
 													 R.id.carres_child_seat_list, R.id.carres_k_tag_list,
 													 R.id.carres_assistance_list, R.id.carres_dinsurance_list,
 													 R.id.carres_ainsurance_list, R.id.carres_start_list,
 													 R.id.carres_end_list, R.id.carres_city_list,
-													 R.id.carres_state_list, R.id.carres_per_week_list,
+													 R.id.carres_state_list,
 													 R.id.carres_type_list, R.id.carres_make_list,
 													 R.id.carres_model_list, R.id.carres_license_plate_list
 								});

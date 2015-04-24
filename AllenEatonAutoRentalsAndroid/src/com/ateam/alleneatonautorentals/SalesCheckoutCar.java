@@ -38,9 +38,6 @@ public class SalesCheckoutCar extends Activity {
 	private EditText et_end;
 	private EditText et_state; 
 	private EditText et_city;
-	private RadioGroup rg_per_week;
-	private RadioButton rb_per_week; 
-	private RadioButton rb_per_day;
 	private ProgressDialog progressDialog;
 	JSONParser jsonParser = new JSONParser();
 	private static final String CHECKOUT_URL =
@@ -70,9 +67,6 @@ public class SalesCheckoutCar extends Activity {
 		et_end = (EditText)findViewById(R.id.end_date_reservation);
 		et_state = (EditText)findViewById(R.id.state_reservation_field); 
 		et_city =  (EditText)findViewById(R.id.city_reservation_field);
-		rg_per_week = (RadioGroup)findViewById(R.id.radio_type_payment);
-		rb_per_week = (RadioButton)findViewById(R.id.radio_week); 
-		rb_per_day = (RadioButton)findViewById(R.id.radio_day);
 		
 		if(reservation.equals("1")){
 			String gps = getIntent.getStringExtra("gps");
@@ -82,8 +76,7 @@ public class SalesCheckoutCar extends Activity {
 			String dinsurance = getIntent.getStringExtra("dinsurance");
 			String ainsurance = getIntent.getStringExtra("ainsurance");			
 			String start_date_full = getIntent.getStringExtra("start_date"); 
-			String end_date_full = getIntent.getStringExtra("end_date"); 
-			String per_week_full = getIntent.getStringExtra("per_week");
+			String end_date_full = getIntent.getStringExtra("end_date");
 			String state_full = getIntent.getStringExtra("state"); 
 			String city_full = getIntent.getStringExtra("city");
 						
@@ -128,15 +121,7 @@ public class SalesCheckoutCar extends Activity {
 			}
 			
 			et_start.setText(start_date);
-			et_end.setText(end_date);
-			
-			if(per_week_full.contains("1")){
-				rb_per_week.setChecked(true); 
-			}
-			else { 
-				rb_per_day.setChecked(true); 
-			}
-			
+			et_end.setText(end_date);		
 			et_state.setText(state);
 			et_city.setText(city);
 				
@@ -180,7 +165,7 @@ public class SalesCheckoutCar extends Activity {
 			int success;
 			
 			String gps, ktag, assistance, dinsurance, ainsurance;
-			String child_seat, start_date, end_date, state, city, per_week;
+			String child_seat, start_date, end_date, state, city;
 			if(cb_gps.isChecked()) {
 				gps = "1"; 
 			}
@@ -221,14 +206,7 @@ public class SalesCheckoutCar extends Activity {
 			end_date = et_end.getText().toString();
 			state = et_state.getText().toString(); 
 			city = et_city.getText().toString();
-			
-			int radio_button_id = rg_per_week.getCheckedRadioButtonId();
-			
-			if(radio_button_id == rb_per_week.getId())
-				per_week = "1"; 
-			else
-				per_week = "0";
-			
+						
 			SessionManager session = new SessionManager(getApplicationContext());
 			String empemail = session.getUsername();
 			
@@ -247,7 +225,6 @@ public class SalesCheckoutCar extends Activity {
 				params.add(new BasicNameValuePair("end", end_date));
 				params.add(new BasicNameValuePair("city", city));
 				params.add(new BasicNameValuePair("state", state));
-				params.add(new BasicNameValuePair("perweek", per_week));
 				params.add(new BasicNameValuePair("empemail", empemail));
 				
 				Log.d("request!", "starting");

@@ -227,27 +227,6 @@
 
                  </TableRow>
 
-                 <TableRow
-                     android:id="@+id/tableRow7"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content" >
-                     <RadioGroup 
-    					android:layout_width="fill_parent"
-    					android:layout_height="wrap_content"
-    					android:orientation="vertical"
-    					android:id = "@+id/radio_type_payment">"
-    						<RadioButton android:id="@+id/radio_day"
-        						android:layout_width="wrap_content"
-        						android:layout_height="wrap_content"
-        						android:checked="true"
-        						android:text="@string/day"/>
-    						<RadioButton android:id="@+id/radio_week"
-        						android:layout_width="wrap_content"
-        						android:layout_height="wrap_content"
-        						android:text="@string/week"/>
-					</RadioGroup>
-                 </TableRow>
-
              </TableLayout>
              
 

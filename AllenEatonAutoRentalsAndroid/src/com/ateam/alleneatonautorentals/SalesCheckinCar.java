@@ -28,7 +28,7 @@ import com.ateam.alleneatonautorentals.SalesCheckoutCar.CheckoutCar;
 public class SalesCheckinCar extends Activity {
 	private String userEmail, name, key, carid, cartype, gps, child_seat, ktag,
 				   assistance, dinsurance, ainsurance, start_date, end_date,
-				   per_week, state, city;
+				   state, city;
 	private ProgressDialog progressDialog;
 	JSONParser jsonParser = new JSONParser();
 	private static final String CHECKIN_URL =
@@ -57,7 +57,6 @@ public class SalesCheckinCar extends Activity {
 		ainsurance = getIntent.getStringExtra("ainsurance");			
 		start_date = getIntent.getStringExtra("start_date"); 
 		end_date = getIntent.getStringExtra("end_date"); 
-		per_week = getIntent.getStringExtra("per_week");
 		state = getIntent.getStringExtra("state"); 
 		city = getIntent.getStringExtra("city");
 						
@@ -81,8 +80,6 @@ public class SalesCheckinCar extends Activity {
 		tview.setText(start_date);
 		tview = (TextView)findViewById(R.id.checkin_end_date);
 		tview.setText(end_date);
-		tview = (TextView)findViewById(R.id.checkin_rental_type);
-		tview.setText(per_week);
 		tview = (TextView)findViewById(R.id.checkin_state);
 		tview.setText(state);
 		tview = (TextView)findViewById(R.id.checkin_city);
