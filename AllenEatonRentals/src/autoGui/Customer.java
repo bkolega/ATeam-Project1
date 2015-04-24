@@ -984,7 +984,7 @@ public class Customer extends JFrame {
 				List<NameValuePair> params = new ArrayList<NameValuePair>();
 				
 				List<NameValuePair> carIdParams = new ArrayList<NameValuePair>();
-				carIdParams.add(new BasicNameValuePair("cartype", carType));
+				carIdParams.add(new BasicNameValuePair("cartype", processCarType(carType)));
 				
 				JsonHandler carIdHandler = new JsonHandler(CAR_ID_URL, carIdParams);
 				
@@ -1168,6 +1168,16 @@ public class Customer extends JFrame {
 			estimatedCost = totalWeeksReserved * weeklyCarCost + ((totalDaysReserved % 7) * dailyCarCost);
 		}
 		
+	}
+	
+	private String processCarType(String carType) {
+		if (carType.toLowerCase().equals("small suv")) {
+			return "Sm SUV";
+		} else if (carType.toLowerCase().equals("stanard suv")) {
+			return "Std SUV";
+		} else {
+			return carType;
+		}
 	}
 	
 	private String formatDate(Date d) {
