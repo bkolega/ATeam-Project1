@@ -17,6 +17,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class JsonHandler {
@@ -43,14 +44,19 @@ public class JsonHandler {
 		DefaultHttpClient http = new DefaultHttpClient();
 		
 		HttpPost post = new HttpPost(url);
+		HttpResponse response = null;
 		
 		try {
 			post.setEntity(new UrlEncodedFormEntity(params));
 			
-			HttpResponse response = http.execute(post);
+			response = http.execute(post);
+			
 			
 			readJson(response);
+		} catch (JSONException e) {
+			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
+		
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClientProtocolException e) {
@@ -78,8 +84,9 @@ public class JsonHandler {
 			is.close();
 			
 //			System.out.println("Raw string: " + strBuilder.toString());
-			
-			jsonObject = new JSONObject(strBuilder.toString());
+			String str = strBuilder.toString();
+			System.out.println(str);
+			jsonObject = new JSONObject(str);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

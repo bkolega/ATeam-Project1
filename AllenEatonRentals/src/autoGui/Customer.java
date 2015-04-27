@@ -117,6 +117,7 @@ public class Customer extends JFrame {
 	private final static String LOGIN_URL = "http://people.eecs.ku.edu/~dyoung/CustomerPHPScripts/login.php";
 	private final static String RESERVE_URL = "http://people.eecs.ku.edu/~dyoung/CustomerPHPScripts/reserve_car.php";
 	private final static String CAR_ID_URL = "http://people.eecs.ku.edu/~dyoung/CustomerPHPScripts/car_id.php";
+	private final static String PAST_ORDERS_URL = "http://people.eecs.ku.edu/~dyoung/CustomerPHPScripts/past_orders.php";
 	private JLabel picLabel;
 	
 	public void login(String userEmail, String pass) {
@@ -411,6 +412,12 @@ public class Customer extends JFrame {
 		btnViewPastOrders.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				List<NameValuePair> params = new ArrayList<NameValuePair>();
+				params.add(new BasicNameValuePair("useremail", userEmail));
+				JsonHandler pastOrderHandler = new JsonHandler(PAST_ORDERS_URL, params);
+				JSONObject pastOrders = pastOrderHandler.getJsonObject();
+				listModel.addElement(pastOrders.toString());
+				/*
 				jsonObject = new JsonHandler(RES_URL).getJsonObject();
 				listModel.clear();
 				JSONArray arr = jsonObject.getJSONArray("reservations");
@@ -421,6 +428,7 @@ public class Customer extends JFrame {
 					System.out.println(obj.toString());
 					listModel.addElement(obj.getString("start_date"));
 				}
+				*/
 				/*
 				DatabaseRowSet rowSet = databaseProvider.getRows("`ALLEN_EATON_AUTO.RESERVATION`");
 				while (rowSet.next()) {
