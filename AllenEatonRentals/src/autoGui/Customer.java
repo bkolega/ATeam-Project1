@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 
@@ -69,7 +70,7 @@ public class Customer extends JFrame {
 	private JTextField textField;
 	private JPasswordField passwordField;
 	private SqlDatabaseProvider databaseProvider;
-	private DefaultListModel<String> listModel = new DefaultListModel<String>();
+//	private DefaultListModel<String> listModel = new DefaultListModel<String>();
 	private JTextField txtDate;
 	private JTextField txtDate_1;
 	private JTextField txtTime;
@@ -412,14 +413,32 @@ public class Customer extends JFrame {
 		btnViewPastOrders.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+//				listModel.clear();
 				List<NameValuePair> params = new ArrayList<NameValuePair>();
 				params.add(new BasicNameValuePair("useremail", userEmail));
 				JsonHandler pastOrderHandler = new JsonHandler(PAST_ORDERS_URL, params);
 				JSONObject pastOrders = pastOrderHandler.getJsonObject();
-				listModel.addElement(pastOrders.toString());
+				
+				String[] columns = {"Car type"
+				                   ,"Start date"
+				                   ,"End date"
+				                   };
+				
+				String[][] rowData = new String[pastOrders.length()][columns.length];
+				
+				for (int i = 0; i < pastOrders.length(); ++i) {
+					rowData[i][0] = pastOrders.getJSONObject(new Integer(i).toString()).getString("car_type");
+					rowData[i][1] = pastOrders.getJSONObject(new Integer(i).toString()).getString("reservation_start_date");
+					rowData[i][2] = pastOrders.getJSONObject(new Integer(i).toString()).getString("reservation_end_date");
+				}
+				
+				JTable table = new JTable(rowData, columns);
+				table.setBounds(22, 50, 460, 431);
+				table.setEnabled(false);
+				PastOrdersPage.add(table);
+				
 				/*
 				jsonObject = new JsonHandler(RES_URL).getJsonObject();
-				listModel.clear();
 				JSONArray arr = jsonObject.getJSONArray("reservations");
 				
 				for (int i = 0; i < arr.length(); ++i) {
@@ -924,10 +943,10 @@ public class Customer extends JFrame {
 		btnBack_1.setBounds(12, 525, 97, 25);
 		PastOrdersPage.add(btnBack_1);
 		
-		JList<String> list = new JList<String>();
-		list.setBounds(22, 50, 460, 431);
-		list.setModel(listModel);
-		PastOrdersPage.add(list);
+//		JList<String> list = new JList<String>();
+//		list.setBounds(22, 50, 460, 431);
+//		list.setModel(listModel);
+//		PastOrdersPage.add(list);
 		
 		////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////  Review and Submit   ///////////////////////////////
