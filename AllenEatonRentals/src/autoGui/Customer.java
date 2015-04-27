@@ -1163,7 +1163,6 @@ public class Customer extends JFrame {
 			lblInvalidRange.setVisible(true);
 		}
 		
-
 		if(totalDaysReserved < 7)
 		{
 			lblEstimatedCost.setText("Estimated cost: $" + totalDaysReserved * dailyCarCost + " plus tax");

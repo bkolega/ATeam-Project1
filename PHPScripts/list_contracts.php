@@ -15,7 +15,8 @@
 			     	  `ALLEN_EATON_AUTO.CUSTOMER` CUST
 			     WHERE R.user_email='".$_POST['username']."'
 			     AND R.car_id=C.car_id
-			     AND R.user_email=CUST.user_email";
+			     AND R.user_email=CUST.user_email
+			     AND (checked_out=1 OR checked_in_date IS NOT NULL)";
 	$listContractsResult = mysqli_query($c, $listContractsQuery);
 
 	if (!$listContractsResult) {
@@ -49,6 +50,7 @@
 		 $contract["car_license_plate"] = $row["car_license_plate"];
 		 $contract["car_license_state"] = $row["car_license_state"];
 		 $contract["car_year"] = $row["car_year"];
+		 $contract["checkedin_date"] = $row["checked_in_date"];
 		 $contract["card_number"] = $row["customer_card_number"];
 		 
 		 array_push($response["contracts"], $contract);

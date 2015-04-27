@@ -1,8 +1,10 @@
 package com.ateam.alleneatonautorentals;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -67,6 +69,25 @@ public class SalesPrintContract extends Activity {
 		checkin = getIntent.getStringExtra("checkin");
 		card_number = getIntent.getStringExtra("cardnumber"); 
 			
+		
+		Map <String, Object> params = new HashMap <String, Object>();
+		params.put("Car Type", car_type.substring(10));
+		params.put("GPS Receiver", gps.substring(5));
+		params.put("Child Seats", childseat.substring(12));
+		params.put("K-Tag Rental", ktag.substring(7));
+		params.put("Roadside Assistance", assistance.substring(17));
+		params.put("Loss Damage Waiver Insurance", dinsurance.substring(18));
+		params.put("Personal Accident Insurance", ainsurance.substring(20));
+		params.put("Start Date", start_date.substring(24));
+		params.put("End Date", end_date.substring(22));
+		params.put("City", city.substring(18));
+		params.put("State", state.substring(19));
+		params.put("Checkin Date", checkin.substring(15));
+		
+		PriceManager priceManager = new PriceManager(params);
+		Double price = priceManager.getContractPrice();
+		DecimalFormat df = new DecimalFormat("#.00");
+		
 		TextView tview = (TextView)findViewById(R.id.contract_user_name);
 		tview.setText(name);
 		tview = (TextView)findViewById(R.id.contract_user_email);
@@ -116,7 +137,8 @@ public class SalesPrintContract extends Activity {
 		tview.setText(ainsurance);
 		tview = (TextView)findViewById(R.id.contract_checkin_date);
 		tview.setText(checkin);
-
+		tview = (TextView)findViewById(R.id.total_price);
+		tview.setText("$"+df.format(price));
 	}
 
 	@Override

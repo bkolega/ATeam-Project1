@@ -81,11 +81,6 @@
 	   $response["message"] .= "Cannot find employee email.\n";
 	}
 
-	if ($_POST['perweek'] == "") {
-	   $response["success"] = 0;
-	   $response["message"] .= "Please pick rent per day or rent per week.\n";
-	}
-
 	if ($response["success"] != 0) {
 	   // Find the reservation in database
 	   $findResQuery = "SELECT user_email
@@ -113,12 +108,12 @@
 					  reservation_assistance='".$assistance."',
 					  reservation_damage_insurance='".$dinsurance."',
 					  reservation_accident_insurance='".ainsurance."',
-					  reservation_start_date='".$_POST['start']."',
+					  reservation_start_date=NOW(),
 					  reservation_end_date='".$_POST['end']."',
 					  reservation_city='".$_POST['city']."',
 					  reservation_state='".$_POST['state']."',
 					  employee_email='".$_POST['empemail']."',
-					  per_week='".$_POST['perweek']."',
+					  per_week=1,
 					  checked_out=1
 				      WHERE user_email='".$_POST['username']."'
 				      AND car_id='".$_POST['carid']."'";
@@ -166,12 +161,12 @@
 						'".$assistance."',
 						'".$dinsurance."',
  						'".$ainsurance."',
-						'".$_POST['start']."',
+						NOW(),
 						'".$_POST['end']."',
 						'".$_POST['city']."',
 						'".$_POST['state']."',
 						'".$_POST['empemail']."',
-						'".$_POST['perweek']."',
+						1,
 						1 )";
 
 		     if (!mysqli_query($c, $insertResQuery)) {
