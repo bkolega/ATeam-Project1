@@ -79,4 +79,5 @@
     <string name="employee_info">Employee Information</string>
     <string name="car_info">Car Information</string>
     <string name="view_contracts">View Contracts</string>
+    <string name="total_price">Total Price:</string>
 </resources>

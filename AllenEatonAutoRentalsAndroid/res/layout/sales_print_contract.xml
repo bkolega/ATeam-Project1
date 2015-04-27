@@ -293,19 +293,6 @@
                  </TableRow>
 
                  <TableRow
-                     android:id="@+id/tableRow28"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content" >
-
-                     <TextView
-                         android:id="@+id/contract_price"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                     />
-
-                 </TableRow>
-
-                 <TableRow
                      android:id="@+id/tableRow20"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content" >
@@ -395,7 +382,36 @@
                      />
 
                  </TableRow>
+                 
+                 <TableRow
+                     android:id="@+id/tableRow29"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
 
+                     <TextView
+                         android:id="@+id/total_price_info"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="@string/total_price"
+                         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                 </TableRow>
+                 
+                 <TableRow
+                     android:id="@+id/tableRow28"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
+
+                     <TextView
+                         android:id="@+id/total_price"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:textAppearance="?android:attr/textAppearanceLarge" 
+                         
+                     />
+
+                 </TableRow>
+                 
                  <Space
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content" />
