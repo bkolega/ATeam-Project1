@@ -82,6 +82,8 @@ public class Customer extends JFrame {
 	private JButton btnReserveAsMember;
 	private JButton btnReserveAsGuest;
 	private JButton btnLogout;
+	private	JButton btnModifyExistingReservation;
+	private	JButton btnViewPastOrders;
 	boolean loggedIn = false;
 	private JLabel lblInvalidRange = new JLabel("Please select a valid range of dates");
 	private int dayReserved =0;
@@ -135,6 +137,8 @@ public class Customer extends JFrame {
 			this.userEmail = userEmail;
 			lblInvalid.setVisible(false);
 			LoginPage.setVisible(false);
+			btnModifyExistingReservation.setVisible(true);
+			btnViewPastOrders.setVisible(true);
 			if(loginReturnPage==1) 
 			{
 				reserveCar();
@@ -409,7 +413,7 @@ public class Customer extends JFrame {
 
 		CustomerHomePage.add(comboBoxVehicleType);
 		
-		JButton btnViewPastOrders = new JButton("View past orders");
+		btnViewPastOrders = new JButton("View past orders");
 		btnViewPastOrders.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -462,7 +466,7 @@ public class Customer extends JFrame {
 		btnViewPastOrders.setBounds(407, 487, 245, 27);
 		CustomerHomePage.add(btnViewPastOrders);
 		
-		JButton btnModifyExistingReservation = new JButton("Modify existing reservation");
+		btnModifyExistingReservation = new JButton("Modify existing reservation");
 		btnModifyExistingReservation.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -473,6 +477,12 @@ public class Customer extends JFrame {
 		});
 		btnModifyExistingReservation.setBounds(109, 487, 245, 27);
 		CustomerHomePage.add(btnModifyExistingReservation);
+		
+		if(!loggedIn)
+		{
+			btnViewPastOrders.setVisible(false);
+			btnModifyExistingReservation.setVisible(false);
+		}
 		
 		JButton btnExit = new JButton("Exit");
 		btnExit.addMouseListener(new MouseAdapter() {
