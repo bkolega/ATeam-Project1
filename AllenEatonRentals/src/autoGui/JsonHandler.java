@@ -40,6 +40,7 @@ public class JsonHandler {
 	}
 	
 	public JsonHandler(String url, List<NameValuePair> params) {
+		
 		DefaultHttpClient http = new DefaultHttpClient();
 		
 		HttpPost post = new HttpPost(url);
