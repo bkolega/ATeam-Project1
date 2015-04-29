@@ -26,6 +26,7 @@ import javax.swing.SwingWorker;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -50,21 +51,14 @@ import java.beans.PropertyChangeEvent;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
-
-import javax.swing.SwingConstants;
-
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 import javax.swing.JTextArea;
-import javax.swing.Icon;
-
-import java.lang.Thread;
 
 public class Customer extends JFrame {
 	private JTextField textField;
@@ -112,6 +106,7 @@ public class Customer extends JFrame {
 	AnimatedIcon iconProcessing = new AnimatedIcon( lblProcessing );
 	Date date = null;
 	Date date2 = null;
+	private Boolean currentDate = false;
 	
 	JSONObject jsonObject;
 
@@ -499,7 +494,7 @@ public class Customer extends JFrame {
 		btnReserveAsMember.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(totalDaysReserved > 0)
+				if(totalDaysReserved > 0 && currentDate)
 				{
 					if (loggedIn) {
 						lblInvalid.setVisible(false);
@@ -577,21 +572,41 @@ public class Customer extends JFrame {
 					if(evt.getPropertyName().equals("date"))
 					{
 						java.util.Date date = null;
+						Date today = new Date();
+						
 						date = (java.util.Date) evt.getNewValue();
 						calendarButton.setTargetDate(date);
 						
 						dayReserved = (int) (date.getTime()/(1000*60*60*24));
+					//	System.out.println(date.getTime()/(1000*60*60*24) + "   "+ (today.getTime()-today.getTimezoneOffset()*60*1000)/(1000*60*60*24));
 						totalDaysReserved = (dayReturned - dayReserved);
 						//System.out.println(totalDaysReserved);
-						if (totalDaysReserved > 0)
+						
+						
+						if((today.getTime()-today.getTimezoneOffset()*60*1000)/(1000*60*60*24) > date.getTime()/(1000*60*60*24))
 						{
-							updateCart();
+							lblInvalidRange.setVisible(true);
+							CustomerHomePage.add(lblInvalidRange);
+							currentDate=false;
+							txtDate.setText("                     Enter a current date");
+							txtDate.setBackground(Color.RED);
 						}
 						
-						if(calendarButton.getTargetDate() != null)
+						else if(calendarButton.getTargetDate() != null )
 						{
 							String s = DateFormat.getDateInstance(DateFormat.FULL, getLocale()).format(date);
 							txtDate.setText(s);
+							txtDate.setEnabled(true);
+							currentDate=true;
+							txtDate.setBackground(Color.white);
+						}
+						if((today.getTime()-today.getTimezoneOffset()*60*1000)/(1000*60*60*24) > date.getTime()/(1000*60*60*24)&&currentDate)
+						{
+							lblInvalidRange.setVisible(false);
+						}
+						if (totalDaysReserved >= 0)
+						{
+							updateCart();
 						}
 					}     			        
 				}
@@ -619,19 +634,37 @@ public class Customer extends JFrame {
 						java.util.Date date = null;
 						date = (java.util.Date) evt.getNewValue();
 						calendarButton_1.setTargetDate(date);
+						Date today = new Date();
 						
 						dayReturned = (int) (date.getTime()/(1000*60*60*24));
 						totalDaysReserved = (dayReturned - dayReserved);
 						System.out.println(totalDaysReserved);
-						if (totalDaysReserved > 0)
+					
+						
+						if((today.getTime()-today.getTimezoneOffset()*60*1000)/(1000*60*60*24) > date.getTime()/(1000*60*60*24))
 						{
-							updateCart();
+							lblInvalidRange.setVisible(true);
+							CustomerHomePage.add(lblInvalidRange);
+							currentDate=false;
+							txtDate_1.setText("                     Enter a current date");
+							txtDate_1.setBackground(Color.RED);
 						}
 						
-						if(calendarButton_1.getTargetDate() != null)
+						else if(calendarButton_1.getTargetDate() != null)
 						{
 							String s = DateFormat.getDateInstance(DateFormat.FULL, getLocale()).format(date);
 							txtDate_1.setText(s);
+							currentDate=true;
+							txtDate_1.setBackground(Color.white);
+							lblInvalidRange.setVisible(false);
+						}
+						if((today.getTime()-today.getTimezoneOffset()*60*1000)/(1000*60*60*24) < date.getTime()/(1000*60*60*24)&&currentDate)
+						{
+							lblInvalidRange.setVisible(false);
+						}
+						if (totalDaysReserved >= 0)
+						{
+							updateCart();
 						}
 					}     			        
 				}
@@ -657,7 +690,7 @@ public class Customer extends JFrame {
 						minuteReturned = (int) (date.getTime()/(1000*60));
 						totalMinutesReserved = minuteReturned - minuteReserved;
 						
-						if(minuteReturned - minuteReserved > 0)
+						if(minuteReturned - minuteReserved >= 0)
 						{
 							totalMinutesReserved = minuteReturned - minuteReserved;
 							updateCart();
@@ -692,7 +725,7 @@ public class Customer extends JFrame {
 						timeButton.setTargetDate(date);
 						minuteReserved = (int) (date.getTime()/(1000*60));
 						
-						if(minuteReturned - minuteReserved > 0)
+						if(minuteReturned - minuteReserved >= 0)
 						{
 							totalMinutesReserved = minuteReturned - minuteReserved;
 							updateCart();
@@ -1075,7 +1108,7 @@ public class Customer extends JFrame {
 	}
 	private void updateCart()
 	{
-		if(totalMinutesReserved > 0 || totalDaysReserved > 0)
+		if((totalMinutesReserved >= 0 || totalDaysReserved >= 0) && currentDate)
 		{
 			lblCartInfo.setText("Cart :    " + totalDaysReserved + " Days Reserved\n"+ " + " 
 								+ totalMinutesReserved + " Minutes\n" +  "Car: " +  carType );
@@ -1102,7 +1135,7 @@ public class Customer extends JFrame {
 	private void reserveCar() {
 		carType = (String) comboBoxVehicleType.getSelectedItem();
 		
-		if(totalDaysReserved > 0)
+		if(totalDaysReserved > 0 && currentDate)
 		{
 			lblInvalidRange.setVisible(false);
 			CustomerHomePage.setVisible(false);
