@@ -463,7 +463,7 @@ public class Customer extends JFrame {
 				PastOrdersPage.setVisible(true);
 			}
 		});
-		btnViewPastOrders.setBounds(270, 487, 245, 27);
+		btnViewPastOrders.setBounds(284, 438, 245, 36);
 		CustomerHomePage.add(btnViewPastOrders);
 		
 //		btnModifyExistingReservation = new JButton("Modify existing reservation");
@@ -571,7 +571,7 @@ public class Customer extends JFrame {
 		txtDate.setBounds(236, 21, 234, 22);
 		CustomerHomePage.add(txtDate);
 		txtDate.setColumns(10);
-		
+		txtDate.setEnabled(false);
 		calendarButton.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 					if(evt.getPropertyName().equals("date"))
@@ -631,7 +631,7 @@ public class Customer extends JFrame {
 		txtDate_1.setColumns(10);
 		
 		JCalendarButton calendarButton_1 = new JCalendarButton(null, null, null);
-
+		txtDate_1.setEnabled(false);
 		calendarButton_1.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 					if(evt.getPropertyName().equals("date"))
@@ -659,6 +659,7 @@ public class Customer extends JFrame {
 						{
 							String s = DateFormat.getDateInstance(DateFormat.FULL, getLocale()).format(date);
 							txtDate_1.setText(s);
+							txtDate_1.setEnabled(true);
 							currentDate=true;
 							txtDate_1.setBackground(Color.white);
 							lblInvalidRange.setVisible(false);
@@ -786,7 +787,8 @@ public class Customer extends JFrame {
 				btnViewPastOrders.setVisible(false);
 			}
 		});
-		btnLogout.setBounds(412, 438, 117, 29);
+		btnLogout.setBounds(284, 389, 245, 36);
+		
 		btnLogout.setVisible(false);
 		CustomerHomePage.add(btnLogout);
 		
@@ -822,7 +824,7 @@ public class Customer extends JFrame {
 				loginReturnPage=0;
 			}
 		});
-		btnLogin.setBounds(284, 438, 116, 27);
+		btnLogin.setBounds(284, 438, 245, 36);
 		CustomerHomePage.add(btnLogin);
 		
 		////////////////////////////////////////////////////////////////////////////////
