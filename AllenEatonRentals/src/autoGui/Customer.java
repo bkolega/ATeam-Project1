@@ -76,7 +76,7 @@ public class Customer extends JFrame {
 	private JButton btnReserveAsMember;
 	private JButton btnReserveAsGuest;
 	private JButton btnLogout;
-	private	JButton btnModifyExistingReservation;
+//	private	JButton btnModifyExistingReservation;
 	private	JButton btnViewPastOrders;
 	boolean loggedIn = false;
 	private JLabel lblInvalidRange = new JLabel("Please select a valid range of dates");
@@ -107,6 +107,7 @@ public class Customer extends JFrame {
 	Date date = null;
 	Date date2 = null;
 	private Boolean currentDate = false;
+	JButton btnLogin;
 	
 	JSONObject jsonObject;
 
@@ -132,7 +133,7 @@ public class Customer extends JFrame {
 			this.userEmail = userEmail;
 			lblInvalid.setVisible(false);
 			LoginPage.setVisible(false);
-			btnModifyExistingReservation.setVisible(true);
+//			btnModifyExistingReservation.setVisible(true);
 			btnViewPastOrders.setVisible(true);
 			if(loginReturnPage==1) 
 			{
@@ -141,6 +142,7 @@ public class Customer extends JFrame {
 			getContentPane().getComponent(loginReturnPage).setVisible(true);
 			//SearchResultsPage.setVisible(true);
 			btnLogout.setVisible(true);
+			btnLogin.setVisible(false); // Remove login button
 			btnReserveAsGuest.setVisible(false);
 			lblProcessing.setVisible(false);
 			iconProcessing.stop();
@@ -458,25 +460,25 @@ public class Customer extends JFrame {
 				PastOrdersPage.setVisible(true);
 			}
 		});
-		btnViewPastOrders.setBounds(407, 487, 245, 27);
+		btnViewPastOrders.setBounds(270, 487, 245, 27);
 		CustomerHomePage.add(btnViewPastOrders);
 		
-		btnModifyExistingReservation = new JButton("Modify existing reservation");
-		btnModifyExistingReservation.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				CustomerHomePage.setVisible(false);
-				ModifyExistingOrdersPage.setVisible(true);
-				ModifyExistingOrdersPage.add(lblCartInfo);
-			}
-		});
-		btnModifyExistingReservation.setBounds(109, 487, 245, 27);
-		CustomerHomePage.add(btnModifyExistingReservation);
+//		btnModifyExistingReservation = new JButton("Modify existing reservation");
+//		btnModifyExistingReservation.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				CustomerHomePage.setVisible(false);
+//				ModifyExistingOrdersPage.setVisible(true);
+//				ModifyExistingOrdersPage.add(lblCartInfo);
+//			}
+//		});
+//		btnModifyExistingReservation.setBounds(109, 487, 245, 27);
+//		CustomerHomePage.add(btnModifyExistingReservation);
 		
 		if(!loggedIn)
 		{
 			btnViewPastOrders.setVisible(false);
-			btnModifyExistingReservation.setVisible(false);
+//			btnModifyExistingReservation.setVisible(false);
 		}
 		
 		JButton btnExit = new JButton("Exit");
@@ -774,9 +776,11 @@ public class Customer extends JFrame {
 				userEmail = null;
 				loggedIn = false;
 				btnLogout.setVisible(false);
+				btnLogin.setVisible(true);
 				btnReserveAsMember.setVisible(true);
 				passwordField.setText("");
 				btnReserveAsGuest.setVisible(true);
+				btnViewPastOrders.setVisible(false);
 			}
 		});
 		btnLogout.setBounds(412, 438, 117, 29);
@@ -805,8 +809,8 @@ public class Customer extends JFrame {
 		registerButton.setBounds(541, 389, 245, 36);
 		CustomerHomePage.add(registerButton);
 		
-		JButton btnNewButton_2 = new JButton("Log in");
-		btnNewButton_2.addMouseListener(new MouseAdapter() {
+		btnLogin = new JButton("Log in");
+		btnLogin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				CustomerHomePage.setVisible(false);
@@ -815,8 +819,8 @@ public class Customer extends JFrame {
 				loginReturnPage=0;
 			}
 		});
-		btnNewButton_2.setBounds(284, 438, 116, 27);
-		CustomerHomePage.add(btnNewButton_2);
+		btnLogin.setBounds(284, 438, 116, 27);
+		CustomerHomePage.add(btnLogin);
 		
 		////////////////////////////////////////////////////////////////////////////////
 		//////////////////////  Additional Options Page   //////////////////////////////
