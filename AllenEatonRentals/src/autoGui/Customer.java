@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
@@ -434,9 +435,11 @@ public class Customer extends JFrame {
 				}
 				
 				JTable table = new JTable(rowData, columns);
-				table.setBounds(22, 50, 460, 431);
+				JScrollPane scrollPane = new JScrollPane(table);
+				table.setFillsViewportHeight(true);
+				scrollPane.setBounds(22, 50, 460, 431);
 				table.setEnabled(false);
-				PastOrdersPage.add(table);
+				PastOrdersPage.add(scrollPane);
 				
 				/*
 				jsonObject = new JsonHandler(RES_URL).getJsonObject();
