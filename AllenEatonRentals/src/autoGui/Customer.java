@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 
@@ -69,7 +70,7 @@ public class Customer extends JFrame {
 	private JTextField textField;
 	private JPasswordField passwordField;
 	private SqlDatabaseProvider databaseProvider;
-	private DefaultListModel<String> listModel = new DefaultListModel<String>();
+//	private DefaultListModel<String> listModel = new DefaultListModel<String>();
 	private JTextField txtDate;
 	private JTextField txtDate_1;
 	private JTextField txtTime;
@@ -81,6 +82,8 @@ public class Customer extends JFrame {
 	private JButton btnReserveAsMember;
 	private JButton btnReserveAsGuest;
 	private JButton btnLogout;
+	private	JButton btnModifyExistingReservation;
+	private	JButton btnViewPastOrders;
 	boolean loggedIn = false;
 	private JLabel lblInvalidRange = new JLabel("Please select a valid range of dates");
 	private int dayReserved =0;
@@ -117,6 +120,7 @@ public class Customer extends JFrame {
 	private final static String LOGIN_URL = "http://people.eecs.ku.edu/~dyoung/CustomerPHPScripts/login.php";
 	private final static String RESERVE_URL = "http://people.eecs.ku.edu/~dyoung/CustomerPHPScripts/reserve_car.php";
 	private final static String CAR_ID_URL = "http://people.eecs.ku.edu/~dyoung/CustomerPHPScripts/car_id.php";
+	private final static String PAST_ORDERS_URL = "http://people.eecs.ku.edu/~dyoung/CustomerPHPScripts/past_orders.php";
 	private JLabel picLabel;
 	
 	public void login(String userEmail, String pass) {
@@ -133,6 +137,8 @@ public class Customer extends JFrame {
 			this.userEmail = userEmail;
 			lblInvalid.setVisible(false);
 			LoginPage.setVisible(false);
+			btnModifyExistingReservation.setVisible(true);
+			btnViewPastOrders.setVisible(true);
 			if(loginReturnPage==1) 
 			{
 				reserveCar();
@@ -407,12 +413,36 @@ public class Customer extends JFrame {
 
 		CustomerHomePage.add(comboBoxVehicleType);
 		
-		JButton btnViewPastOrders = new JButton("View past orders");
+		btnViewPastOrders = new JButton("View past orders");
 		btnViewPastOrders.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+//				listModel.clear();
+				List<NameValuePair> params = new ArrayList<NameValuePair>();
+				params.add(new BasicNameValuePair("useremail", userEmail));
+				JsonHandler pastOrderHandler = new JsonHandler(PAST_ORDERS_URL, params);
+				JSONObject pastOrders = pastOrderHandler.getJsonObject();
+				
+				String[] columns = {"Car type"
+				                   ,"Start date"
+				                   ,"End date"
+				                   };
+				
+				String[][] rowData = new String[pastOrders.length()][columns.length];
+				
+				for (int i = 0; i < pastOrders.length(); ++i) {
+					rowData[i][0] = pastOrders.getJSONObject(new Integer(i).toString()).getString("car_type");
+					rowData[i][1] = pastOrders.getJSONObject(new Integer(i).toString()).getString("reservation_start_date");
+					rowData[i][2] = pastOrders.getJSONObject(new Integer(i).toString()).getString("reservation_end_date");
+				}
+				
+				JTable table = new JTable(rowData, columns);
+				table.setBounds(22, 50, 460, 431);
+				table.setEnabled(false);
+				PastOrdersPage.add(table);
+				
+				/*
 				jsonObject = new JsonHandler(RES_URL).getJsonObject();
-				listModel.clear();
 				JSONArray arr = jsonObject.getJSONArray("reservations");
 				
 				for (int i = 0; i < arr.length(); ++i) {
@@ -421,6 +451,7 @@ public class Customer extends JFrame {
 					System.out.println(obj.toString());
 					listModel.addElement(obj.getString("start_date"));
 				}
+				*/
 				/*
 				DatabaseRowSet rowSet = databaseProvider.getRows("`ALLEN_EATON_AUTO.RESERVATION`");
 				while (rowSet.next()) {
@@ -435,7 +466,7 @@ public class Customer extends JFrame {
 		btnViewPastOrders.setBounds(407, 487, 245, 27);
 		CustomerHomePage.add(btnViewPastOrders);
 		
-		JButton btnModifyExistingReservation = new JButton("Modify existing reservation");
+		btnModifyExistingReservation = new JButton("Modify existing reservation");
 		btnModifyExistingReservation.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -446,6 +477,12 @@ public class Customer extends JFrame {
 		});
 		btnModifyExistingReservation.setBounds(109, 487, 245, 27);
 		CustomerHomePage.add(btnModifyExistingReservation);
+		
+		if(!loggedIn)
+		{
+			btnViewPastOrders.setVisible(false);
+			btnModifyExistingReservation.setVisible(false);
+		}
 		
 		JButton btnExit = new JButton("Exit");
 		btnExit.addMouseListener(new MouseAdapter() {
@@ -916,10 +953,10 @@ public class Customer extends JFrame {
 		btnBack_1.setBounds(12, 525, 97, 25);
 		PastOrdersPage.add(btnBack_1);
 		
-		JList<String> list = new JList<String>();
-		list.setBounds(22, 50, 460, 431);
-		list.setModel(listModel);
-		PastOrdersPage.add(list);
+//		JList<String> list = new JList<String>();
+//		list.setBounds(22, 50, 460, 431);
+//		list.setModel(listModel);
+//		PastOrdersPage.add(list);
 		
 		////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////  Review and Submit   ///////////////////////////////
