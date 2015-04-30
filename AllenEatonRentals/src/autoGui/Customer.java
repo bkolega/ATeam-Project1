@@ -89,7 +89,7 @@ public class Customer extends JFrame {
 	private int totalMinutesReserved =0;
 	private JTextArea lblCartInfo = new JTextArea("Cart :    " + totalDaysReserved + " Days Reserved");
 	private RegisterPagePanel RegisterPage;
-	private String carType = "";
+	private String carType = "Economy";
 	private JPanel SearchResultsPage; 
 	private JComboBox comboBoxVehicleType;
 	private JLabel lblEstimatedCost;
